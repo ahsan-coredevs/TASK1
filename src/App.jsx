@@ -6,6 +6,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import logo from './assets/icons/logo-white.png'
+import hero from './assets/about/girl-1.webp'
 import './App.css'
 import { CameraIcon, LinkedinIcon, Dot, Search, Shopping, Arrow, DownArrow } from './components/shared/svgComponents';
 
@@ -74,9 +75,18 @@ function App() {
             </button>
           </div>
         </div>
-      </div>
+      </div> 
 
-        <div></div>
+        <div>
+          <div>
+            <h1>Get 25000+ <br /> Best Online Courses <br /> from Edublink</h1>
+            <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
+            <button>Find courses <Arrow/></button>
+          </div>
+          <div>
+            <img src={hero} alt="" />
+          </div>
+        </div>
         <div></div>
       </div>
     </>
