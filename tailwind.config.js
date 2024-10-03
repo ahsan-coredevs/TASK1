@@ -12,6 +12,8 @@ export default {
         secondary: '#ee4a62',
         grayDark: '#343a40',
         dark: '#020b17',
+        yallow: '#fd7e14',
+        ctaColorBg: '#F0F4F5',
       },
       keyframes: {
         move: {
@@ -19,9 +21,14 @@ export default {
           '50%': { transform: 'translateX(200px)' },
           '100%': { transform: 'translateX(0)' }
         },
+        bounce: {
+          '0%, 10%, 100%': { transform: 'translateY(0)' },
+          '10%': { transform: 'translateY(50px)' },
+        }
       },
       animation: {
-         move: 'move 6s linear infinite'
+         move: 'move 6s linear infinite',
+         bounce: 'bounce 4s linear infinite',
       }
     },
   },

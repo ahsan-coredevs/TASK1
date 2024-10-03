@@ -4,7 +4,7 @@ import { Management, Design, Code, Pil, Mic, Hand, Data, Photos, Laptop } from '
 const Categories = () => {
     return (
         <>
-            <div className='flex flex-col w-screen items-center pt-16 bg-dark text-white'>
+            <div className='flex flex-col w-screen items-center pt-16 bg-[#1c242f] text-white'>
                 <h1 className='text-5xl font-bold'>Top Categories</h1>
                 <p className='text-xl my-5'>Consectetur adipscing elit sed do eiusmod tempor incididunt ut labore et dolore</p>
                 <div className='grid grid-cols-3 gap-12'>

@@ -17,9 +17,9 @@ import Catergories from './components/Categories/Categories'
 import wave from './assets/about/shape-15.png';
 import './App.css'
 import { CameraIcon, LinkedinIcon, Dot, Search, Shopping, Arrow, DownArrow, Laptop, Man, Certificate, Members } from './components/shared/svgComponents';
-
-import { useState } from "react";
 import Learning from './components/Learning/Learning';
+import Courses from './components/Courses/Courses';
+
 
 
 function App() {
@@ -159,6 +159,7 @@ function App() {
       </div>
       <Catergories />
       <Learning />
+      <Courses />
 
     
 

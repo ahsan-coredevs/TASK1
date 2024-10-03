@@ -19,6 +19,9 @@ import Hand from '../../assets/icons/hand.svg?react';
 import Photos from '../../assets/icons/photos.svg?react';
 import Award from '../../assets/icons/award.svg?react';
 import Check from '../../assets/icons/check.svg?react';
+import Star from '../../assets/icons/star.svg?react';
+import Book from '../../assets/icons/book.svg?react';
+import Person from '../../assets/icons/Person.svg?react';
 
 
 
@@ -44,11 +47,10 @@ export  {
     Hand,
     Photos,
     Award,
-    Check
-
-
-
-
+    Check,
+    Star,
+    Book,
+    Person
 
 
 
