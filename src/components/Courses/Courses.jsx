@@ -111,6 +111,8 @@ function Courses() {
     <img speed={3} className='absolute top-[3200px] left-[950px] transition-all duration-200 mousemove ease-linear' src={stone} alt="" />
         <img speed={-3} className='absolute h-[220px] top-[3200px] left-[850px] transition-all duration-200 mousemove ease-linear' src={redBall} alt="" />
         <Swape />
+
+        
     </div>
   )
 }

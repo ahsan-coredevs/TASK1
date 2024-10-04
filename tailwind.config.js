@@ -32,7 +32,8 @@ export default {
         },
         
           slideInLeft: {
-          '0%': { transform: 'translateX(-100%)', opacity: 0 },
+          '0%': { transform: 'translateX(100%)', opacity: 0 },
+          '40%': { transform: 'translateX(0)', opacity: 1 },
           '100%': { transform: 'translateX(0)', opacity: 1 },
         },
         
@@ -41,7 +42,7 @@ export default {
          move: 'move 6s linear infinite',
          bounce: 'bounce 4s linear infinite',
          spinreverse: 'spinreverse 10s linear infinite',
-         slideInLeft: 'slideInLeft 0.7s ease-in-out'
+         slideInLeft: 'slideInLeft 4s ease-in-out infinite'
       }
     },
   },
