@@ -10,10 +10,11 @@ export default {
         nav: '#1F2937',
         primary:'#1ab69d',
         secondary: '#ee4a62',
-        grayDark: '#343a40',
+        grayDark: '#111822',
         dark: '#020b17',
         yallow: '#fd7e14',
         ctaColorBg: '#F0F4F5',
+        gold: '#FFD700'
       },
       keyframes: {
         move: {
@@ -24,11 +25,23 @@ export default {
         bounce: {
           '0%, 10%, 100%': { transform: 'translateY(0)' },
           '10%': { transform: 'translateY(50px)' },
-        }
+        },
+        spinreverse: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
+        },
+        
+          slideInLeft: {
+          '0%': { transform: 'translateX(-100%)', opacity: 0 },
+          '100%': { transform: 'translateX(0)', opacity: 1 },
+        },
+        
       },
       animation: {
          move: 'move 6s linear infinite',
          bounce: 'bounce 4s linear infinite',
+         spinreverse: 'spinreverse 10s linear infinite',
+         slideInLeft: 'slideInLeft 0.7s ease-in-out'
       }
     },
   },
