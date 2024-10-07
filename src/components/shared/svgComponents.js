@@ -1,5 +1,7 @@
 import CameraIcon from '../../assets/icons/camera.svg?react';
 import LinkedinIcon from '../../assets/icons/linkedIn.svg?react';
+import Twitter from '../../assets/icons/twitter.svg?react';
+import Facebook from '../../assets/icons/facebook.svg?react';
 import Dot from '../../assets/icons/dot.svg?react';
 import Search from '../../assets/icons/search.svg?react';
 import Shopping from '../../assets/icons/shopping.svg?react';
@@ -22,6 +24,8 @@ import Check from '../../assets/icons/check.svg?react';
 import Star from '../../assets/icons/star.svg?react';
 import Book from '../../assets/icons/book.svg?react';
 import Person from '../../assets/icons/Person.svg?react';
+import Shared from '../../assets/icons/share.svg?react';
+import Checkbox from '../../assets/icons/checkbox.svg?react';
 
 
 
@@ -50,7 +54,11 @@ export  {
     Check,
     Star,
     Book,
-    Person
+    Person,
+    Shared,
+    Twitter,
+    Facebook,
+    Checkbox
 
 
 
