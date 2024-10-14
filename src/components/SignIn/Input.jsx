@@ -1,12 +1,14 @@
 import React from 'react'
 
-function Input({ labelName, InputClass, labelClass,...rest}) {
-  return (
+
+const Input = React.forwardRef(({ labelName,InputClass, labelClass, register, errors, ...rest}) => (
+  
     <div className='flex flex-col w-[80%]'>
         <label className={`text-lg font-bold ${labelClass}`} htmlFor="">{labelName}</label>
-        <input className={`text-base py-2 px-1 bg-grayDark border-2 border-stone-600 rounded-lg ${InputClass}`} {...rest}/>
+        <input {...register()} className={`text-base py-2 px-1 bg-grayDark border-2 border-stone-600 rounded-lg ${InputClass}`}  {...rest}/>
+        {errors && <span className="text-red-500">{errors?.message}</span>}
     </div>
   )
-}
+)
 
 export default Input

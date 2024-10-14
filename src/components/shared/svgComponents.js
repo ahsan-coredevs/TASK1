@@ -26,6 +26,7 @@ import Book from '../../assets/icons/book.svg?react';
 import Person from '../../assets/icons/Person.svg?react';
 import Shared from '../../assets/icons/share.svg?react';
 import Checkbox from '../../assets/icons/checkbox.svg?react';
+import Checkboxok from '../../assets/icons/checkboxok.svg?react';
 
 
 
@@ -58,7 +59,8 @@ export  {
     Shared,
     Twitter,
     Facebook,
-    Checkbox
+    Checkbox,
+    Checkboxok
 
 
 
