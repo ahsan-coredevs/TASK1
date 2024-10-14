@@ -15,7 +15,6 @@ function SignIn() {
 
   const onSubmit = (data) => {
     console.log(data);
-    reset();
   }
   return (
     <div className='w-screen bg-dark  h-[550px] text-white flex justify-center items-center'>
