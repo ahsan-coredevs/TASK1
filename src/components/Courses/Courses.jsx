@@ -67,10 +67,12 @@ function Courses() {
     ];
 
   return (
-    <div className='flex flex-col items-center bg-dark text-slate-200 pt-[50px] realtive ' onMouseMove={handleMouseMove} >
+
+    <div className=" ">
+         <div className='w-full flex flex-col items-center bg-dark text-slate-200 pt-[50px] realtive ' onMouseMove={handleMouseMove} >
         <p className='text-xl '>Popular Courses</p>
         <h1 className='text-5xl my-4 font-bold'>Pick A Course To Get Started</h1>
-        <div className='flex flex-wrap mt-8'>
+        <div className='flex justify-center flex-wrap mt-8'>
             {cardData.map((card, index) => (
                 <Card 
                 key={index}
@@ -86,7 +88,7 @@ function Courses() {
             
         </div>
         <button className='flex items-center bg-primary px-5 py-4 my-8 rounded-xl active:scale-95 hover:bg-gradient-to-r hover:from-[#1ab69d] hover:to-[#31b978] duration-300'>Browse more courses <Arrow className='ml-4' /> </button>
-        <div className='bg-[#1c242f] h-[400px] p-14 w-[700px] grid grid-cols-2 grid-rows-2 rounded-xl z-10 ' >
+        <div className='bg-[#1c242f] h-[400px] p-14 w-[50%] grid grid-cols-2 grid-rows-2 rounded-xl z-10 ' >
             <div className='flex flex-col items-center justify-center border-r-[1px] border-b-[1px] border-slate-600'>
                 <h1 className='text-primary text-5xl font-bold py-2'>45.2k</h1>
                 <p>STUDENT ENROLLED</p>
@@ -106,14 +108,16 @@ function Courses() {
             </div>
         </div>
 
-        <img speed={-3} className='absolute top-[2800px] left-[300px] transition-all duration-200 mousemove ease-linear' src={blueBall} alt="" />
-        <img className='absolute top-[2810px] left-[390px] z-20 animate-spinreverse' src={circle} alt="" />
-    <img speed={3} className='absolute top-[3200px] left-[950px] transition-all duration-200 mousemove ease-linear' src={stone} alt="" />
-        <img speed={-3} className='absolute h-[220px] top-[3200px] left-[850px] transition-all duration-200 mousemove ease-linear' src={redBall} alt="" />
+        <img speed={-3} className='absolute top-[800px] left-[300px] transition-all duration-200 mousemove ease-linear' src={blueBall} alt="" />
+        <img className='absolute top-[810px] left-[330px] z-20 animate-spinreverse' src={circle} alt="" />
+    <img speed={3} className='absolute top-[1200px] left-[950px] transition-all duration-200 mousemove ease-linear' src={stone} alt="" />
+        <img speed={-3} className='absolute h-[220px] top-[1200px] left-[850px] transition-all duration-200 mousemove ease-linear' src={redBall} alt="" />
         <Swape />
 
         
     </div>
+    </div>
+   
   )
 }
 

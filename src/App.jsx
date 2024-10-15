@@ -19,6 +19,10 @@ import MainLayout from './Layout/MainLayout';
 import Categories from './components/Categories/Categories';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
+import Contact from './components/Contact/Contact';
+import Admin from './components/AdminPanel/Admin';
+import ManageCourses from './pages/admin/courses/ManageCourses';
+import AddCourses from './pages/admin/courses/AddCourses';
 
 
 
@@ -41,12 +45,23 @@ function App() {
        <Route  path="/" element={<MainLayout />} >
        <Route path="/Home" element={<Home />} />
         <Route path="/Categories" element={<Categories />} />
-        <Route path="/Courses" element={<Courses />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/News" element={<News />} />
         <Route path="/Partners" element={<Partners />} />
+        <Route path="/Contact" element={<Contact />} />
+        
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
        </Route>
+      </Routes>
+
+      <Routes>
+        <Route path="/admin" element={<Admin />} >
+        <Route path="/admin/courses" element={<ManageCourses />} />
+        <Route path="/admin/courses/add" element={<AddCourses />} />
+        <Route path="/admin/news" element={<News />} />
+        </Route>
+        
       </Routes>
 
     </Router>

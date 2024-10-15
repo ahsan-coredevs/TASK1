@@ -35,7 +35,7 @@ function Card({category, title, Image, price, Lessons, students, rating }) {
     
   return (
     
-        <div className='bg-grayDark text-white w-[300px] h-[450px] relative group mr-4 rounded-xl overflow-hidden'>
+        <div className='bg-grayDark text-white w-[22%] h-content relative group mr-4 rounded-xl overflow-hidden'>
                 <div>
                     <img className='w-full h-[250px] object-cover rounded-t-xl group-hover:scale-110  duration-300' src={Image} alt={title} />
                     <div className='p-4'>
