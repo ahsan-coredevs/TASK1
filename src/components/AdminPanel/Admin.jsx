@@ -2,10 +2,13 @@ import React from 'react'
 import logo from '../../assets/icons/logo-white.png';
 import { BrowserRouter as Router, Route, Routes, Link, Outlet } from 'react-router-dom';
 import Courses from '../Courses/Courses';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Admin() {
   return (
    <div className="w-full h-screen bg-dark overflow-hidden relative">
+    <ToastContainer />
     {/* Upper part */}
      <div className='flex  h-20 w-full bg-nav justify-between items-center absolute top-0 left-0'>
         <div className="flex h-full">
