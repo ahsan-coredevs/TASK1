@@ -1,31 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../../../components/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchData, storeData } from '../../../utils/FileManagement';
+import { fetchData, storeData ,deleteItem } from '../../../utils/FileManagement';
+import { LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 
 const ManageCourses = () => {
   const [courseData, setCourseData] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(null);
+  const [page, setPage] = useState(1);
+  const [filteredData, setFilteredData]=useState([]);
   const navigate = useNavigate();
+  const item_per_page=5;
  
   const retrieveData = () => {
     const res= fetchData('course');
 
     setCourseData(res)
+    const filtered_data= res.slice((0),(5) );
+    setFilteredData(filtered_data);
     }
  
+    const handleDelete = (index) => {
+
+      
+      deleteItem('course', index);
+
+      const updatedCourses = courseData.filter((_, i) => i !== index);
+      setCourseData(updatedCourses);
+      setShowConfirm(null);s
+
+    };
+
 
  
   useEffect(() => {
     retrieveData();
   }, []);
+
+  useEffect(() => {
   
+  }, [page]);
+  
+  const handlePage = (value=1) => {
+    
+ 
+      const totat_page = Math.ceil(courseData.length/item_per_page);
+      if (value < 1  || value>totat_page) return ;
+
+     const filtered_data= courseData.slice((value-1)*item_per_page,((value-1)*item_per_page)+5 );
+     setFilteredData(filtered_data);
+     setPage(value)
+    
+
+
+
+  }
    
   return (
     <>
        <div className='h-full w-[calc(100vw-177px)] relative p-10'>
-        <div className="flex justify-end pb-5">
-        <button className='text-white] bg-primary py-4 px-6 rounded-md focus:scale-90 duration-100 text-white font-[500] ' onClick={()=>navigate('add')}>Add New Course</button>
-        </div>
+          <div className="flex justify-end pb-5">
+             <button className='text-white bg-primary py-4 px-6 rounded-md focus:scale-90 duration-100 font-[500] ' onClick={()=>navigate('add')}>Add New Course</button>
+          </div>
          
 
         <div className=" ">
@@ -34,21 +70,23 @@ const ManageCourses = () => {
               <tr className='p-4 '>
                 <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase rounded-tl-md '>Title</th>
                 <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Label</th>
-                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase rounded-tr-md'>Price</th>
+                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Price</th>
+                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase rounded-tr-md w-[100px]'>Action</th>
               </tr>
             </thead>
             <tbody className='bg-grayDark'>
               {courseData.length > 0 ? (
-                courseData.map((course, index) => (
+                filteredData.map((course, index) => (
                   <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={index}>
                     <td className='text-left  py-3 px-6 '>{course.title}</td>
                     <td className=' text-left  py-3 px-6'>{course.label}</td>
                     <td className='text-start py-3 px-6 '>{course.price}</td>
+                    <td className='text-start py-3 px-6'><button onClick={() => setShowConfirm({...course, id:index})} className=' focus:scale-90 duration-100 bg-primary  py-2 px-4 rounded-md'>Delete</button></td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="3">No data available</td>
+                  <td colSpan={4} className='py-4 text-center'>No data available</td>
                 </tr>
               )}
             </tbody>
@@ -56,6 +94,23 @@ const ManageCourses = () => {
           <div className={`h-2 ${(courseData?.length-1)%2===0?'bg-[#101726]':'bg-[#17212E]'} rounded-b-md`}></div>
         </div>
 
+
+       {
+        showConfirm &&  <div className='  w-[calc(100vw-177px)] h-[calc(100vh-99px)] bg-dark bg-opacity-70 text-white top-0 left-0  absolute'>
+        <div className='mt-[150px] ml-[250px] w-[50%] h-[40%] flex flex-col justify-center items-start bg-primary rounded-md'>
+          <p className='ml-8 p-4 text-black text-lg font-bold'>Are you Sure about delete this Course ? <br /> Note: Once you deleted the data, you won't get it back. </p>
+          <div className='w-[50%] flex justify-around ml-8 '>
+          <button className='bg-grayDark py-2 px-4 rounded-md font-bold' onClick={() => handleDelete(showConfirm.id)} >Confirm Delete</button>
+          <button className='bg-grayDark py-2 px-4 rounded-md font-bold' onClick={() => setShowConfirm(null)} >Cancel</button>
+          </div>
+        </div>
+      </div>
+       }
+              
+        <div className=' text-white text-xl flex justify-end pt-5 pb-10'>
+          <button onClick={() => handlePage(page-1)} className='border p-2'><LeftArrow /></button>
+          <button onClick={() => handlePage(page+1)} className='border border-l-0 p-2'><RightArrow /></button>
+        </div>
 
        </div>
     </>

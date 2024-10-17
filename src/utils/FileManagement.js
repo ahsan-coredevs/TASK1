@@ -30,5 +30,15 @@ export const fetchData= (target)=>{
 
 
 export const deleteItem= (target, index)=>{
-
+  
+  try {
+    const isFound = localStorage.getItem(target);
+    if (isFound) {
+      const stored_data = JSON.parse(isFound);
+      stored_data.splice(index, 1); // Remove the item at the specified index
+      localStorage.setItem(target, JSON.stringify(stored_data));
+    }
+  } catch (error) {
+    console.error("Error deleting data:", error);
+  }
 }

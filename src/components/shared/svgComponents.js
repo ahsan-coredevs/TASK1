@@ -27,6 +27,8 @@ import Person from '../../assets/icons/Person.svg?react';
 import Shared from '../../assets/icons/share.svg?react';
 import Checkbox from '../../assets/icons/checkbox.svg?react';
 import Checkboxok from '../../assets/icons/checkboxok.svg?react';
+import LeftArrow from '../../assets/icons/leftArrow.svg?react';
+import RightArrow from '../../assets/icons/rightArrow.svg?react';
 
 
 
@@ -60,7 +62,9 @@ export  {
     Twitter,
     Facebook,
     Checkbox,
-    Checkboxok
+    Checkboxok,
+    LeftArrow,
+    RightArrow
 
 
 

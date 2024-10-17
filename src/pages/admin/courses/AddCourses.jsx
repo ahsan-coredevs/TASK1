@@ -54,8 +54,9 @@ const AddCourses = () => {
         imageUrl: imageSrc, // Add image URL to form data
       };
 
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve,10));
       console.log('Form data with image url:', formData);
+      
       
         const res= storeData('course',formData);
         if(res) {
