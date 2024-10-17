@@ -1,20 +1,37 @@
 import React, { useRef, useState } from 'react';
 import Button from '../../../components/Button/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Input from '../../../components/SignIn/Input';
 import axios from 'axios';
-import { storeData } from '../../../utils/FileManagement';
+import { storeData, editItem } from '../../../utils/FileManagement';
 import { toast } from 'react-toastify';
 
 const AddCourses = () => {
-    const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
 
-    const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100'); 
+    const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const fileInputRef = useRef(null); 
     const API_KEY = '9c7c04f46fb0e79f4be68f9eafd8aff3';
-    const submitButtonRef = useRef(null);
     const navigate = useNavigate();
+    const {operation}= useParams();
+    const location= useLocation();
+
+
+    useState(()=>{
+        if(location?.state?.courseData) {
+            setValue('title', location?.state?.courseData?.title );
+            setValue('label', location?.state?.courseData?.label );
+            setValue('price', location?.state?.courseData?.price );
+            setValue('details', location?.state?.courseData?.details );
+            setImageSrc(location?.state?.courseData?.imageUrl);
+        }
+
+    },[])
+  
+   
+
+    
 
     // Image change handler and ImgBB upload
     const handleImageChange = async (e) => {
@@ -54,10 +71,18 @@ const AddCourses = () => {
         imageUrl: imageSrc, // Add image URL to form data
       };
 
-      await new Promise((resolve) => setTimeout(resolve,10));
-      console.log('Form data with image url:', formData);
-      
-      
+
+      if(location?.state?.courseData && operation==='edit') {
+        const EditedData = editItem('course',location?.state?.courseData?.id, formData)
+        if(EditedData) {
+            toast.success('Course successfully added');
+
+        }
+        else toast.error('Something went wrong')
+
+      }
+      else {
+        //add new
         const res= storeData('course',formData);
         if(res) {
             toast.success('Course successfully added');
@@ -66,6 +91,10 @@ const AddCourses = () => {
 
         }
         else toast.error('Something went wrong')
+      }
+      
+      
+       
        
     
     };
@@ -122,7 +151,7 @@ const AddCourses = () => {
                 
                 {/* Submit Button */}
                 <button className='w-[150px] py-2 ml-0 bg-primary rounded-md ' disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : 'Add Course'}
+                    {isSubmitting ? 'Submitting...' :  operation==='edit'?'Update':'Submit'}
                 </button>
             </form>
         </div>

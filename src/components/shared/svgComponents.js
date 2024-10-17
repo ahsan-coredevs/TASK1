@@ -29,6 +29,8 @@ import Checkbox from '../../assets/icons/checkbox.svg?react';
 import Checkboxok from '../../assets/icons/checkboxok.svg?react';
 import LeftArrow from '../../assets/icons/leftArrow.svg?react';
 import RightArrow from '../../assets/icons/rightArrow.svg?react';
+import Delete from '../../assets/icons/delete.svg?react';
+import Edit from '../../assets/icons/edit.svg?react';
 
 
 
@@ -64,7 +66,9 @@ export  {
     Checkbox,
     Checkboxok,
     LeftArrow,
-    RightArrow
+    RightArrow,
+    Edit, 
+    Delete
 
 
 

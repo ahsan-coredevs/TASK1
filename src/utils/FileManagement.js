@@ -1,7 +1,6 @@
 
 export const storeData = (target, data) => {
   try {
-   
     const isFound = localStorage.getItem(target);
     if(!isFound) {
       localStorage.setItem(target, JSON.stringify([data]));
@@ -28,17 +27,36 @@ export const fetchData= (target)=>{
   
 }
 
-
 export const deleteItem= (target, index)=>{
   
   try {
     const isFound = localStorage.getItem(target);
     if (isFound) {
       const stored_data = JSON.parse(isFound);
-      stored_data.splice(index, 1); // Remove the item at the specified index
+      stored_data.splice(index, 1);
       localStorage.setItem(target, JSON.stringify(stored_data));
     }
   } catch (error) {
     console.error("Error deleting data:", error);
+  }
+}
+
+export const editItem = (target, index, newData)=>{
+
+
+
+  
+  try {
+    const isFound = localStorage.getItem(target);
+    if (isFound) {
+    const stored_data= JSON.parse(isFound);
+      stored_data[index] = newData;
+
+      localStorage.setItem(target, JSON.stringify(stored_data));
+      return true
+    }
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    return false
   }
 }

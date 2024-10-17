@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '../../../components/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchData, storeData ,deleteItem } from '../../../utils/FileManagement';
-import { LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 
 const ManageCourses = () => {
   const [courseData, setCourseData] = useState([]);
@@ -42,17 +42,12 @@ const ManageCourses = () => {
   }, [page]);
   
   const handlePage = (value=1) => {
-    
  
       const totat_page = Math.ceil(courseData.length/item_per_page);
       if (value < 1  || value>totat_page) return ;
-
      const filtered_data= courseData.slice((value-1)*item_per_page,((value-1)*item_per_page)+5 );
      setFilteredData(filtered_data);
      setPage(value)
-    
-
-
 
   }
    
@@ -81,7 +76,10 @@ const ManageCourses = () => {
                     <td className='text-left  py-3 px-6 '>{course.title}</td>
                     <td className=' text-left  py-3 px-6'>{course.label}</td>
                     <td className='text-start py-3 px-6 '>{course.price}</td>
-                    <td className='text-start py-3 px-6'><button onClick={() => setShowConfirm({...course, id:index})} className=' focus:scale-90 duration-100 bg-primary  py-2 px-4 rounded-md'>Delete</button></td>
+                    <td className='text-start py-3 px-6 flex gap-2'>
+                      <button onClick={() => setShowConfirm({...course, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
+                      <button onClick={()=>navigate('edit',{state: {courseData: {...course, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -97,7 +95,7 @@ const ManageCourses = () => {
 
        {
         showConfirm &&  <div className='  w-[calc(100vw-177px)] h-[calc(100vh-99px)] bg-dark bg-opacity-70 text-white top-0 left-0  absolute'>
-        <div className='mt-[150px] ml-[250px] w-[50%] h-[40%] flex flex-col justify-center items-start bg-primary rounded-md'>
+        <div className='mt-[150px] ml-[250px] w-[50%] h-[40%] flex flex-col justify-center items-start bg-white/90 rounded-md'>
           <p className='ml-8 p-4 text-black text-lg font-bold'>Are you Sure about delete this Course ? <br /> Note: Once you deleted the data, you won't get it back. </p>
           <div className='w-[50%] flex justify-around ml-8 '>
           <button className='bg-grayDark py-2 px-4 rounded-md font-bold' onClick={() => handleDelete(showConfirm.id)} >Confirm Delete</button>
