@@ -22,12 +22,10 @@ const ManageCourses = () => {
  
     const handleDelete = (index) => {
 
-      
       deleteItem('course', index);
+      retrieveData();
 
-      const updatedCourses = courseData.filter((_, i) => i !== index);
-      setCourseData(updatedCourses);
-      setShowConfirm(null);s
+      setShowConfirm(null);
 
     };
 
@@ -91,7 +89,6 @@ const ManageCourses = () => {
           </table>
           <div className={`h-2 ${(courseData?.length-1)%2===0?'bg-[#101726]':'bg-[#17212E]'} rounded-b-md`}></div>
         </div>
-
 
        {
         showConfirm &&  <div className='  w-[calc(100vw-177px)] h-[calc(100vh-99px)] bg-dark bg-opacity-70 text-white top-0 left-0  absolute'>

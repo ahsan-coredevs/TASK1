@@ -23,6 +23,8 @@ import Contact from './components/Contact/Contact';
 import Admin from './components/AdminPanel/Admin';
 import ManageCourses from './pages/admin/courses/ManageCourses';
 import AddCourses from './pages/admin/courses/AddCourses';
+import ManageBlogs from './pages/admin/blogs/ManageBlogs';
+import AddBlogs from './pages/admin/blogs/AddBlogs';
 
 
 
@@ -59,7 +61,8 @@ function App() {
         <Route path="/admin" element={<Admin />} >
         <Route path="/admin/courses" element={<ManageCourses />} />
         <Route path='/admin/courses/:operation' element={<AddCourses />} />
-        <Route path="/admin/news" element={<News />} />
+        <Route path="/admin/blogs" element={<ManageBlogs />} />
+        <Route path='/admin/blogs/:operation' element={<AddBlogs />} />
         </Route>
         
       </Routes>

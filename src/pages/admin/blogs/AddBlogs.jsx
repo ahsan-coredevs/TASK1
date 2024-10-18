@@ -1,15 +1,12 @@
 import React, { useRef, useState } from 'react';
-import Button from '../../../components/Button/Button';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Input from '../../../components/SignIn/Input';
 import axios from 'axios';
 import { storeData, editItem } from '../../../utils/FileManagement';
 import { toast } from 'react-toastify';
 
-const AddCourses = () => {
+function AddBlogs() {
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
-
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const fileInputRef = useRef(null); 
     const API_KEY = '9c7c04f46fb0e79f4be68f9eafd8aff3';
@@ -19,21 +16,16 @@ const AddCourses = () => {
 
 
     useState(()=>{
-        if(location?.state?.courseData) {
-            setValue('title', location?.state?.courseData?.title );
-            setValue('label', location?.state?.courseData?.label );
-            setValue('price', location?.state?.courseData?.price );
-            setValue('details', location?.state?.courseData?.details );
-            setImageSrc(location?.state?.courseData?.imageUrl);
+        if(location?.state?.blogData) {
+            setValue('title', location?.state?.blogData?.title );
+            setValue('label', location?.state?.blogData?.label );
+            setValue('details', location?.state?.blogData?.details );
+            setImageSrc(location?.state?.blogData?.imageUrl);
         }
 
     },[])
   
-   
-
-    
-
-    // Image change handler and ImgBB upload
+  
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -48,7 +40,7 @@ const AddCourses = () => {
           );
 
           if (response.data.success) {
-            setImageSrc(response.data.data.url); // Set the new image URL after upload
+            setImageSrc(response.data.data.url); 
             console.log("Image uploaded:", response.data.data.url);
           } else {
             console.log("Failed to upload image");
@@ -59,35 +51,35 @@ const AddCourses = () => {
     };
 
     const handleImageClick = () => {
-      fileInputRef.current.click(); // Open file dialog
+      fileInputRef.current.click();
     };
 
-    // Form submit handler
+   
     async function onSubmit(data) {
 
-      // Include the image URL in the form data
+     
       const formData = {
         ...data,
-        imageUrl: imageSrc, // Add image URL to form data
+        imageUrl: imageSrc, 
       };
 
 
-      if(location?.state?.courseData && operation==='edit') {
-        const EditedData = editItem('course',location?.state?.courseData?.id, formData)
+      if(location?.state?.blogData && operation==='edit') {
+        const EditedData = editItem('blogs',location?.state?.blogData?.id, formData)
         if(EditedData) {
-            toast.success('Course successfully added');
+            toast.success('Blog successfully added');
 
         }
         else toast.error('Something went wrong')
 
       }
       else {
-        //add new
-        const res= storeData('course',formData);
+        
+        const res= storeData('blogs',formData);
         if(res) {
             toast.success('Course successfully added');
 
-            navigate('/admin/courses')
+            navigate('/admin/blogs')
 
         }
         else toast.error('Something went wrong')
@@ -98,12 +90,11 @@ const AddCourses = () => {
        
     
     };
-
-    return (
-        <div className='h-full flex items-center justify-center bg-grayDark text-white'>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-[1000px] h-[450px] bg-dark p-4 grid grid-cols-2 gap-2 rounded-lg'>
+  return (
+    <div className='h-full flex items-center justify-center bg-grayDark text-white'>
+        <form onSubmit={handleSubmit(onSubmit)} className='w-[1000px] h-[450px] bg-dark p-4 grid grid-cols-2 gap-2 rounded-lg'>
                 
-                {/* Image Chooser */}
+                
                 <div className="max-w-xs mx-auto p-1 ml-0 bg-white shadow-md rounded-lg">
                     <div
                         onClick={handleImageClick}
@@ -126,37 +117,31 @@ const AddCourses = () => {
                     />
                 </div> 
 
-                {/* Input Fields */}
+             
                 <input 
                     className='h-12 rounded-md bg-grayDark p-4 col-span-2' 
-                    placeholder='Type Course Title...' 
+                    placeholder='Type Blog Title...' 
                     {...register("title", { required: true })} 
                 />
                 <input 
-                    className='h-12 rounded-md bg-grayDark p-4' 
-                    placeholder='Type Course Label...' 
+                    className='h-12 rounded-md bg-grayDark p-4 col-span-2' 
+                    placeholder='Type Blog Label...' 
                     {...register("label", { required: true })}
-                />
-                <input 
-                    className='h-12 rounded-md bg-grayDark p-4' 
-                    placeholder='Type Course Price...' 
-                    {...register("price", { required: true })} 
                 />
                 <textarea 
                     type='text' 
                     className='h-32 rounded-md bg-grayDark p-4 col-span-2  text-wrap' 
-                    placeholder='Write Down Further Information About Course' 
+                    placeholder='Write Down Your Blog' 
                     {...register("details", { required: true })} 
                 />
                 
-                {/* Submit Button */}
+            
                 <button className='w-[150px] py-2 ml-0 bg-primary rounded-md ' disabled={isSubmitting}>
                     {isSubmitting ? 'Submitting...' :  operation==='edit'?'Update':'Submit'}
                 </button>
             </form>
-        </div>
-    );
-};
+    </div>
+  )
+}
 
-export default AddCourses;
-
+export default AddBlogs

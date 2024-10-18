@@ -108,10 +108,10 @@ function Courses() {
             </div>
         </div>
 
-        <img speed={-3} className='absolute top-[800px] left-[300px] transition-all duration-200 mousemove ease-linear' src={blueBall} alt="" />
-        <img className='absolute top-[810px] left-[330px] z-20 animate-spinreverse' src={circle} alt="" />
-    <img speed={3} className='absolute top-[1200px] left-[950px] transition-all duration-200 mousemove ease-linear' src={stone} alt="" />
-        <img speed={-3} className='absolute h-[220px] top-[1200px] left-[850px] transition-all duration-200 mousemove ease-linear' src={redBall} alt="" />
+        <img speed={-3} className='absolute top-[2800px] left-[300px] transition-all duration-200 mousemove ease-linear' src={blueBall} alt="" />
+        <img className='absolute top-[2810px] left-[330px] z-20 animate-spinreverse' src={circle} alt="" />
+    <img speed={3} className='absolute top-[3200px] left-[950px] transition-all duration-200 mousemove ease-linear' src={stone} alt="" />
+        <img speed={-3} className='absolute h-[220px] top-[3200px] left-[850px] transition-all duration-200 mousemove ease-linear' src={redBall} alt="" />
         <Swape />
 
         

@@ -4,13 +4,13 @@ export const storeData = (target, data) => {
     const isFound = localStorage.getItem(target);
     if(!isFound) {
       localStorage.setItem(target, JSON.stringify([data]));
-      return true
+      return true;
     }
     else {
       const stored_data = JSON.parse(isFound);
       stored_data.push(data);
       localStorage.setItem(target, JSON.stringify(stored_data));
-      return true
+      return true;
 
     }
    
@@ -42,9 +42,6 @@ export const deleteItem= (target, index)=>{
 }
 
 export const editItem = (target, index, newData)=>{
-
-
-
   
   try {
     const isFound = localStorage.getItem(target);

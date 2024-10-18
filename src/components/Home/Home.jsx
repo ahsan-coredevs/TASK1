@@ -8,6 +8,13 @@ import ball1 from '../../assets/about/shape-35.png';
 import ball2 from '../../assets/about/shape-37.png';
 import rectangle from '../../assets/about/h-1-shape-01.png';
 import wave from '../../assets/about/shape-15.png';
+import Categories from '../Categories/Categories';
+import Learning from '../Learning/Learning';
+import Courses from '../Courses/Courses';
+import Instructors from '../Instructors/Instructors';
+import Partners from '../Partners/Partners';
+import News from '../News/News';
+import Footer from '../footer/Footer';
 
 
 function Home() {
@@ -22,6 +29,7 @@ function Home() {
     
  };
   return (
+    <>
     <div className='w-screen ' onMouseMove={handleMouseMove}>
         <div className='flex justify-between h-screen w-screen bg-dark relative '>
           <div className='flex flex-col items-left z-10 justify-center ml-[85px] text-white w-[50%]'>
@@ -81,6 +89,14 @@ function Home() {
           </div>
         </div>
     </div>
+    <Categories />
+    <Learning />
+    <Courses />
+    <Instructors />
+    <Partners />
+    <News />
+    <Footer/>
+    </>
   )
 }
 
