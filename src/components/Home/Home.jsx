@@ -10,11 +10,14 @@ import rectangle from '../../assets/about/h-1-shape-01.png';
 import wave from '../../assets/about/shape-15.png';
 import Categories from '../Categories/Categories';
 import Learning from '../Learning/Learning';
-import Courses from '../Courses/Courses';
+import Courses from '../popularCourses/PopularCourses';
 import Instructors from '../Instructors/Instructors';
 import Partners from '../Partners/Partners';
 import News from '../News/News';
 import Footer from '../footer/Footer';
+import AboutCourse from '../popularCourses/AboutCourse';
+import Blog from '../../pages/blog/Blog';
+import HomeBlog from '../blog/HomeBlog';
 
 
 function Home() {
@@ -30,7 +33,7 @@ function Home() {
  };
   return (
     <>
-    <div className='w-screen ' onMouseMove={handleMouseMove}>
+    <div className='w-full max-w-[1500px]' onMouseMove={handleMouseMove}>
         <div className='flex justify-between h-screen w-screen bg-dark relative '>
           <div className='flex flex-col items-left z-10 justify-center ml-[85px] text-white w-[50%]'>
             <h1 className='text-[50px] font-bold mb-4'>Get <span className='text-secondary'>2500+</span> <br /> Best Online Courses <br /> from Edublink</h1>
@@ -92,6 +95,8 @@ function Home() {
     <Categories />
     <Learning />
     <Courses />
+    <AboutCourse />
+    <HomeBlog/>
     <Instructors />
     <Partners />
     <News />

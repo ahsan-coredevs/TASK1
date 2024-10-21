@@ -10,7 +10,7 @@ const roundRating = (rating) => {
     return Math.round(rating); // For values above 4.75 or less than 2.75
   };
 
-function Card({category, title, Image, price, Lessons, students, rating }) {
+function Card({category, title, Image, price, Lessons, students, rating ,details }) {
     const roundedRating = roundRating(rating);
 
   const getStars = () => {
@@ -35,12 +35,12 @@ function Card({category, title, Image, price, Lessons, students, rating }) {
     
   return (
     
-        <div className='bg-grayDark text-white w-[22%] h-content relative group mr-4 rounded-xl overflow-hidden'>
+        <div className='bg-dark w-[23%] text-white h-content relative group rounded-xl overflow-hidden'>
                 <div>
                     <img className='w-full h-[250px] object-cover rounded-t-xl group-hover:scale-110  duration-300' src={Image} alt={title} />
                     <div className='p-4'>
                         <h5 className=' text-lg rounded  bg-[#0ecd73] inline py-1 px-2  bg-opacity-20 text-center mb-1' >{category}</h5>
-                        <h2 className='text-lg font-bold'>{title}</h2>
+                        <h2 className='text-lg font-bold line-clamp-1'>{title}</h2>
                         <div className='flex font-bold py-1'>
                         <div className='flex w-[120px] justify-between text-xl'>{getStars()}</div> <p className='pl-1'>{rating}/5 Rating</p>
                         </div>
@@ -55,7 +55,7 @@ function Card({category, title, Image, price, Lessons, students, rating }) {
                         <div className='flex'>
                         {getStars()}
                         </div>
-                        <p className='text-lg my-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus eaque dolore sunt porro blanditiis</p>
+                        <p className='text-lg my-2'>{details}</p>
                         <p className='my-2'>${price}.00</p>
                         <p className='flex items-center'> <span className='flex items-center mr-4' ><Book className='mr-2' /> {Lessons} Lessons</span> | <span className='flex items-center ml-4'><Person className='mr-2' /> {students} Students</span>  </p>
                         <button className='flex items-center bg-[#f92596] px-5 py-4 rounded-xl active:scale-95 hover:bg-gradient-to-r hover:text-black hover:from-[#c4cccb] hover:to-[#b2b8b5] duration-300 my-4'>Enrolled <Arrow className='ml-2' /> </button>

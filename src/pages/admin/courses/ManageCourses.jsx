@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../../../components/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchData, storeData ,deleteItem } from '../../../utils/FileManagement';
-import { Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { fetchData, deleteItem } from '../../../utils/FileManagement';
+import { Book, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 
 const ManageCourses = () => {
   const [courseData, setCourseData] = useState([]);
@@ -56,39 +56,35 @@ const ManageCourses = () => {
              <button className='text-white bg-primary py-4 px-6 rounded-md focus:scale-90 duration-100 font-[500] ' onClick={()=>navigate('add')}>Add New Course</button>
           </div>
          
+         <div className='w-[calc(100vw-177px)] flex gap-8 flex-wrap'>
+          {courseData.length > 0 ? (
+            filteredData.map((course, index) => (
+              <div className='w-[25%] rounded-md bg-grayDark overflow-hidden text-white relative group' key={index}>
+                <div className='w-full h-[200px]'>
+                  <img className='w-[100%] h-full object-cover' src={course.imageUrl} alt="" />
+                </div>
 
-        <div className=" ">
-        <table className=' text-white shadow-md overflow-hidden  w-full top-[100px]'>
-            <thead className=' '>
-              <tr className='p-4 '>
-                <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase rounded-tl-md '>Title</th>
-                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Label</th>
-                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Price</th>
-                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase rounded-tr-md w-[100px]'>Action</th>
-              </tr>
-            </thead>
-            <tbody className='bg-grayDark'>
-              {courseData.length > 0 ? (
-                filteredData.map((course, index) => (
-                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={index}>
-                    <td className='text-left  py-3 px-6 '>{course.title}</td>
-                    <td className=' text-left  py-3 px-6'>{course.label}</td>
-                    <td className='text-start py-3 px-6 '>{course.price}</td>
-                    <td className='text-start py-3 px-6 flex gap-2'>
-                      <button onClick={() => setShowConfirm({...course, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
-                      <button onClick={()=>navigate('edit',{state: {courseData: {...course, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={4} className='py-4 text-center'>No data available</td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-          <div className={`h-2 ${(courseData?.length-1)%2===0?'bg-[#101726]':'bg-[#17212E]'} rounded-b-md`}></div>
-        </div>
+                <button onClick={() => setShowConfirm({...course, id:index})} className='  focus:scale-90 bg-primary/90  py-2 px-4 rounded-md absolute top-4 right-20 opacity-0 group-hover:opacity-100 duration-300'><Delete /></button> 
+                <button onClick={()=>navigate('edit',{state: {courseData: {...course, id:index}}})} className=' focus:scale-90 bg-primary/90  py-2 px-4 rounded-md absolute top-4 right-4 opacity-0 group-hover:opacity-100 duration-300'><Edit /></button>
+                
+                <div className='bg-primary w-[80px] h-[80px] flex items-center justify-center rounded-full absolute top-[155px] right-[20px]'>
+                  $ {course.price}
+                </div>
+
+                <h1 className='text-4xl py-6 px-4 text-wrap'>{course.title}</h1>
+                <p className='px-4 my-2 text-lg'>{course.details}</p>
+                <p className='px-4 flex items-center gap-2 text-lg'> <Book/> 6 Lessons</p>
+                <Button buttonClass={'py-2 pl-4 pr-1 m-4'} buttonName={'Enroll Now'} />
+
+
+
+              </div>
+            ))
+    
+          ) : (
+            <div className='text-white text-4xl font-bold'>No Course Available</div>
+          )}
+         </div>
 
        {
         showConfirm &&  <div className='  w-[calc(100vw-177px)] h-[calc(100vh-99px)] bg-dark bg-opacity-70 text-white top-0 left-0  absolute'>

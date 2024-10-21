@@ -13,8 +13,8 @@ function Nav() {
  
   
   return (
-    <div className='sticky top-0 z-50'>
-        <div className='w-full overflow-hidden sticky z-50 '  >
+    <div className='sticky top-0 z-50 bg-dark flex items-center justify-center '>
+        <div className='w-full max-w-[1500px] overflow-hidden sticky z-50 '  >
         <div className='flex flex-row max-h-14 w-full bg-gray-900 justify-between items-center p-2 '> 
           <div className='flex justify-between w-[40%] min-h-full border-r border-gray-500'>
           <p className='text-slate-100'>First 20 students get 50% discount. <span className='text-red-600 cursor-pointer'>Hurry up!</span> </p> 
@@ -43,7 +43,7 @@ function Nav() {
           <div className="flex h-full">
           <div className='border-r border-gray-500/30 p-2'>
           <img src={logo} alt="Logo" className='cursor-pointer'/>
-            </div>
+          </div>
 
             <div className='border-r border-gray-500/30 h-full flex items-center justify-center px-5'>
               <a href="#" className="flex items-center text-slate-100 hover:text-primary duration-300">
@@ -59,9 +59,9 @@ function Nav() {
               <div className='w-[50%] h-[100%] items-center'>
                 <ul className='flex justify-between items-center h-[100%]'>
                   <li className='h-[100%] flex items-center hover:text-primary duration-300'><Link to="/home" className='flex items-center'>Home <DownArrow className="ml-1" /></Link></li>
-                  <li><Link to="/Categories" className='flex items-center hover:text-primary duration-300'>Pages <DownArrow className="ml-1" /></Link></li>
+                  <li><Link to="#" className='flex items-center hover:text-primary duration-300'>Pages <DownArrow className="ml-1" /></Link></li>
                   <li><Link to="/courses" className='flex items-center hover:text-primary duration-300'>Courses <DownArrow className="ml-1" /></Link></li>
-                  <li><Link to="/News" className='flex items-center hover:text-primary duration-300'>Blog <DownArrow className="ml-1" /></Link></li>
+                  <li><Link to="/blog" className='flex items-center hover:text-primary duration-300'>Blog <DownArrow className="ml-1" /></Link></li>
                   <li><Link to="/Contact" className='flex items-center hover:text-primary duration-300'>Contact <DownArrow className="ml-1" /></Link></li>
                 </ul>
               </div>

@@ -16,21 +16,21 @@ function Footer() {
         </div>
         <div className='flex flex-col w-[20%]'>
             <h1 className='text-2lg font-bold mb-4'>Online Platform</h1>
-            <a className='text-lg' href="#about">About</a>
-            <a className='text-lg' href="#courses">Courses</a>
-            <a className='text-lg' href="#instructor">Instructor</a>
-            <a className='text-lg' href="#events">Events</a>
-            <a className='text-lg' href="#profile">Instructor Profile</a>
-            <a className='text-lg' href="#guide">Pruchase Guide</a>
+            <a className='text-lg hover:text-primary duration-150 hover:scale-105' href="#about">About</a>
+            <a className='text-lg  hover:text-primary duration-150 hover:scale-105' href="#courses">Courses</a>
+            <a className='text-lg  hover:text-primary duration-150 hover:scale-105' href="#instructor">Instructor</a>
+            <a className='text-lg  hover:text-primary duration-150 hover:scale-105' href="#events">Events</a>
+            <a className='text-lg  hover:text-primary duration-150 hover:scale-105' href="#profile">Instructor Profile</a>
+            <a className='text-lg  hover:text-primary duration-150 hover:scale-105' href="#guide">Pruchase Guide</a>
         </div>
         <div className='flex flex-col w-[20%]'>
             <h1 className='text-2lg font-bold mb-4'>Online Platform</h1>
-            <a className='text-lg' href="#about">About</a>
-            <a className='text-lg' href="#courses">Courses</a>
-            <a className='text-lg' href="#instructor">Instructor</a>
-            <a className='text-lg' href="#events">Events</a>
-            <a className='text-lg' href="#profile">Instructor Profile</a>
-            <a className='text-lg' href="#guide">Pruchase Guide</a>
+            <a className='text-lg  hover:text-primary duration-150 hover:scale-105' href="#about">About</a>
+            <a className='text-lg hover:text-primary duration-150 hover:scale-105' href="#courses">Courses</a>
+            <a className='text-lg hover:text-primary duration-150 hover:scale-105' href="#instructor">Instructor</a>
+            <a className='text-lg hover:text-primary duration-150 hover:scale-105' href="#events">Events</a>
+            <a className='text-lg hover:text-primary duration-150 hover:scale-105' href="#profile">Instructor Profile</a>
+            <a className='text-lg hover:text-primary duration-150 hover:scale-105' href="#guide">Pruchase Guide</a>
         </div>
         <div className='flex flex-col w-[30%]'>
             <h1 className='text-2lg font-bold mb-4'>Contacts</h1>

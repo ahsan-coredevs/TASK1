@@ -9,7 +9,6 @@ import Catergories from './components/Categories/Categories'
 import './App.css'
 import { CameraIcon, LinkedinIcon, Dot, Search, Shopping, Arrow, DownArrow, Laptop, Man, Certificate, Members } from './components/shared/svgComponents';
 import Learning from './components/Learning/Learning';
-import Courses from './components/Courses/Courses';
 import Instructors from './components/Instructors/Instructors';
 import Partners from './components/Partners/Partners';
 import News from './components/News/News';
@@ -25,6 +24,9 @@ import ManageCourses from './pages/admin/courses/ManageCourses';
 import AddCourses from './pages/admin/courses/AddCourses';
 import ManageBlogs from './pages/admin/blogs/ManageBlogs';
 import AddBlogs from './pages/admin/blogs/AddBlogs';
+import Courses from './pages/course/Courses';
+import Blog from './pages/blog/Blog';
+import BlogView from './pages/blog/BlogView';
 
 
 
@@ -48,7 +50,9 @@ function App() {
        <Route path="/Home" element={<Home />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/courses" element={<Courses />} />
-        <Route path="/News" element={<News />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path='/blog/:operation' element={<BlogView />} />
         <Route path="/Partners" element={<Partners />} />
         <Route path="/Contact" element={<Contact />} />
         
@@ -63,6 +67,7 @@ function App() {
         <Route path='/admin/courses/:operation' element={<AddCourses />} />
         <Route path="/admin/blogs" element={<ManageBlogs />} />
         <Route path='/admin/blogs/:operation' element={<AddBlogs />} />
+        
         </Route>
         
       </Routes>

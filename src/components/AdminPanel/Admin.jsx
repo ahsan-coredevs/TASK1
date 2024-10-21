@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../assets/icons/logo-white.png';
 import { BrowserRouter as Router, Route, Routes, Link, Outlet, NavLink } from 'react-router-dom';
-import Courses from '../Courses/Courses';
+import Courses from '../popularCourses/PopularCourses';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
