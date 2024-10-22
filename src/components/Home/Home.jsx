@@ -100,7 +100,6 @@ function Home() {
     <Instructors />
     <Partners />
     <News />
-    <Footer/>
     </>
   )
 }

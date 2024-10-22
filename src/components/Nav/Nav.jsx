@@ -59,10 +59,11 @@ function Nav() {
               <div className='w-[50%] h-[100%] items-center'>
                 <ul className='flex justify-between items-center h-[100%]'>
                   <li className='h-[100%] flex items-center hover:text-primary duration-300'><Link to="/home" className='flex items-center'>Home <DownArrow className="ml-1" /></Link></li>
-                  <li><Link to="#" className='flex items-center hover:text-primary duration-300'>Pages <DownArrow className="ml-1" /></Link></li>
+                  
                   <li><Link to="/courses" className='flex items-center hover:text-primary duration-300'>Courses <DownArrow className="ml-1" /></Link></li>
                   <li><Link to="/blog" className='flex items-center hover:text-primary duration-300'>Blog <DownArrow className="ml-1" /></Link></li>
                   <li><Link to="/Contact" className='flex items-center hover:text-primary duration-300'>Contact <DownArrow className="ml-1" /></Link></li>
+                  <li><Link to="/feedback" className='flex items-center hover:text-primary duration-300'>Feedback <DownArrow className="ml-1" /></Link></li>
                 </ul>
               </div>
 

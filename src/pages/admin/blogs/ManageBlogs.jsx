@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../../../components/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchData, storeData ,deleteItem } from '../../../utils/FileManagement';
+import { fetchData, deleteItem } from '../../../utils/FileManagement';
 import { Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 
 function ManageBlogs() {

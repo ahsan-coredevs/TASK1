@@ -92,11 +92,6 @@ const AddCourses = () => {
         }
         else toast.error('Something went wrong')
       }
-      
-      
-       
-       
-    
     };
 
     return (

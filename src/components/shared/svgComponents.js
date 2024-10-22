@@ -31,6 +31,12 @@ import LeftArrow from '../../assets/icons/leftArrow.svg?react';
 import RightArrow from '../../assets/icons/rightArrow.svg?react';
 import Delete from '../../assets/icons/delete.svg?react';
 import Edit from '../../assets/icons/edit.svg?react';
+import Plus from '../../assets/icons/plus.svg?react';
+import Minus from '../../assets/icons/minus.svg?react';
+import Money from '../../assets/icons/money.svg?react';
+import Teacher from '../../assets/icons/teacher.svg?react';
+import Clock from '../../assets/icons/clock.svg?react';
+import World from '../../assets/icons/world.svg?react';
 
 
 
@@ -68,7 +74,13 @@ export  {
     LeftArrow,
     RightArrow,
     Edit, 
-    Delete
+    Delete,
+    Plus,
+    Minus,
+    Money,
+    Teacher,
+    Clock,
+    World
 
 
 

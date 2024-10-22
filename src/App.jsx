@@ -27,6 +27,8 @@ import AddBlogs from './pages/admin/blogs/AddBlogs';
 import Courses from './pages/course/Courses';
 import Blog from './pages/blog/Blog';
 import BlogView from './pages/blog/BlogView';
+import Feedback from './components/feedback/Feedback';
+import ViewCourse from './pages/course/ViewCourse';
 
 
 
@@ -50,11 +52,13 @@ function App() {
        <Route path="/Home" element={<Home />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/:operation" element={<ViewCourse />} />
         <Route path="/news" element={<News />} />
         <Route path="/blog" element={<Blog />} />
         <Route path='/blog/:operation' element={<BlogView />} />
         <Route path="/Partners" element={<Partners />} />
         <Route path="/Contact" element={<Contact />} />
+        <Route path="/feedback" element={<Feedback />} />
         
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
