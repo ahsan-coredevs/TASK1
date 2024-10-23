@@ -16,7 +16,7 @@ function Contact() {
     <>
         <div className='h-screen w-screen flex items-center justify-center absolute bg-grayDark text-white'>
             <form onSubmit={handleSubmit(onSubmit)} className='w-[600px] h-[500px] bg-dark p-8 flex flex-col items-center rounded-lg'>
-                <h1>Contact Us</h1>
+                <h1 className='text-2xl font-bold'>Contact Us</h1>
                 <Input 
                 errors={errors.name}
                 labelClass={`py-2`}
@@ -30,7 +30,7 @@ function Contact() {
                 <Input 
                 errors={errors.email}
                 labelClass={`py-2`}
-                InputClass={` w-[100%] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary `}
+                InputClass={` w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary `}
                 labelName={'Email*'}
                 placeholder={'Type Your Email...'}
                 register={()=>register('email',{required: 'Email is required...', minLength:8, maxLength: 35})}
@@ -40,14 +40,14 @@ function Contact() {
                 <Input 
                 errors={errors.textbox}
                 labelClass={`py-2`}
-                InputClass={`  w-[100%] h-[100px] text-ellipsis text-wrap px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary `}
+                InputClass={`  w-full h-[100px] text-ellipsis text-wrap px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary `}
                 labelName={'Write Your Message*'}
                 type={"text"}
                 register={()=>register('textbox',{required: 'text is required...', minLength:20, maxLength: 100})}
                 id="textbox"
                 /> 
                 <Button 
-                type='submit' buttonClass={`w-[80%] py-2 my-4 gap-2 `} disabled={isSubmitting} buttonName={isSubmitting? 'Submitting':'Submit'}
+                type='submit' buttonClass={`w-full py-2 my-4 gap-2 `} disabled={isSubmitting} buttonName={isSubmitting? 'Submitting':'Submit'}
                 />
             </form>
         </div>

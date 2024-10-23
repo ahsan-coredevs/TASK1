@@ -18,9 +18,11 @@ import Footer from '../footer/Footer';
 import AboutCourse from '../popularCourses/AboutCourse';
 import Blog from '../../pages/blog/Blog';
 import HomeBlog from '../blog/HomeBlog';
+import { useNavigate } from 'react-router-dom';
 
 
 function Home() {
+  const navigate = useNavigate();
   const handleMouseMove = (event) => {
    
     const movable_images= document.querySelectorAll('.mousemove');
@@ -38,7 +40,7 @@ function Home() {
           <div className='flex flex-col items-left z-10 justify-center ml-[85px] text-white w-[50%]'>
             <h1 className='text-[50px] font-bold mb-4'>Get <span className='text-secondary'>2500+</span> <br /> Best Online Courses <br /> from Edublink</h1>
             <p className='text-xl '>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
-            <button className='flex w-[170px] text-base mt-3 bg-primary px-4 py-4 rounded-lg justify-center'>Find courses <Arrow className='ml-2 mt-2 text-sm' /></button>
+            <button onClick={() => navigate("/courses")} className='flex w-[170px] text-base mt-3 bg-primary px-4 py-4 rounded-lg justify-center'>Find courses <Arrow className='ml-2 mt-2 text-sm' /></button>
           </div>
           <div className='relative z-20'>
             <img className='h-[591px] mt-[50px]'  src={hero} alt="" />

@@ -20,7 +20,9 @@ function Instructors() {
                     <Shared className='p-2 w-10 h-10 rounded-full absolute right-6 top-[25px] text-primary border-2 border-primary z-30 group-hover:bg-slate-200 group-hover:border-none duration-300' />
                     <Facebook className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[75px] group-hover:opacity-100 duration-1000 absolute' />
                     <Twitter className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[125px] group-hover:opacity-100 duration-1000 absolute' /> 
-                    <LinkedinIcon className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute' />
+                    <div className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute flex items-center justify-center'>
+                    <LinkedinIcon className='text-lg'  />
+                    </div>
                 </div>
                 <h1 className='py-2 text-2xl font-bold'>Jane Seymour</h1>
                 <p className='text-lg'>UI Designer</p>
@@ -34,7 +36,9 @@ function Instructors() {
                     <Shared className='p-2 w-10 h-10 rounded-full absolute right-6 top-[25px] text-primary border-2 border-primary z-30 group-hover:bg-slate-200 group-hover:border-none duration-300' />
                     <Facebook className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[75px] group-hover:opacity-100 duration-1000 absolute' />
                     <Twitter className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[125px] group-hover:opacity-100 duration-1000 absolute' /> 
-                    <LinkedinIcon className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute' />
+                    <div className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute flex items-center justify-center'>
+                    <LinkedinIcon className='text-lg'    />
+                    </div>
                 </div>
                  
                  <h1 className='py-2 text-2xl font-bold'>Edward Norton</h1>
@@ -49,7 +53,9 @@ function Instructors() {
                     <Shared className='p-2 w-10 h-10 rounded-full absolute right-6 top-[25px] text-primary border-2 border-primary z-30 group-hover:bg-slate-200 group-hover:border-none duration-300' />
                     <Facebook className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[75px] group-hover:opacity-100 duration-1000 absolute' />
                     <Twitter className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[125px] group-hover:opacity-100 duration-1000 absolute' /> 
-                    <LinkedinIcon className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute' />
+                    <div className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute flex items-center justify-center'>
+                    <LinkedinIcon className='text-lg'    />
+                    </div>
                 </div>
                 <h1 className='py-2 text-2xl font-bold'>Penenlope Cruz</h1>
                 <p className='text-lg'>Digital Marketer</p>
@@ -62,7 +68,9 @@ function Instructors() {
                     <Shared className='p-2 w-10 h-10 rounded-full absolute right-6 top-[25px] text-primary border-2 border-primary z-30 group-hover:bg-slate-200 group-hover:border-none duration-300' />
                     <Facebook className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[75px] group-hover:opacity-100 duration-1000 absolute' />
                     <Twitter className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[125px] group-hover:opacity-100 duration-1000 absolute' /> 
-                    <LinkedinIcon className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute' />
+                    <div className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute flex items-center justify-center'>
+                    <LinkedinIcon className='text-lg'    />
+                    </div>
                 </div>
                 <h1 className='py-2 text-2xl font-bold'>John Travolta</h1>
                 <p className='text-lg'>Medicine Expert</p>

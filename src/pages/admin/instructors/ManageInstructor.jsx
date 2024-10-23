@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { fetchData, deleteItem } from '../../../utils/FileManagement';
 import { Book, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 
-const ManageCourses = () => {
-  const [courseData, setCourseData] = useState([]);
+const ManageInstructor = () => {
+  const [instructorData, setInstructorData] = useState([]);
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData]=useState([]);
@@ -13,16 +13,16 @@ const ManageCourses = () => {
   const item_per_page=5;
  
   const retrieveData = () => {
-    const res= fetchData('course');
+    const res= fetchData('instructor');
 
-    setCourseData(res)
+    setInstructorData(res)
     const filtered_data= res.slice((0),(5) );
     setFilteredData(filtered_data);
     }
  
     const handleDelete = (index) => {
 
-      deleteItem('course', index);
+      deleteItem('instructor', index);
       retrieveData();
 
       setShowConfirm(null);
@@ -41,9 +41,9 @@ const ManageCourses = () => {
   
   const handlePage = (value=1) => {
  
-      const totat_page = Math.ceil(courseData.length/item_per_page);
+      const totat_page = Math.ceil(instructorData.length/item_per_page);
       if (value < 1  || value>totat_page) return ;
-     const filtered_data= courseData.slice((value-1)*item_per_page,((value-1)*item_per_page)+5 );
+     const filtered_data= instructorData.slice((value-1)*item_per_page,((value-1)*item_per_page)+5 );
      setFilteredData(filtered_data);
      setPage(value)
 
@@ -53,27 +53,26 @@ const ManageCourses = () => {
     <>
        <div className='h-full w-[calc(100vw-177px)] relative p-10'>
           <div className="flex justify-end pb-5">
-             <button className='text-white bg-primary py-4 px-6 rounded-md focus:scale-90 duration-100 font-[500] ' onClick={()=>navigate('add')}>Add New Course</button>
+             <button className='text-white bg-primary py-4 px-6 rounded-md focus:scale-90 duration-100 font-[500] ' onClick={()=>navigate('add')}>Add New Instructor</button>
           </div>
-         
           <div className=''>
             <table className=' text-white shadow-md overflow-hidden  w-full top-[100px]'>
             <thead className=' '>
               <tr className='p-4 '>
-                <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase rounded-tl-md '>Title</th>
-                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Label</th>
+                <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase rounded-tl-md '>Name</th>
+                <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Designation</th>
                 <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase rounded-tr-md w-[100px]'>Action</th>
               </tr>
             </thead>
             <tbody className='bg-grayDark'>
-              {courseData.length > 0 ? (
-                filteredData.map((course, index) => (
+              {instructorData.length > 0 ? (
+                filteredData.map((instructor, index) => (
                   <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={index}>
-                    <td className='text-left  py-3 px-6 '>{course.title}</td>
-                    <td className=' text-left  py-3 px-6'>{course.label}</td>
+                    <td className='text-left  py-3 px-6 '>{instructor.name}</td>
+                    <td className=' text-left  py-3 px-6'>{instructor.designation}</td>
                     <td className='text-start py-3 px-6 flex gap-2'>
-                      <button onClick={() => setShowConfirm({...course, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
-                      <button onClick={()=>navigate('edit',{state: {courseData: {...course, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
+                      <button onClick={() => setShowConfirm({...instructor, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
+                      <button onClick={()=>navigate('edit',{state: {instructorData: {...instructor, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
                     </td>
                   </tr>
                 ))
@@ -84,7 +83,7 @@ const ManageCourses = () => {
               )}
             </tbody>
             </table>
-                <div className={`h-2 ${(courseData?.length-1)%2===0?'bg-[#101726]':'bg-[#17212E]'} rounded-b-md`}></div>
+                <div className={`h-2 ${(instructorData?.length-1)%2===0?'bg-[#101726]':'bg-[#17212E]'} rounded-b-md`}></div>
             </div>
 
        {
@@ -108,4 +107,4 @@ const ManageCourses = () => {
     </>
   )
 };
-export default ManageCourses;
+export default ManageInstructor;

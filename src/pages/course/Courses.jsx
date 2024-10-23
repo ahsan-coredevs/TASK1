@@ -99,7 +99,7 @@ const Courses = () => {
                                         <div className='flex'>
                                         {getStars()}
                                         </div>
-                                        <p className='text-lg my-2'>{course.details}</p>
+                                        <p className='text-lg my-2 line-clamp-5'>{course.details}</p>
                                         <p className='my-2'>${course.price}.00</p>
                                         <p className='flex items-center'> <span className='flex items-center mr-4' ><Book className='mr-2' /> {50} Lessons</span> | <span className='flex items-center ml-4'><Person className='mr-2' /> {50} Students</span>  </p>
                                         <button onClick={() =>navigate(`/Courses/${course.title.replace(/\s+/g, ' ').replace(/\s/g, '-')}`, {state:{courseData:{...course, id: index} }})} className='flex items-center bg-[#f92596] px-5 py-4 rounded-xl active:scale-95 hover:bg-gradient-to-r hover:text-black hover:from-[#c4cccb] hover:to-[#b2b8b5] duration-300 my-4'>Enrolled <Arrow className='ml-2' /> </button>

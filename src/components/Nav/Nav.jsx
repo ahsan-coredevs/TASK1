@@ -6,7 +6,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import logo from '../../assets/icons/logo-white.png';
-import { Arrow, Dot, DownArrow, LinkedinIcon, Search, Shopping } from '../shared/svgComponents';
+import { Arrow, Dot, DownArrow, LinkedinIcon, Person, Search, Shopping } from '../shared/svgComponents';
 import { Link } from 'react-router-dom';
 
 function Nav() {
@@ -70,7 +70,7 @@ function Nav() {
             
               <div className='flex justify-between items-center space-x-4 mr-6'>
                 <Search className='size-7 mr-4' />
-                <Shopping className='size-7 mr-6' />
+                <Person className='size-7 mr-6' />
                 <button className='flex items-center bg-primary px-5 py-4 rounded-xl active:scale-95 hover:bg-gradient-to-r hover:from-[#1ab69d] hover:to-[#31b978] duration-300'>
                   Try for free <Arrow className="ml-1 size-5 mr-4" />
                 </button>

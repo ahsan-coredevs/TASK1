@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
+import { World } from '../shared/svgComponents';
 
-function Youtube({videoId}) {
+function Youtube({videoId, tClassName}) {
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const handleClick = () => {
@@ -10,7 +11,7 @@ function Youtube({videoId}) {
   return (
     
         <div>
-            <div className="relative w-[350px] h-[200px] bg-gray-200 rounded-lg overflow-hidden py-4 px-4">
+            <div className={`relative w-[300px] h-[200px] bg-gray-200 rounded-lg overflow-hidden ${tClassName} `}>
             <div
           className="w-full h-full bg-cover bg-center cursor-pointer rounded"
           style={{
@@ -28,11 +29,11 @@ function Youtube({videoId}) {
     </div>
 
     {
-        isVideoPlaying &&  <div className="fixed backdrop-blur-xl top-0 bottom-0 left-0 right-0 z-30 w-full h-full">
-            <div className="flex justify-end cursor-pointer" onClick={()=>setIsVideoPlaying(prev=>!prev)}> X</div>
+        isVideoPlaying &&  <div className="fixed backdrop-blur-xl top-[100px] bottom-0 left-0 right-0 z-30 w-full">
+            <div className=" flex cursor-pointer z-5 top-10 text-3xl right-8 font-bold absolute text-green-600 hover:text-red-600 duration-300 hover:scale-105" onClick={()=>setIsVideoPlaying(prev=>!prev)}> X </div>
        <div className="flex justify-center w-full h-full">
        <iframe
-          className="px-10 py-10 max-w-[1200px] w-full h-full"
+          className="px-10 py-10 max-w-[1200px] w-full h-full absolute"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
           title="YouTube video"
           frameBorder="0"

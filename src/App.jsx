@@ -29,6 +29,8 @@ import Blog from './pages/blog/Blog';
 import BlogView from './pages/blog/BlogView';
 import Feedback from './components/feedback/Feedback';
 import ViewCourse from './pages/course/ViewCourse';
+import ManageInstructor from './pages/admin/instructors/ManageInstructor';
+import AddInstructor from './pages/admin/instructors/AddInstructor';
 
 
 
@@ -49,6 +51,7 @@ function App() {
      */}
       <Routes>
        <Route  path="/" element={<MainLayout />} >
+       <Route path="/" element={<Home />} />
        <Route path="/Home" element={<Home />} />
         <Route path="/Categories" element={<Categories />} />
         <Route path="/courses" element={<Courses />} />
@@ -71,6 +74,8 @@ function App() {
         <Route path='/admin/courses/:operation' element={<AddCourses />} />
         <Route path="/admin/blogs" element={<ManageBlogs />} />
         <Route path='/admin/blogs/:operation' element={<AddBlogs />} />
+        <Route path="/admin/instructor" element={<ManageInstructor />} />
+        <Route path="/admin/instructor/:operation" element={<AddInstructor />} />
         
         </Route>
         

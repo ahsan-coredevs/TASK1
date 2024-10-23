@@ -17,9 +17,9 @@ function SignIn() {
     console.log(data);
   }
   return (
-    <div className='w-screen bg-dark  h-[550px] text-white flex justify-center items-center'>
-        <form onSubmit={handleSubmit(onSubmit)} >
-        <div className='w-[450px] h-[490px] flex flex-col justify-center items-left bg-grayDark p-4 pl-16 rounded-lg'>
+    <div className='w-screen bg-dark text-white flex justify-center items-center'>
+        <form className='m-8' onSubmit={handleSubmit(onSubmit)} >
+        <div className='w-[450px] p-8 flex flex-col justify-center items-left bg-grayDark rounded-lg'>
             <h1 className='text-xl font-bold'>Sign In</h1>
             <p>Don't have an account? <Link to='/SignUp'><span className='text-primary text-lg hover:text-secondary duration-300 cursor-pointer'>Sign Up</span></Link> </p>
             <Input 
@@ -49,7 +49,7 @@ function SignIn() {
               />
               
               <span>Remember Me </span></p> <span className='hover:cursor-pointer hover:text-primary duration-300'>Lost your password?</span></p>
-            <Button buttonClass={`w-[90%] py-4 my-4 gap-4`} disabled={!isChecked} buttonName={'Log In'} /> 
+            <Button buttonClass={`w-full py-4 my-4 gap-2 flex`} disabled={!isChecked} buttonName={'Log In'} /> 
            
         </div>
         </form>

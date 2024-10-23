@@ -21,10 +21,10 @@ function SignUp() {
   const onSubmit = (data) => console.log(data)
 
   return (
-    <div className='w-screen bg-dark  h-[950px] text-white flex justify-center items-center'>
-       <form onSubmit={handleSubmit(onSubmit)}>
-       <div  className='w-[450px] h-[690px] flex flex-col justify-center items-left bg-grayDark p-4 pl-16 rounded-lg'>
-            <h1 className='text-xl font-bold'>Registration</h1>
+    <div className='w-screen h-auto bg-dark   text-white flex justify-center'>
+       <form className='m-12 ' onSubmit={handleSubmit(onSubmit)}>
+       <div  className='w-[450px] flex flex-col justify-center items-left bg-grayDark p-8  rounded-lg'>
+            <h1 className='text-xl font-bold pt-8'>Registration</h1>
             <p>Already have an account? <Link to='/SignIn'><span className='text-primary text-lg hover:text-secondary duration-300 cursor-pointer'>Sign In</span></Link> </p>
             <Input 
             labelClass={`py-2 `}
@@ -78,7 +78,7 @@ function SignUp() {
             {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
 
             <div className='flex flex-col items-start text-base pt-4'><p className='flex items-center gap-2'><button onClick={toggleCheckbox}><Checkbox  /></button> <p className='flex flex-co'> I agree the User Agreement And </p>  </p> <p className='hover:cursor-pointer hover:text-primary duration-300 text-base font-bold'>  Terms & Conditions. </p> </div>
-            <Button type='submit' buttonClass={`w-[90%] py-4 my-4 gap-4`} buttonName={'Create Account'} /> 
+            <Button type='submit' buttonClass={`w-full py-2 my-4 gap-4`} buttonName={'Create Account'} /> 
             
             
         </div>

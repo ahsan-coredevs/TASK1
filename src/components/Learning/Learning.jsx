@@ -20,7 +20,7 @@ function Learning() {
     };
   return (
     <>
-        <div className='flex justify-between h-[600px] w-screen pt-16 bg-[#1c242f] text-white' onMouseMove={handleMouseMove}>
+        <div className='flex justify-between pb-52 w-screen pt-16 bg-[#1c242f] text-white' onMouseMove={handleMouseMove}>
         <div className='w-[50%] flex flex-col items-center relative z-20'>
 
             <img className='h-[400px] w-[350px] rounded-xl top-14 left-20 absolute' src={person} alt="" />
@@ -34,7 +34,7 @@ function Learning() {
 
             <div className='absolute h-[200px] w-[300px] bg-slate-100 right-28 top-0 rounded-lg'>
                 <div className="flex justify-center items-center">
-                    <YoutubeVideo videoId="bMknfKXIFA8" /> 
+                    <YoutubeVideo tClassName={'p-4'} videoId="bMknfKXIFA8" /> 
                  </div>
             </div>
         </div>

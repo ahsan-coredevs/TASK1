@@ -37,6 +37,9 @@ import Money from '../../assets/icons/money.svg?react';
 import Teacher from '../../assets/icons/teacher.svg?react';
 import Clock from '../../assets/icons/clock.svg?react';
 import World from '../../assets/icons/world.svg?react';
+import Language from '../../assets/icons/language.svg?react'; 
+import Youtubebtn from '../../assets/icons/youtube.svg?react'; 
+import Checkright from '../../assets/icons/checkright.svg?react'; 
 
 
 
@@ -80,7 +83,10 @@ export  {
     Money,
     Teacher,
     Clock,
-    World
+    World,
+    Language,
+    Youtubebtn,
+    Checkright
 
 
 

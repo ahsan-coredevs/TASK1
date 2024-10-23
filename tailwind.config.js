@@ -43,7 +43,7 @@ export default {
          bounce: 'bounce 4s linear infinite',
          spinreverse: 'spinreverse 10s linear infinite',
          slideInLeft: 'slideInLeft 4s ease-in-out infinite'
-      }
+      },
     },
   },
   plugins: [],

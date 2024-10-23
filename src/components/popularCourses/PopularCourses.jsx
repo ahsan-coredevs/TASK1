@@ -33,7 +33,7 @@ function PopularCourses() {
 
   return (
 
-    <div className=" ">
+    <div className="">
          <div className='w-full flex flex-col items-center bg-dark text-slate-200 pt-[50px]  realtive '>
         <p className='text-xl '>Popular Courses</p>
         <h1 className='text-5xl my-4 font-bold'>Pick A Course To Get Started</h1>

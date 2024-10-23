@@ -44,7 +44,7 @@ function Blog() {
             <div className='w-full flex flex-col items-center bg-dark text-slate-200 pt-[50px]'>
                 <p className='text-xl'>Popular Blogs</p>
                 <h1 className='text-4xl my-4 font-bold text-center'>Read Blogs to <br /> Gather More Knowledge About The World</h1>
-                <div className='w-full max-w-[1400px] rounded-md flex justify-center items-start p-8 flex-wrap gap-6 bg-grayDark overflow-hidden text-white'>
+                <div className='w-full max-w-[1400px] rounded-md flex justify-start items-start p-8 flex-wrap gap-6 bg-grayDark overflow-hidden text-white'>
                     {filteredData.length > 0 ? (
                         filteredData.map((blog, index) => (
                             <div className='w-[28%] h-[405px] rounded-md overflow-hidden group' key={index}>
