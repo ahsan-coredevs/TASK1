@@ -1,7 +1,6 @@
 import React from 'react'
 import logo from '../../assets/icons/logo-white.png';
 import { BrowserRouter as Router, Route, Routes, Link, Outlet, NavLink } from 'react-router-dom';
-import Courses from '../popularCourses/PopularCourses';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -34,6 +33,9 @@ function Admin() {
             </li>
             <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
                 <NavLink to='/admin/instructor' className={({isActive}) => isActive ? "text-primary" : " "}> Instructor </NavLink>
+            </li>
+            <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
+                <NavLink to='/admin/orders' className={({isActive}) => isActive ? "text-primary" : " "}> Orders </NavLink>
             </li>
         </ul>
         </div>

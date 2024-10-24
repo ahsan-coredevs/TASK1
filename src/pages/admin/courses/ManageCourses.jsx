@@ -20,12 +20,13 @@ const ManageCourses = () => {
     setFilteredData(filtered_data);
     }
  
-    const handleDelete = (index) => {
-
-      deleteItem('course', index);
+    const handleDelete = (id) => {
+      
+      deleteItem('course', id);
       retrieveData();
 
       setShowConfirm(null);
+      console.log('ID NO: ', id);
 
     };
 
@@ -67,13 +68,13 @@ const ManageCourses = () => {
             </thead>
             <tbody className='bg-grayDark'>
               {courseData.length > 0 ? (
-                filteredData.map((course, index) => (
-                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={index}>
+                filteredData.map((course) => (
+                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={course.id}>
                     <td className='text-left  py-3 px-6 '>{course.title}</td>
                     <td className=' text-left  py-3 px-6'>{course.label}</td>
                     <td className='text-start py-3 px-6 flex gap-2'>
-                      <button onClick={() => setShowConfirm({...course, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
-                      <button onClick={()=>navigate('edit',{state: {courseData: {...course, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
+                      <button onClick={() => setShowConfirm({...course, id:course.id})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
+                      <button onClick={()=>navigate('edit',{state: {courseData: {...course, id:course.id}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
                     </td>
                   </tr>
                 ))

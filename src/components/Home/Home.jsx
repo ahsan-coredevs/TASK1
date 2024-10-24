@@ -35,8 +35,9 @@ function Home() {
  };
   return (
     <>
-    <div className='w-full max-w-[1500px]' onMouseMove={handleMouseMove}>
-        <div className='flex justify-between h-screen w-screen bg-dark relative '>
+    <div className='w-full flex items-center justify-center'>
+    <div className='w-full overflow-hidden' onMouseMove={handleMouseMove}>
+        <div className='flex justify-between h-full w-full bg-dark relative '>
           <div className='flex flex-col items-left z-10 justify-center ml-[85px] text-white w-[50%]'>
             <h1 className='text-[50px] font-bold mb-4'>Get <span className='text-secondary'>2500+</span> <br /> Best Online Courses <br /> from Edublink</h1>
             <p className='text-xl '>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
@@ -67,7 +68,7 @@ function Home() {
         </div>
 
 
-        <div className='h-[150px] w-screen flex bg-primary text-white justify-around items-center' >
+        <div className='h-[150px] w-full flex bg-primary text-white justify-around items-center' >
           <div className='flex items-center justify-center h-[100%] w-[25%] border-r border-gray-200/30'>
             <div className='bg-white p-4 rounded-full mr-3 bg-opacity-10'>
             <Laptop className='h-10 w-10 ' />
@@ -93,6 +94,7 @@ function Home() {
             <p className='font-bold'>6000 <br /> Members</p>
           </div>
         </div>
+    </div>
     </div>
     <Categories />
     <Learning />

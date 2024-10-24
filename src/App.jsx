@@ -31,6 +31,7 @@ import Feedback from './components/feedback/Feedback';
 import ViewCourse from './pages/course/ViewCourse';
 import ManageInstructor from './pages/admin/instructors/ManageInstructor';
 import AddInstructor from './pages/admin/instructors/AddInstructor';
+import Orders from './pages/orders/Orders';
 
 
 
@@ -76,6 +77,7 @@ function App() {
         <Route path='/admin/blogs/:operation' element={<AddBlogs />} />
         <Route path="/admin/instructor" element={<ManageInstructor />} />
         <Route path="/admin/instructor/:operation" element={<AddInstructor />} />
+        <Route path="/admin/orders" element={<Orders />} />
         
         </Route>
         

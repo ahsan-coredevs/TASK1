@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -9,13 +9,13 @@ function AddBlogs() {
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const fileInputRef = useRef(null); 
-    const API_KEY = '9c7c04f46fb0e79f4be68f9eafd8aff3';
+    const API_KEY = import.meta.env.VITE_IMG_API_KEY;
     const navigate = useNavigate();
-    const {operation}= useParams();
+    const operation = useParams;
     const location= useLocation();
 
 
-    useState(()=>{
+    useEffect(()=>{
         if(location?.state?.blogData) {
             setValue('title', location?.state?.blogData?.title );
             setValue('label', location?.state?.blogData?.label );
@@ -56,11 +56,12 @@ function AddBlogs() {
 
    
     async function onSubmit(data) {
-
+      const uniqueId = new Date().getTime();
      
       const formData = {
         ...data,
         imageUrl: imageSrc, 
+        id: uniqueId
       };
 
 

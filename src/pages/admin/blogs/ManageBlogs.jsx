@@ -20,11 +20,11 @@ const [blogData, setBlogData] = useState([]);
     setFilteredData(filtered_data);
     }
  
-    const handleDelete = (index) => {
+    const handleDelete = (id) => {
      
 
       
-      deleteItem('blogs', index);
+      deleteItem('blogs', id);
       retrieveData();
 
      
@@ -69,13 +69,13 @@ const [blogData, setBlogData] = useState([]);
             </thead>
             <tbody className='bg-grayDark'>
               {blogData.length > 0 ? (
-                filteredData.map((blogs, index) => (
-                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={index}>
+                filteredData.map((blogs ) => (
+                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={blogs.id}>
                     <td className='text-left  py-3 px-6 '>{blogs.title}</td>
                     <td className=' text-left  py-3 px-6'>{blogs.label}</td>
                     <td className='text-start py-3 px-6 flex gap-2'>
-                      <button onClick={() => setShowConfirm({...blogs, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
-                      <button onClick={()=>navigate('edit',{state: {blogData: {...blogs, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
+                      <button onClick={() => setShowConfirm({...blogs, id:blogs.id})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
+                      <button onClick={()=>navigate('edit',{state: {blogData: {...blogs, id:blogs.id}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
                     </td>
                   </tr>
                 ))

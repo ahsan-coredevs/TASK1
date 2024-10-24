@@ -1,49 +1,50 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { storeData, editItem } from '../../../utils/FileManagement';
 import { toast } from 'react-toastify';
 import { Delete, Plus } from '../../../components/shared/svgComponents';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const AddInstructor = () => {
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
-    const [skills, setSkills] = useState(['']); 
-    const fileInputRef = useRef(null); 
-    const API_KEY = '9c7c04f46fb0e79f4be68f9eafd8aff3';
+    const [skills, setSkills] = useState([{ id: new Date().getTime(), value: '' }]);
+    const fileInputRef = useRef(null);
+    const API_KEY = import.meta.env.VITE_IMG_API_KEY;
     const navigate = useNavigate();
+    const location = useLocation();
+    const operation = location?.state?.operation || 'add';
 
-    useState(()=>{
-        if(location?.state?.instructorData) {
-            setValue('title', location?.state?.instructorData?.title );
-            setValue('label', location?.state?.instructorData?.label );
-            setValue('price', location?.state?.instructorData?.price );
-            setValue('details', location?.state?.instructorData?.details );
-            setImageSrc(location?.state?.instructorData?.imageUrl);
+    useEffect(() => {
+        if (location?.state?.instructorData) {
+            const { name, designation, details, imageUrl, skills } = location?.state?.instructorData;
+            setValue('name', name);
+            setValue('designation', designation);
+            setValue('details', details);
+            setImageSrc(imageUrl);
+            if (skills) {
+                setSkills(skills.map(skill => ({ id: new Date().getTime(), value: skill })));
+            }
         }
+    }, [location, setValue]);
 
-    },[])
-  
-
-
-    const addNewInput = (index) => {
-        setSkills([...skills, ''])
+    const addNewInput = () => {
+        setSkills([...skills, { id: new Date().getTime(), value: '' }]);
     };
 
-    const deleteSkillInput = (index) => {
-        const updatedSkills = skills.filter((_, i) => i !== index);
+    const deleteSkillInput = (skillId) => {
+        const updatedSkills = skills.filter(skill => skill.id !== skillId);
         setSkills(updatedSkills);
     };
 
-    const skillInputData = (index, event) => {
-        const inputData = [...skills];
-        inputData[index] = event.target.value;
-        setSkills(inputData);
-    }
-   
+    const skillInputData = (skillId, event) => {
+        const updatedSkills = skills.map(skill =>
+            skill.id === skillId ? { ...skill, value: event.target.value } : skill
+        );
+        setSkills(updatedSkills);
+    };
 
-   
     const handleImageChange = async (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -52,66 +53,58 @@ const AddInstructor = () => {
         formData.append('image', file);
 
         try {
-          const response = await axios.post(
-            `https://api.imgbb.com/1/upload?key=${API_KEY}`,
-            formData
-          );
-
-          if (response.data.success) {
-            setImageSrc(response.data.data.url); // Set the new image URL after upload
-          } else {
-            console.log("Failed to upload image");
-          }
+            const response = await axios.post(`https://api.imgbb.com/1/upload?key=${API_KEY}`, formData);
+            if (response.data.success) {
+                setImageSrc(response.data.data.url);
+            } else {
+                console.log('Failed to upload image');
+            }
         } catch (error) {
-          console.error("Error uploading image:", error);
+            console.error('Error uploading image:', error);
         }
     };
 
     const handleImageClick = () => {
-      fileInputRef.current.click(); 
+        fileInputRef.current.click();
     };
 
-  
     async function onSubmit(data) {
+        const uniqueId = new Date().getTime();
         const formData = {
             ...data,
-            imageUrl: imageSrc, 
-            skills, 
+            imageUrl: imageSrc,
+            skills: skills.map(skill => skill.value), // Only send skill values
+            id: uniqueId
         };
 
-        if(location?.state?.instructorData && operation==='edit') {
-            const EditedData = editItem('course',location?.state?.instructorData?.id, formData)
-            if(EditedData) {
+        if (operation === 'edit') {
+            const EditedData = editItem('course', id, formData);
+            if (EditedData) {
+                toast.success('Instructor successfully updated');
+            } else {
+                toast.error('Something went wrong');
+            }
+        } else {
+            const res = storeData('instructor', formData);
+            if (res) {
                 toast.success('Instructor successfully added');
-    
+                navigate('/admin/instructor');
+            } else {
+                toast.error('Something went wrong');
             }
-            else toast.error('Something went wrong')
-    
-          }
-          else {
-            //add new
-            const res= storeData('instructor',formData);
-            if(res) {
-                toast.success('instructor successfully added');
-    
-                navigate('/admin/instructor')
-    
-            }
-            else toast.error('Something went wrong')
-          }
-        };
-
+        }
+    }
 
     return (
-        <div className='h-full flex items-center justify-center bg-grayDark text-white'>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-[1000px] bg-dark p-4 grid grid-cols-2 gap-2 rounded-lg'>
+        <div className='flex items-center justify-center text-white'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-[1000px] m-14 bg-gray-900 p-4 grid grid-cols-2 gap-2 rounded-lg'>
                 
                 {/* Image Chooser */}
                 <div className="max-w-xs mx-auto p-1 ml-0 bg-white shadow-md rounded-lg">
                     <div
                         onClick={handleImageClick}
                         className="cursor-pointer w-24 h-24 bg-gray-100 flex items-center justify-center border rounded-md overflow-hidden"
-                        style={{ width: '170px', height: '100px' }} 
+                        style={{ width: '170px', height: '100px' }}
                     >
                         <img
                             src={imageSrc}
@@ -119,68 +112,59 @@ const AddInstructor = () => {
                             className="object-cover w-full h-full"
                         />
                     </div>
-                 
                     <input
                         type="file"
                         accept="image/*"
-                        ref={fileInputRef} 
-                        onChange={handleImageChange} 
-                        style={{ display: 'none' }} 
+                        ref={fileInputRef}
+                        onChange={handleImageChange}
+                        style={{ display: 'none' }}
                     />
-                </div> 
+                </div>
 
                 {/* Input Fields */}
-                <input 
-                    className='h-12 rounded-md bg-grayDark p-4 col-span-2' 
-                    placeholder='Name of Instructor' 
-                    {...register("name", { required: true })} 
+                <input
+                    className='h-12 rounded-md bg-gray-700 p-4 col-span-2'
+                    placeholder='Name of Instructor'
+                    {...register("name", { required: true })}
                 />
-                <input 
-                    className='h-12 rounded-md bg-grayDark p-4 col-span-2' 
-                    placeholder='Designation' 
+                <input
+                    className='h-12 rounded-md bg-gray-700 p-4 col-span-2'
+                    placeholder='Designation'
                     {...register("designation", { required: true })}
                 />
-                <textarea 
-                    type='text' 
-                    className='h-32 rounded-md bg-grayDark p-4 col-span-2' 
-                    placeholder='Write Something About You' 
-                    {...register("details", { required: true })} 
+                <textarea
+                    type='text'
+                    className='h-32 rounded-md bg-gray-700 p-4 col-span-2'
+                    placeholder='Write Something About You'
+                    {...register("details", { required: true })}
                 />
 
-             
-               
-                    {
-                        skills.map((skill, index) => (
-                                <div key={index} className='col-span-2 w-full flex items-center mb-2'>
+                {/* Skills Input */}
+                <div className='col-span-2'>
+                    {skills.map((skill) => (
+                        <div key={skill.id} className={`transition-all duration-300 ease-in-out flex items-center mb-2 opacity-100`} style={{ height: 'auto' }}>
                             <input
-                                className='h-12 w-full rounded-md bg-grayDark p-4' 
-                                placeholder={`Skill ${index + 1}`} 
-                                value={skill} onChange={() => skillInputData(index, event)}
-                            
+                                className='h-12 w-full rounded-md bg-gray-700 p-4 transition-all duration-300 ease-in-out'
+                                placeholder={`Skill`}
+                                value={skill.value}
+                                onChange={(event) => skillInputData(skill.id, event)}
                             />
                             <div className='flex items-center justify-between gap-2 ml-2'>
-                    
-                                    {
-                                        skills.length > 1 && (
-                                            <Delete 
-                                            className='cursor-pointer text-red-500'
-                                            onClick={() => deleteSkillInput(index)}
-                                                />
-                                        )
-                                    }
-                            
-                                <Plus 
+                                <Delete
+                                    className={`cursor-pointer text-red-500 ${skills.length === 1 ? 'pointer-events-none' : ''}`}
+                                    onClick={() => deleteSkillInput(skill.id)}
+                                />
+                                <Plus
                                     className='cursor-pointer text-green-500'
-                                    onClick={() => addNewInput(index)}
+                                    onClick={addNewInput}
                                 />
                             </div>
                         </div>
-                        ) )
-                    }
-             
+                    ))}
+                </div>
 
                 {/* Submit Button */}
-                <button className='w-[150px] py-2 bg-primary rounded-md col-span-2' disabled={isSubmitting}>
+                <button className='w-[150px] py-2 bg-blue-500 hover:bg-blue-600 rounded-md col-span-2' disabled={isSubmitting}>
                     {isSubmitting ? 'Submitting...' : 'Submit'}
                 </button>
             </form>
@@ -189,5 +173,4 @@ const AddInstructor = () => {
 };
 
 export default AddInstructor;
-
 

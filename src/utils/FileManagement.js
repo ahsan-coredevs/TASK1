@@ -27,13 +27,13 @@ export const fetchData= (target)=>{
   
 }
 
-export const deleteItem= (target, index)=>{
+export const deleteItem= (target, id)=>{
   
   try {
     const isFound = localStorage.getItem(target);
     if (isFound) {
       const stored_data = JSON.parse(isFound);
-      stored_data.splice(index, 1);
+      stored_data.splice(target.id, 1);
       localStorage.setItem(target, JSON.stringify(stored_data));
     }
   } catch (error) {
@@ -41,13 +41,13 @@ export const deleteItem= (target, index)=>{
   }
 }
 
-export const editItem = (target, index, newData)=>{
+export const editItem = (target, id, newData)=>{
   
   try {
     const isFound = localStorage.getItem(target);
     if (isFound) {
     const stored_data= JSON.parse(isFound);
-      stored_data[index] = newData;
+      stored_data[target.id] = newData;
 
       localStorage.setItem(target, JSON.stringify(stored_data));
       return true

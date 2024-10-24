@@ -8,7 +8,7 @@ import Footer from '../components/footer/Footer'
 function MainLayout() {
   
   return (
-    <div>
+    <div className='max-w-[1500px] w-full mx-auto relative'>
         <Nav />
         <Outlet />
         <Footer/>

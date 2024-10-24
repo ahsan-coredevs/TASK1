@@ -3,12 +3,25 @@ import { Book, Certificate, Checkright, Clock, Facebook, Language, LinkedinIcon,
 import Button from '../../components/Button/Button'
 import Youtube from '../../components/Learning/Youtube';
 import { useLocation } from 'react-router-dom';
-import { DiDart } from 'react-icons/di';
-import Image from '../../assets/about/about-01.webp'
+import Input from '../../components/SignIn/Input';
+
+const suggestions = ["Bkash", "Rocket", "Nogod"];
 
 function ViewCourse() {
-    const {state: {courseData}} = useLocation();
-    const [expended, setExpended] = useState();
+  const {state: {courseData}} = useLocation();
+  const [expended, setExpended] = useState();
+  const [payment, setPayment] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('Bkash');
+
+  const handlePaymentMethodChange = (e) => {
+    setSelectedPaymentMethod(e.target.value);
+  };
+
+  
+
+    const paymentBtn = () => {
+        setPayment(true);
+    }
 
     const handleBtn = () => {
         setExpended(!expended);
@@ -30,7 +43,7 @@ function ViewCourse() {
             </div>
         </div>
         <div className='bg-grayDark text-white p-20'>
-            <div className='flex w-full'>
+            <div className='flex w-full relative'>
                 <div className='w-[60%]'>
                     <h4 className='text-2xl font-bold pb-8'>About This Course</h4>
                     <p className='pr-4 text-white/50'> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore blanditiis laboriosam officia possimus, nesciunt laborum, ab doloribus, ducimus modi quidem ipsa similique! Ipsa culpa illo iste, saepe fugit quisquam in impedit numquam, labore alias distinctio veritatis deserunt aperiam, odit eos voluptatem. Officiis ex ratione repellendus, architecto eum dignissimos corporis! Minus error molestias corporis enim provident recusandae nam quis aspernatur expedita? Vero odio culpa numquam aliquid necessitatibus sunt sapiente adipisci ad ipsum enim provident quod, voluptatum odit doloribus distinctio ea labore tenetur. Explicabo facilis magni reprehenderit, veniam ipsa iusto praesentium omnis magnam vel odio libero animi recusandae placeat. Adipisci rerum nulla, explicabo totam autem mollitia enim deserunt in error dolores accusamus est tenetur quos architecto veniam veritatis vitae animi quibusdam provident aspernatur. <br /> Ullam tenetur eum eos? Deserunt autem repudiandae architecto amet nisi maxime quam ipsam officiis asperiores dicta, eius necessitatibus ad consequatur obcaecati facilis id maiores minima consectetur enim deleniti voluptatem! Deserunt excepturi alias porro, rerum, molestiae at placeat similique unde voluptatum nihil omnis fugit! Esse labore officia tempore! Assumenda tempore officia sint dicta cumque voluptatem reprehenderit eligendi atque aspernatur in esse, repellat possimus iure nulla doloribus provident quas minus dignissimos voluptas excepturi. Ducimus atque cumque, natus harum temporibus reprehenderit iusto! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi commodi provident nostrum. Voluptates consequuntur illo ducimus dolor modi esse facere, consequatur quasi consectetur, libero iure magnam. Blanditiis unde molestiae ipsa quo, doloremque, repellat tenetur, dicta suscipit debitis veritatis ipsum. Unde, ab? Eligendi cum, praesentium ex quos quasi repellendus numquam! Aliquam nihil atque culpa veritatis beatae ad obcaecati similique laudantium quaerat excepturi voluptatibus qui sint adipisci fugit ea a iure sequi voluptatum eveniet delectus itaque dicta, exercitationem quam dolores! Nemo ab quidem quos sit vel natus labore. Natus, saepe voluptates voluptatum reprehenderit doloribus numquam cum quisquam, ab, asperiores architecto optio id. </p>
@@ -158,7 +171,7 @@ function ViewCourse() {
                             <span>Yes</span>
                         </div>
                         <div>
-                            <Button buttonClass={'my-4 py-2 w-full'} buttonName={'Start Now'} />
+                            <Button onClick={() => paymentBtn()} buttonClass={'my-4 py-2 w-full'} buttonName={'Start Now'} />
 
                             <h3 className='text-2xl font-bold mb-8'>Share On</h3>
                             <div className='text-white flex justify-around items-center'>
@@ -171,6 +184,42 @@ function ViewCourse() {
                     </div>
                     
                 </div>
+
+                {   payment &&
+                     <div className='top-[100px] left-0 right-0 bottom-0 flex justify-center items-center bg-dark fixed opacity-[98%]'>
+                        <form className=' w-[50%] absolute bg-gray-800 p-8 rounded-md ' action="">
+                        <label htmlFor="payment-method" className="block text-lg font-medium text-white">
+                                Select Payment Method
+                            </label>
+                            <select
+                                id="payment-method"
+                                value={selectedPaymentMethod}
+                                onChange={handlePaymentMethodChange}
+                                className="block w-full mt-1 p-2 bg-dark border border-gray-300 rounded-md focus:outline-none focus:ring-2 "
+                            >
+                                <option value="Bkash">Bkash</option>
+                                <option value="Nogod">Nogod</option>
+                                <option value="Rocket">Rocket</option>
+                            </select>
+
+                            <p className="mt-2">Selected Payment Method: {selectedPaymentMethod}</p>
+                        
+                            <div className='w-full flex flex-col gap-4 py-4'>
+                            <label htmlFor="">Phone NO:</label>
+                            <input className='py-4 px-2 rounded-md bg-dark ' placeholder='Type Your Phone Number' type="text" />
+                            </div>
+                            
+                            <div className='w-full flex-col flex gap-4 py-4'>
+                            <label htmlFor="">Tnx ID</label>
+                            <input placeholder='Type your Transection ID' className='py-4 px-2 rounded-md bg-dark' type="text" />
+                            </div>
+                            <Button type='button' buttonClass={'py-2 w-full gap-2'} buttonName={'SUBMIT'} />
+                        </form>
+
+                        <p className='text-3xl absolute right-4 top-8 scale-110 text-green-700 font-bold hover:text-red-700 cursor-pointer' onClick={()=>setPayment(prev=>!prev)}>X</p>
+
+                    </div>
+                }
             </div>
         </div>
     </div>

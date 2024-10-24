@@ -16,7 +16,7 @@ function News() {
         })
     };
   return (
-    <div className='flex flex-col items-center justify-center w-full bg-grayDark text-white py-36 pb-[200px] relative ' onMouseOver={handleMouseMove}>
+    <div className='flex flex-col items-center justify-center w-full bg-grayDark text-white py-36 pb-[200px] relative' onMouseOver={handleMouseMove}>
         <p className='text-lg py-4'>LATEST ARTICLES</p>
         <h2 className='text-4xl font-bold pb-8 z-40'>Get News With Edublink</h2>
 
@@ -32,7 +32,7 @@ function News() {
 
             <div className='w-[65%] flex gap-16 h-full'>
                 <div className='w-[40%] h-[400px] relative group'>
-                    <div className='w-full h-full  rounded-lg overflow-hidden'>
+                    <div className='w-full h-full rounded-lg overflow-hidden'>
                         <img className='object-cover h-full w-full group-hover:scale-110 duration-300' src={Img1} alt="" />
                     </div>
                     <div className='absolute flex flex-col bg-gray-800 w-[80%] rounded-lg p-4 -mt-[150px] ml-[40px]'>

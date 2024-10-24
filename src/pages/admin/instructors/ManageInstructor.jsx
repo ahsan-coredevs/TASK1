@@ -20,9 +20,9 @@ const ManageInstructor = () => {
     setFilteredData(filtered_data);
     }
  
-    const handleDelete = (index) => {
+    const handleDelete = (id) => {
 
-      deleteItem('instructor', index);
+      deleteItem('instructor', id);
       retrieveData();
 
       setShowConfirm(null);
@@ -66,13 +66,13 @@ const ManageInstructor = () => {
             </thead>
             <tbody className='bg-grayDark'>
               {instructorData.length > 0 ? (
-                filteredData.map((instructor, index) => (
-                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={index}>
+                filteredData.map((instructor, id) => (
+                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={id}>
                     <td className='text-left  py-3 px-6 '>{instructor.name}</td>
                     <td className=' text-left  py-3 px-6'>{instructor.designation}</td>
                     <td className='text-start py-3 px-6 flex gap-2'>
-                      <button onClick={() => setShowConfirm({...instructor, id:index})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
-                      <button onClick={()=>navigate('edit',{state: {instructorData: {...instructor, id:index}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
+                      <button onClick={() => setShowConfirm({...instructor, id:id})} className='  focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Delete /></button> 
+                      <button onClick={()=>navigate('edit',{state: {instructorData: {...instructor, id:id}}})} className=' focus:scale-90 duration-100 bg-primary/70  py-2 px-4 rounded-md'><Edit /></button>
                     </td>
                   </tr>
                 ))

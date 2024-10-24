@@ -1,8 +1,6 @@
-import React, { useRef, useState } from 'react';
-import Button from '../../../components/Button/Button';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import Input from '../../../components/SignIn/Input';
 import axios from 'axios';
 import { storeData, editItem } from '../../../utils/FileManagement';
 import { toast } from 'react-toastify';
@@ -12,13 +10,13 @@ const AddCourses = () => {
 
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const fileInputRef = useRef(null); 
-    const API_KEY = '9c7c04f46fb0e79f4be68f9eafd8aff3';
+    const API_KEY = import.meta.env.VITE_IMG_API_KEY;
     const navigate = useNavigate();
-    const {operation}= useParams();
     const location= useLocation();
+    const operation = location?.state?.operation || 'add';
 
 
-    useState(()=>{
+    useEffect(()=>{
         if(location?.state?.courseData) {
             setValue('title', location?.state?.courseData?.title );
             setValue('label', location?.state?.courseData?.label );
@@ -64,13 +62,13 @@ const AddCourses = () => {
 
     // Form submit handler
     async function onSubmit(data) {
-
-      // Include the image URL in the form data
+      const uniqueId = new Date().getTime();
+      console.log(uniqueId);
       const formData = {
         ...data,
-        imageUrl: imageSrc, // Add image URL to form data
-      };
-
+        imageUrl: imageSrc, 
+        id: uniqueId
+      }
 
       if(location?.state?.courseData && operation==='edit') {
         const EditedData = editItem('course',location?.state?.courseData?.id, formData)
