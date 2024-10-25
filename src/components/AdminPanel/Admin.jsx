@@ -37,10 +37,14 @@ function Admin() {
             <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
                 <NavLink to='/admin/orders' className={({isActive}) => isActive ? "text-primary" : " "}> Orders </NavLink>
             </li>
+            <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
+                <NavLink to='/admin/users' className={({isActive}) => isActive ? "text-primary" : " "}> Users </NavLink>
+            </li>
+            
         </ul>
         </div>
-        {/* outlet */}z
-        <div className=" h-full overflow-y-auto w-[calc(100vw-177px)] -ml-2 ">
+        {/* outlet */}
+        <div className=" h-full overflow-y-auto w-[calc(100vw-177px)] flex items-center justify-center ">
             <Outlet/>
         </div>
     </div>

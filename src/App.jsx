@@ -32,6 +32,10 @@ import ViewCourse from './pages/course/ViewCourse';
 import ManageInstructor from './pages/admin/instructors/ManageInstructor';
 import AddInstructor from './pages/admin/instructors/AddInstructor';
 import Orders from './pages/orders/Orders';
+import Profile from './components/profile/Profile';
+import OrderDetails from './pages/orders/OrderDetails';
+import OrderOwnerInfo from './pages/orders/OrderOwnerInfo';
+import UsersList from './pages/admin/users/UsersList';
 
 
 
@@ -63,6 +67,8 @@ function App() {
         <Route path="/Partners" element={<Partners />} />
         <Route path="/Contact" element={<Contact />} />
         <Route path="/feedback" element={<Feedback />} />
+        <Route path="/profile" element={<Profile />} />
+        
         
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
@@ -78,6 +84,10 @@ function App() {
         <Route path="/admin/instructor" element={<ManageInstructor />} />
         <Route path="/admin/instructor/:operation" element={<AddInstructor />} />
         <Route path="/admin/orders" element={<Orders />} />
+        <Route path="/admin/orders/order_details" element={<OrderDetails />} />
+        <Route path="/admin/orders/order_owner_info" element={<OrderOwnerInfo />} />
+        <Route path="/admin/users" element={<UsersList />} />
+        <Route path="/admin/users/order_owner_info" element={<OrderOwnerInfo />} />
         
         </Route>
         
