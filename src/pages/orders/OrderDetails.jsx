@@ -8,7 +8,7 @@ function OrderDetails() {
       console.log("Selected Status:", event.target.value);
     }
   return (
-    <div className='text-white'>
+    <div className='w-full text-white'>
         <div className='w-full p-4 border-b border-stone-300/50'>
             <h3 className='text-2xl font-bold'>Order Details</h3>
         </div>

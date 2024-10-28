@@ -1,16 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import Button from '../../../components/Button/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchData, deleteItem } from '../../../utils/FileManagement';
-import { Book, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 
 const ManageCourses = () => {
   const [courseData, setCourseData] = useState([]);
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData]=useState([]);
+  const [selectedCourseIds, setSelectedCourseIds] = useState([]); // State for selected course IDs
+  const [isSelectAll, setIsSelectAll] = useState(false); // State for "Select All" checkbox
   const navigate = useNavigate();
   const item_per_page=5;
+
+
+  const handleCheckBox = (id) => {
+    setSelectedCourseIds((prevSelectedIds) =>
+      prevSelectedIds.includes(id)
+        ? prevSelectedIds.filter((blogId) => blogId !== id) // Deselect if already selected
+        : [...prevSelectedIds, id] // Select if not selected
+    );
+  };
+
+  const handleSelectAll = () => {
+    if (isSelectAll) {
+      setSelectedCourseIds([]);
+    } else {
+      setSelectedCourseIds(filteredData.map((course) => course.id));
+    }
+    setIsSelectAll(!isSelectAll);
+  };
+
+  const handleDeleteMultiple = () => {
+    selectedCourseIds.forEach((id) => {
+      deleteItem('course', id);
+      console.log("Selected ID : ", id);
+    });
+    retrieveData();
+    setSelectedCourseIds([]); // Clear selection after deletion
+    setIsSelectAll(false); // Reset "Select All" state
+  };
+
  
   const retrieveData = () => {
     const res= fetchData('course');
@@ -52,16 +82,34 @@ const ManageCourses = () => {
    
   return (
     <>
-       <div className='h-full w-[calc(100vw-177px)] relative p-10'>
+       <div className='h-full w-[calc(100vw-177px)] relative p-10 text-white'>
           <div className="flex justify-end pb-5">
              <button className='text-white bg-primary py-4 px-6 rounded-md focus:scale-90 duration-100 font-[500] ' onClick={()=>navigate('add')}>Add New Course</button>
           </div>
-         
+          
+          <div className='h-16'>
+            {
+              selectedCourseIds.length > 0 ? `${selectedCourseIds.length}  ${selectedCourseIds.length > 1 ? 'Items' : 'Item' } Selected
+              ` : 'No Item Selected'
+            }
+            {selectedCourseIds.length > 0 && (
+              <button  onClick={handleDeleteMultiple}
+              className='text-white bg-red-600 py-2 px-4 rounded-md ml-8 focus:scale-90 duration-100 font-[500]'>
+               {`${selectedCourseIds.length > 1 ? 'Delete All' : 'Delete' }`}
+              </button>
+            )}
+          </div>
+        
           <div className=''>
             <table className=' text-white shadow-md overflow-hidden  w-full top-[100px]'>
             <thead className=' '>
               <tr className='p-4 '>
-                <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase rounded-tl-md '>Title</th>
+                <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase rounded-tl-md '>
+                <button onClick={handleSelectAll}>
+                  {isSelectAll ? <Checkboxok/> : <Checkbox/> }
+                </button>
+                </th>
+                <th className='bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase '>Title</th>
                 <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase '>Label</th>
                 <th className='bg-primary/50 py-3 px-6  text-left text-sm font-medium uppercase rounded-tr-md w-[100px]'>Action</th>
               </tr>
@@ -70,6 +118,17 @@ const ManageCourses = () => {
               {courseData.length > 0 ? (
                 filteredData.map((course) => (
                   <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={course.id}>
+                    <td className='text-left  py-3 px-6 '>
+
+                    <button onClick={() => handleCheckBox(course.id)}>
+                      {selectedCourseIds.includes(course.id) ? (
+                        <Checkboxok /> 
+                      ) : (
+                        <Checkbox />
+                      ) }
+                    </button>
+
+                    </td>
                     <td className='text-left  py-3 px-6 '>{course.title}</td>
                     <td className=' text-left  py-3 px-6'>{course.label}</td>
                     <td className='text-start py-3 px-6 flex gap-2'>

@@ -92,8 +92,8 @@ function AddBlogs() {
     
     };
   return (
-    <div className='h-full flex items-center justify-center bg-grayDark text-white'>
-        <form onSubmit={handleSubmit(onSubmit)} className='w-[1000px] h-[450px] bg-dark p-4 grid grid-cols-2 gap-2 rounded-lg'>
+    <div className='w-full h-full flex items-center justify-center bg-grayDark text-white'>
+        <form onSubmit={handleSubmit(onSubmit)} className='w-full h-full bg-dark p-4 grid grid-cols-2 gap-2'>
                 
                 
                 <div className="max-w-xs mx-auto p-1 ml-0 bg-white shadow-md rounded-lg">

@@ -96,8 +96,8 @@ const AddInstructor = () => {
     }
 
     return (
-        <div className='flex items-center justify-center text-white'>
-            <form onSubmit={handleSubmit(onSubmit)} className='w-[1000px] m-14 bg-gray-900 p-4 grid grid-cols-2 gap-2 rounded-lg'>
+        <div className='w-full flex items-center justify-center text-white'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-full m-4 bg-gray-900 p-4 grid grid-cols-2 gap-2 rounded-lg'>
                 
                 {/* Image Chooser */}
                 <div className="max-w-xs mx-auto p-1 ml-0 bg-white shadow-md rounded-lg">
