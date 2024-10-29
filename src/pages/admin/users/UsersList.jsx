@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Checkbox, Checkboxok } from '../../../components/shared/svgComponents';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../../services/redux/reducers/userSlice';
 
 
 const orders_list = [
@@ -73,6 +75,11 @@ function UsersList() {
   const navigate = useNavigate();
   const [selectedOrderIds, setSelectedOrderIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.user);
+
+
+  dispatch(setUser(orders_list)); // store userlist in redux store
 
   // Toggle individual checkbox selection
   const handleCheckBox = (index) => {
@@ -132,7 +139,7 @@ function UsersList() {
             </tr>
           </thead>
           <tbody className="bg-grayDark">
-            {orders_list.map((order, index) => (
+            {userData.map((order, index) => (
               <tr
                 key={index}
                 className="text-center even:bg-slate-800/50 odd:bg-slate-900/50 cursor-pointer hover:bg-slate-700/50 transition-colors"
@@ -142,7 +149,7 @@ function UsersList() {
                     {selectedOrderIds.includes(index) ? <Checkboxok /> : <Checkbox />}
                   </button>
                 </td>
-                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6" onClick={() => navigate('order_owner_info')}>{order.name}</td>
+                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.name}</td>
                 <td  onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.courseName}</td>
                 <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.paymentMethod}</td>
                 <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.phoneNO}</td>

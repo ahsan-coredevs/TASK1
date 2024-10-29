@@ -39,21 +39,14 @@ import UsersList from './pages/admin/users/UsersList';
 
 
 
+
+
 function App() {
  
 
   return (
-    <Router>
-      
-      {/* <Home />
-      <Catergories />
-      <Learning />
-      <Courses />
-      <Instructors />
-      <Partners />
-      <News />
-
-     */}
+  
+     <Router>
       <Routes>
        <Route  path="/" element={<MainLayout />} >
        <Route path="/" element={<Home />} />
@@ -94,6 +87,7 @@ function App() {
       </Routes>
 
     </Router>
+
   )
 }
 

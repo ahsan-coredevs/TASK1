@@ -19,10 +19,13 @@ import AboutCourse from '../popularCourses/AboutCourse';
 import Blog from '../../pages/blog/Blog';
 import HomeBlog from '../blog/HomeBlog';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function Home() {
   const navigate = useNavigate();
+  const userState= useSelector(state=>state.userStore);
+  console.log({userState})
   const handleMouseMove = (event) => {
    
     const movable_images= document.querySelectorAll('.mousemove');

@@ -2,15 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchData, deleteItem } from '../../../utils/FileManagement';
 import { Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCourse } from '../../../services/redux/reducers/courseSlice';
 
 const ManageCourses = () => {
-  const [courseData, setCourseData] = useState([]);
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData]=useState([]);
   const [selectedCourseIds, setSelectedCourseIds] = useState([]); // State for selected course IDs
   const [isSelectAll, setIsSelectAll] = useState(false); // State for "Select All" checkbox
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const courseData = useSelector((state) => state.course.course)
   const item_per_page=5;
 
 
@@ -26,7 +29,7 @@ const ManageCourses = () => {
     if (isSelectAll) {
       setSelectedCourseIds([]);
     } else {
-      setSelectedCourseIds(filteredData.map((course) => course.id));
+      setSelectedCourseIds(courseData.map((course) => course.id));
     }
     setIsSelectAll(!isSelectAll);
   };
@@ -43,11 +46,10 @@ const ManageCourses = () => {
 
  
   const retrieveData = () => {
-    const res= fetchData('course');
+    const res = fetchData('course');
+    dispatch(setCourse(res));
 
-    setCourseData(res)
-    const filtered_data= res.slice((0),(5) );
-    setFilteredData(filtered_data);
+    
     }
  
     const handleDelete = (id) => {
@@ -116,7 +118,7 @@ const ManageCourses = () => {
             </thead>
             <tbody className='bg-grayDark'>
               {courseData.length > 0 ? (
-                filteredData.map((course) => (
+                courseData.map((course) => (
                   <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={course.id}>
                     <td className='text-left  py-3 px-6 '>
 

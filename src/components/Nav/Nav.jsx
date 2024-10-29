@@ -8,9 +8,14 @@ import { FaLinkedin } from "react-icons/fa";
 import logo from '../../assets/icons/logo-white.png';
 import { Arrow, Dot, DownArrow, LinkedinIcon, Person, Search, Shopping } from '../shared/svgComponents';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../services/redux/reducers/userSlice';
 
 function Nav() {
   const navigate = useNavigate();
+  const dispatch= useDispatch();
+
+  dispatch(setUser({name:'Ahsan Kabir'}))
  
   
   return (

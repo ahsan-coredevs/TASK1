@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { Checkbox, Checkboxok, Data, Person } from '../../components/shared/svgComponents';
 import { useNavigate } from 'react-router-dom';
+import { setBlogs } from '../../services/redux/reducers/blogSlice';
+import { fetchData } from '../../utils/FileManagement';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOrder } from '../../services/redux/reducers/orderSlice';
 
 const orders_list = [
   {
@@ -64,6 +68,12 @@ const orders_list = [
 function Orders() {
   const [OrderIds, setOrderIds] = useState([]); // Selected order indices
   const [isSelectedAll, setIsSelectedAll] = useState(false); // "Select All" state
+  const dispatch = useDispatch();
+  const orderData = useSelector((state) => state.order.order);
+
+  dispatch(setOrder(orders_list));
+
+
 
   const handleCheckBox = (index) => {
     setOrderIds((prevSelectedIds) =>
@@ -130,7 +140,7 @@ function Orders() {
             </tr>
           </thead>
           <tbody className='bg-grayDark'>
-            {orders_list.map((order, index) => (
+            {orderData.map((order, index) => (
               <tr className='text-center even:bg-slate-800/50 odd:bg-slate-900/50' key={index}>
                 <td className='text-left py-3 px-6'>
                   <button onClick={() => handleCheckBox(index)}>
@@ -151,6 +161,9 @@ function Orders() {
             ))}
           </tbody>
         </table>
+      </div>
+      <div>
+
       </div>
     </div>
   );

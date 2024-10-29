@@ -3,14 +3,18 @@ import Button from '../../../components/Button/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchData, deleteItem } from '../../../utils/FileManagement';
 import { Book, Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { useDispatch, useSelector } from 'react-redux';
+import { setInstructor } from '../../../services/redux/reducers/instructorSlice';
 
 const ManageInstructor = () => {
-  const [instructorData, setInstructorData] = useState([]);
+
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData]=useState([]);
   const [selectInstructorIds, setSelectInstructorIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
+  const dispatch = useDispatch();
+  const instructorData = useSelector((state) => state.instructor.instructor);
   const navigate = useNavigate();
   const item_per_page=5;
 
@@ -26,7 +30,7 @@ const ManageInstructor = () => {
     if (isSelectAll) {
       setSelectInstructorIds([]);
     } else {
-      setSelectInstructorIds(filteredData.map((blog) => blog.id));
+      setSelectInstructorIds(instructorData.map((instructor) => instructor.id));
     }
     setIsSelectAll(!isSelectAll);
   };
@@ -46,9 +50,7 @@ const ManageInstructor = () => {
   const retrieveData = () => {
     const res= fetchData('instructor');
 
-    setInstructorData(res)
-    const filtered_data= res.slice((0),(5) );
-    setFilteredData(filtered_data);
+    dispatch(setInstructor(res))
     }
  
     const handleDelete = (id) => {
@@ -118,7 +120,7 @@ const ManageInstructor = () => {
             </thead>
             <tbody className='bg-grayDark'>
               {instructorData.length > 0 ? (
-                filteredData.map((instructor, id) => (
+                instructorData.map((instructor, id) => (
                   <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={id}>
                      <td className="text-left py-3 px-6">
                         <button onClick={() => handleCheckBox(instructor.id)}>

@@ -101,7 +101,6 @@ const AddCourses = () => {
                     <div
                         onClick={handleImageClick}
                         className="cursor-pointer w-32 h-24 bg-gray-100 flex items-center justify-center border rounded-md overflow-hidden"
-                       
                     >
                         <img
                             src={imageSrc}

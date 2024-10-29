@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchData, deleteItem } from '../../../utils/FileManagement';
 import { Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { useDispatch, useSelector } from 'react-redux';
+import { setBlogs } from '../../../services/redux/reducers/blogSlice';
 
 function ManageBlogs() {
-  const [blogData, setBlogData] = useState([]);
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
   const [filteredData, setFilteredData] = useState([]);
   const [selectedBlogIds, setSelectedBlogIds] = useState([]); // State for selected blog IDs
   const [isSelectAll, setIsSelectAll] = useState(false); // State for "Select All" checkbox
+  const dispatch = useDispatch();
+  const blogData = useSelector((state) => state.blogs.blogs);
   const navigate = useNavigate();
   const item_per_page = 5;
 
@@ -25,10 +28,44 @@ function ManageBlogs() {
     if (isSelectAll) {
       setSelectedBlogIds([]);
     } else {
-      setSelectedBlogIds(filteredData.map((blog) => blog.id));
+      setSelectedBlogIds(blogData.map((blog) => blog.id));
     }
     setIsSelectAll(!isSelectAll);
   };
+
+
+
+  // const retrieveData = () => {
+  //   const res = fetchData('blogs');
+  //   setBlogData(res);
+  //   const filtered_data = res.slice(0, item_per_page);
+  //   setFilteredData(filtered_data);
+  // };
+
+  // const handleDelete = (id) => {
+  //   deleteItem('blogs', id);
+  //   retrieveData();
+  //   setShowConfirm(null);
+  // };
+
+  // useEffect(() => {
+  //   retrieveData();
+  // }, []);
+
+  // const handlePage = (value = 1) => {
+  //   const total_page = Math.ceil(blogData.length / item_per_page);
+  //   if (value < 1 || value > total_page) return;
+  //   const filtered_data = blogData.slice(
+  //     (value - 1) * item_per_page,
+  //     value * item_per_page
+  //   );
+  //   setFilteredData(filtered_data);
+
+  //   // Reset selection on page change
+  //   setPage(value);
+  //   setIsSelectAll(false);
+  //   setSelectedBlogIds([]);
+  // };
 
   const handleDeleteMultiple = () => {
     selectedBlogIds.forEach((id) => {
@@ -40,17 +77,15 @@ function ManageBlogs() {
     setIsSelectAll(false); // Reset "Select All" state
   };
 
-  const retrieveData = () => {
-    const res = fetchData('blogs');
-    setBlogData(res);
-    const filtered_data = res.slice(0, item_per_page);
-    setFilteredData(filtered_data);
+  const handleDelete = (id) => {
+    dispatch(deleteBlog(id));
+    setShowConfirm(null);
   };
 
-  const handleDelete = (id) => {
-    deleteItem('blogs', id);
-    retrieveData();
-    setShowConfirm(null);
+  const retrieveData = () => {
+    // Assuming fetchData returns the latest blog data
+    const res = fetchData('blogs');
+    dispatch(setBlogs(res)); // Dispatch the fetched blogs to the Redux store
   };
 
   useEffect(() => {
@@ -60,17 +95,12 @@ function ManageBlogs() {
   const handlePage = (value = 1) => {
     const total_page = Math.ceil(blogData.length / item_per_page);
     if (value < 1 || value > total_page) return;
-    const filtered_data = blogData.slice(
-      (value - 1) * item_per_page,
-      value * item_per_page
-    );
-    setFilteredData(filtered_data);
-
     // Reset selection on page change
     setPage(value);
     setIsSelectAll(false);
     setSelectedBlogIds([]);
   };
+
 
   return (
     <div className="h-full w-[calc(100vw-177px)] relative p-10">
@@ -120,7 +150,7 @@ function ManageBlogs() {
           </thead>
           <tbody className="bg-grayDark">
             {blogData.length > 0 ? (
-              filteredData.map((blogs) => (
+              blogData.map((blogs) => (
                 <tr
                   className="text-center even:bg-slate-800/50 odd:bg-slate-900/50"
                   key={blogs.id}
