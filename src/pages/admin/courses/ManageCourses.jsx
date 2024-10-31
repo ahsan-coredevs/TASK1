@@ -95,7 +95,7 @@ const ManageCourses = () => {
         </button>
       </div>
 
-      <div className={`h-16 flex items-center mb-4 
+      <div className={`h-16 flex items-center mb-2 
           ${
             selectedCourseIds.length > 0
               ? "scale-100  transform transition-transform duration-[1.5s]"
