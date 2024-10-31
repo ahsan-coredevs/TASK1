@@ -95,7 +95,13 @@ const ManageCourses = () => {
         </button>
       </div>
 
-      <div className="h-16 flex items-center mb-4">
+      <div className={`h-16 flex items-center mb-4 
+          ${
+            selectedCourseIds.length > 0
+              ? "scale-100  transform transition-transform duration-[1.5s]"
+              : "scale-0"
+          }
+        `}>
         <p className="px-4 bg-grayDark py-2 rounded-md">
           {selectedCourseIds.length > 0
             ? `${selectedCourseIds.length} ${
@@ -111,13 +117,8 @@ const ManageCourses = () => {
                 ? "scale-100  transform transition-transform duration-[1.5s]"
                 : "scale-0"
             }
-            ${
-              selectedCourseIds.length > 1
-                ? "w-[110px] transform transition-transform duration-1000"
-                : "w-[80px]"
-            }
               
-              h-[40px] text-white bg-red-600 px-4 rounded-md ml-8 focus:scale-90 font-[500]`}
+             w-[110px] h-[40px] text-white bg-red-600 px-4 rounded-md ml-8 focus:scale-90 font-[500]`}
           >
             {`${selectedCourseIds.length > 1 ? "Delete All" : "Delete"}`}
           </button>
