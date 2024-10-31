@@ -70,8 +70,8 @@ function App() {
 
       <Routes>
         <Route path="/admin" element={<Admin />} >
-        <Route path="/admin/courses" element={<ManageCourses />} />
-        <Route path='/admin/courses/:operation' element={<AddCourses />} />
+        <Route path="/admin/course" element={<ManageCourses />} />
+        <Route path='/admin/course/:operation' element={<AddCourses />} />
         <Route path="/admin/blogs" element={<ManageBlogs />} />
         <Route path='/admin/blogs/:operation' element={<AddBlogs />} />
         <Route path="/admin/instructor" element={<ManageInstructor />} />

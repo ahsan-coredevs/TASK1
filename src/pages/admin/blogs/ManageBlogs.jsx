@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchData, deleteItem } from '../../../utils/FileManagement';
 import { Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
@@ -8,7 +8,6 @@ import { setBlogs } from '../../../services/redux/reducers/blogSlice';
 function ManageBlogs() {
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
-  const [filteredData, setFilteredData] = useState([]);
   const [selectedBlogIds, setSelectedBlogIds] = useState([]); // State for selected blog IDs
   const [isSelectAll, setIsSelectAll] = useState(false); // State for "Select All" checkbox
   const dispatch = useDispatch();

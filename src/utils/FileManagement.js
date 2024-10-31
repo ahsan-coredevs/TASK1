@@ -1,4 +1,3 @@
-import { json } from "react-router-dom";
 
 export const storeData = (target, data) => {
   try {
@@ -28,7 +27,7 @@ export const fetchData= (target)=>{
   
 }
 
-export const deleteItem= (target, id)=>{
+export const deleteItem= (target)=>{
   
   try {
     const isFound = localStorage.getItem(target);

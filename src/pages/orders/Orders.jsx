@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Checkbox, Checkboxok, Data, Person } from '../../components/shared/svgComponents';
 import { useNavigate } from 'react-router-dom';
-import { setBlogs } from '../../services/redux/reducers/blogSlice';
-import { fetchData } from '../../utils/FileManagement';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { setOrder } from '../../services/redux/reducers/orderSlice';
 
