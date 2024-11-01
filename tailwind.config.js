@@ -36,7 +36,7 @@ export default {
           '40%': { transform: 'translateX(0)', opacity: 1 },
           '100%': { transform: 'translateX(0)', opacity: 1 },
         },
-        
+
       },
       animation: {
          move: 'move 6s linear infinite',

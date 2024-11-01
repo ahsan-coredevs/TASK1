@@ -1,21 +1,14 @@
-import React from 'react'
-import { IoCallSharp } from "react-icons/io5";
-import { IoMdMail } from "react-icons/io";
-import { FaFacebook } from 'react-icons/fa';
+import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import { FaInstagram } from "react-icons/fa6";
-import { FaTwitter } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import logo from '../../assets/icons/logo-white.png';
-import { Arrow, Dot, DownArrow, LinkedinIcon, Person, Search, Shopping } from '../shared/svgComponents';
+import { IoMdMail } from "react-icons/io";
+import { IoCallSharp } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../services/redux/reducers/userSlice';
+import logo from '../../assets/icons/logo-white.png';
+import { Arrow, Dot, DownArrow, LinkedinIcon, Person, Search } from '../shared/svgComponents';
 
 function Nav() {
   const navigate = useNavigate();
-  const dispatch= useDispatch();
 
-  dispatch(setUser({name:'Ahsan Kabir'}))
  
   
   return (
@@ -48,7 +41,7 @@ function Nav() {
       
           <div className="flex h-full">
           <div className='border-r border-gray-500/30 p-2'>
-          <img src={logo} alt="Logo" className='cursor-pointer'/>
+          <img onClick={() => navigate("/")} src={logo} alt="Logo" className='cursor-pointer'/>
           </div>
 
             <div className='border-r border-gray-500/30 h-full flex items-center justify-center px-5'>

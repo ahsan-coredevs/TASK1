@@ -2,6 +2,7 @@ import React from 'react';
 import { Management, Design, Code, Pil, Mic, Hand, Data, Photos, Laptop } from '../shared/svgComponents';
 
 const Categories = () => {
+    
     return (
         <>
             <div id='Categories' className='flex flex-col w-full   items-center pt-16 bg-[#1c242f] text-white overflow-hidden'>

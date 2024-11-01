@@ -47,25 +47,25 @@ const ManageCourses = () => {
     });
   };
 
-    const handleDelete = async (id) => {
-      try {
-        const response = await api.delete(`/course/${JSON.stringify(id)}`);
-        if (response.success) {
-          toast.success("Course successfully deleted");
-          retrieveData();
-        } else {
-          throw new Error(response.data || "Failed to delete course");
-        }
-      } catch (error) {
-        console.error("Error deleting course:", error);
-        toast.error(error.message || "Something went wrong. Please try again.");
-      } finally {
-        setShowConfirm(null);
+  const handleDelete = async (id) => {
+    try {
+      const response = await api.delete(`/course/${JSON.stringify(id)}`);
+      if (response.success) {
+        toast.success("Course successfully deleted");
+        retrieveData();
+      } else {
+        throw new Error(response.data || "Failed to delete course");
       }
-      retrieveData();
-      setSelectedCourseIds([]); // Clear selection after deletion
-      setIsSelectAll(false); // Reset "Select All" state
-    };
+    } catch (error) {
+      console.error("Error deleting course:", error);
+      toast.error(error.message || "Something went wrong. Please try again.");
+    } finally {
+      setShowConfirm(null);
+    }
+    retrieveData();
+    setSelectedCourseIds([]); // Clear selection after deletion
+    setIsSelectAll(false); // Reset "Select All" state
+  };
 
   useEffect(() => {
     retrieveData();
@@ -95,13 +95,15 @@ const ManageCourses = () => {
         </button>
       </div>
 
-      <div className={`h-16 flex items-center mb-2 
+      <div
+        className={`h-16 flex items-center mb-2 
           ${
             selectedCourseIds.length > 0
               ? "scale-100  transform transition-transform duration-[1.5s]"
               : "scale-0"
           }
-        `}>
+        `}
+      >
         <p className="px-4 bg-grayDark py-2 rounded-md">
           {selectedCourseIds.length > 0
             ? `${selectedCourseIds.length} ${
@@ -111,7 +113,7 @@ const ManageCourses = () => {
         </p>
         {
           <button
-            onClick={()=>handleDelete(selectedCourseIds)}
+            onClick={() => handleDelete(selectedCourseIds)}
             className={`${
               selectedCourseIds.length > 0
                 ? "scale-100  transform transition-transform duration-[1.5s]"
@@ -231,7 +233,7 @@ const ManageCourses = () => {
         <button
           onClick={() => handlePage(page + 1)}
           disabled={page === totalPages}
-          className="border border-l-0 p-2"
+          className="border p-2"
         >
           <RightArrow />
         </button>

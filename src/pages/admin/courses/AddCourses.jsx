@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -12,10 +12,11 @@ const AddCourses = () => {
     const API_KEY = import.meta.env.VITE_IMG_API_KEY;
     const navigate = useNavigate();
     const location = useLocation();
-    const operation = location?.state?.operation || 'add';
+
 
     useEffect(() => {
         if (location?.state?.courseData) {
+            console.log(location?.state?.courseData)
             setValue('title', location.state.courseData.title);
             setValue('label', location.state.courseData.label);
             setValue('price', location.state.courseData.price);
@@ -62,9 +63,10 @@ const AddCourses = () => {
 
         try {
             let response;
-            if (operation === 'edit' && location?.state?.courseData?.id) {
+         
+            if (location?.state?.courseData?._id) {
                 // Update course (PUT request)
-                response = await api.patch(`/course/${location.state.courseData.id}`, formData);
+                response = await api.patch(`/course/${location.state.courseData._id}`, formData);
                 if (response.success) {
                     toast.success('Course successfully updated');
                 } else {
@@ -137,7 +139,7 @@ const AddCourses = () => {
                 
                 {/* Submit Button */}
                 <button className='w-full sm:w-[150px] py-2 ml-0 bg-primary rounded-md' disabled={isSubmitting}>
-                    {isSubmitting ? 'Submitting...' : operation === 'edit' ? 'Update' : 'Submit'}
+                    {isSubmitting ? 'Submitting...' :location?.state?.courseData?._id ? 'Update' : 'Submit'}
                 </button>
             </form>
         </div>

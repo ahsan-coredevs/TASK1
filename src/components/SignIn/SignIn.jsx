@@ -1,20 +1,38 @@
-import React, { useState } from 'react'
-import Input from './Input'
-import { Checkbox, Checkboxok } from '../shared/svgComponents'
-import Button from '../Button/Button'
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { api } from '../../utils/apiCaller';
+import Button from '../Button/Button';
+import Input from './Input';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../../services/redux/reducers/userSlice';
 
 function SignIn() {
-  const {register, handleSubmit, reset, formState: { errors }} = useForm();
+  const navigate = useNavigate();
+  const {register, handleSubmit, formState: { errors }} = useForm();
   const [isChecked, setIsChecked] = useState(false);
+  const dispatch= useDispatch();
+
 
   
 
 
 
-  const onSubmit = (data) => {
-    console.log(data);
+  async function onSubmit  (data) {
+
+
+    const response = await api.post('/user/login', data);
+    if(response.success) {
+
+      dispatch(setUser(response.data.data))
+
+      navigate('/');
+      toast.success('Sign in successfull');
+    } else {
+      toast.error(response.data.message);
+    }
+      
   }
   return (
     <div className='w-screen bg-dark text-white flex justify-center items-center'>

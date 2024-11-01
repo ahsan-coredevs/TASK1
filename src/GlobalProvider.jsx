@@ -1,14 +1,16 @@
-import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from './services/redux/store';
+import 'react-toastify/dist/ReactToastify.css';
 import App from './App';
+import { store } from './services/redux/store';
+
 
 const GlobalProvider = () => {
     return (
         <div>
+      
              <Provider store={store}>
+             
                 <App/>
-
              </Provider>
             
         </div>

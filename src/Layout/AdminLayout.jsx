@@ -1,18 +1,18 @@
-import React from 'react'
-import logo from '../../assets/icons/logo-white.png';
-import { BrowserRouter as Router, Route, Routes, Link, Outlet, NavLink } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-function Admin() {
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+
+import logo from '../assets/icons/logo-white.png';
+
+function AdminLayout() {
+    const navigate = useNavigate();
   return (
    <div className="w-full h-screen bg-dark overflow-hidden relative">
-    <ToastContainer />
+   
     {/* Upper part */}
      <div className='flex  h-20 w-full bg-nav justify-between items-center absolute top-0 left-0'>
         <div className="flex h-full">
             <div className='border-r border-gray-500/30 p-2'>
-                <img src={logo} alt="Logo" className='cursor-pointer'/>
+                <img onClick={() => navigate("/")}  src={logo} alt="Logo" className='cursor-pointer'/>
             </div>
         </div>
     </div> 
@@ -54,5 +54,5 @@ function Admin() {
   )
 }
 
-export default Admin
+export default AdminLayout
 

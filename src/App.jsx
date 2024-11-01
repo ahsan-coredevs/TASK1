@@ -1,41 +1,40 @@
-import React from 'react';
 
 
 
-import Catergories from './components/Categories/Categories'
+
 
 // import round from './assets/about/shape-46';
 
-import './App.css'
-import { CameraIcon, LinkedinIcon, Dot, Search, Shopping, Arrow, DownArrow, Laptop, Man, Certificate, Members } from './components/shared/svgComponents';
-import Learning from './components/Learning/Learning';
-import Instructors from './components/Instructors/Instructors';
-import Partners from './components/Partners/Partners';
-import News from './components/News/News';
-import Home from './components/Home/Home';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.css';
+
 import MainLayout from './Layout/MainLayout';
 import Categories from './components/Categories/Categories';
+import Contact from './components/Contact/Contact';
+import Home from './components/Home/Home';
+import News from './components/News/News';
+import Partners from './components/Partners/Partners';
 import SignIn from './components/SignIn/SignIn';
 import SignUp from './components/SignUp/SignUp';
-import Contact from './components/Contact/Contact';
-import Admin from './components/AdminPanel/Admin';
-import ManageCourses from './pages/admin/courses/ManageCourses';
-import AddCourses from './pages/admin/courses/AddCourses';
-import ManageBlogs from './pages/admin/blogs/ManageBlogs';
+import Feedback from './components/feedback/Feedback';
+import Profile from './components/profile/Profile';
 import AddBlogs from './pages/admin/blogs/AddBlogs';
-import Courses from './pages/course/Courses';
+import ManageBlogs from './pages/admin/blogs/ManageBlogs';
+import AddCourses from './pages/admin/courses/AddCourses';
+import ManageCourses from './pages/admin/courses/ManageCourses';
+import AddInstructor from './pages/admin/instructors/AddInstructor';
+import ManageInstructor from './pages/admin/instructors/ManageInstructor';
+import UsersList from './pages/admin/users/UsersList';
 import Blog from './pages/blog/Blog';
 import BlogView from './pages/blog/BlogView';
-import Feedback from './components/feedback/Feedback';
+import Courses from './pages/course/Courses';
 import ViewCourse from './pages/course/ViewCourse';
-import ManageInstructor from './pages/admin/instructors/ManageInstructor';
-import AddInstructor from './pages/admin/instructors/AddInstructor';
-import Orders from './pages/orders/Orders';
-import Profile from './components/profile/Profile';
 import OrderDetails from './pages/orders/OrderDetails';
 import OrderOwnerInfo from './pages/orders/OrderOwnerInfo';
-import UsersList from './pages/admin/users/UsersList';
+import Orders from './pages/orders/Orders';
+import AdminLayout from './Layout/AdminLayout';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -46,6 +45,8 @@ function App() {
 
   return (
   
+     <>
+     <ToastContainer />
      <Router>
       <Routes>
        <Route  path="/" element={<MainLayout />} >
@@ -62,14 +63,13 @@ function App() {
         <Route path="/feedback" element={<Feedback />} />
         <Route path="/profile" element={<Profile />} />
         
-        
         <Route path="/SignIn" element={<SignIn />} />
         <Route path="/SignUp" element={<SignUp />} />
        </Route>
       </Routes>
 
       <Routes>
-        <Route path="/admin" element={<Admin />} >
+        <Route path="/admin" element={<AdminLayout />} >
         <Route path="/admin/course" element={<ManageCourses />} />
         <Route path='/admin/course/:operation' element={<AddCourses />} />
         <Route path="/admin/blogs" element={<ManageBlogs />} />
@@ -86,7 +86,7 @@ function App() {
         
       </Routes>
 
-    </Router>
+    </Router></>
 
   )
 }

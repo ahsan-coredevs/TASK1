@@ -14,7 +14,7 @@ export const api= {
             
         } catch (error) {
             console.log(error)
-            return {success: false,data:error.response.data}
+            return {success: false,data:error?.response?.data || 'Something went wrong' }
             
         }
     },
@@ -26,7 +26,7 @@ export const api= {
             
         } catch (error) {
             console.log(error)
-            return {success: false,data:error.response.data}
+            return {success: false,data:error?.response?.data || 'Something went wrong'}
             
         }
     },
@@ -38,7 +38,7 @@ export const api= {
             
         } catch (error) {
             console.log(error)
-            return {success: false,data:error.response.data}
+            return {success: false,data:error?.response?.data || 'Something went wrong'}
             
         }
     },
@@ -49,7 +49,7 @@ export const api= {
             
         } catch (error) {
             console.log(error)
-            return {success: false,data:error.response.data}
+            return {success: false,data:error?.response?.data || 'Something went wrong'}
             
         }
     }
