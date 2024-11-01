@@ -35,12 +35,6 @@ function SignUp() {
       toast.error("Please accept the terms and conditions.");
       return;
     }
-
-
-
-
-
-
       
        const response = await api.post('/user', formData);
        if (response.success) {
