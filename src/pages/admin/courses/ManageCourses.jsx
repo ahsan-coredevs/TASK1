@@ -96,7 +96,7 @@ const ManageCourses = () => {
       </div>
 
       <div
-        className={`h-16 flex items-center mb-2 
+        className={`h-16 flex items-start mb-2 
           ${
             selectedCourseIds.length > 0
               ? "scale-100  transform transition-transform duration-[1.5s]"
@@ -116,7 +116,7 @@ const ManageCourses = () => {
             onClick={() => handleDelete(selectedCourseIds)}
             className={`${
               selectedCourseIds.length > 0
-                ? "scale-100  transform transition-transform duration-[1.5s]"
+                ? "scale-100  transform transition-transform duration-[0.5s]"
                 : "scale-0"
             }
               

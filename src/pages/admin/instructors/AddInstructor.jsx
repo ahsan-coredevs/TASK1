@@ -1,13 +1,14 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { storeData, editItem } from '../../../utils/FileManagement';
 import { toast } from 'react-toastify';
 import { Delete, Plus } from '../../../components/shared/svgComponents';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { api } from '../../../utils/apiCaller';
 
 const AddInstructor = () => {
-    const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm();
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const [skills, setSkills] = useState([{ id: new Date().getTime(), value: '' }]);
     const fileInputRef = useRef(null);
@@ -76,22 +77,31 @@ const AddInstructor = () => {
             skills: skills.map(skill => skill.value), // Only send skill values
             id: uniqueId
         };
+        try {
+            let response;
+         
+            if (location?.state?.instructorData?._id) {
+                // Update course (PUT request)
+                response = await api.patch(`/insturctor/${location.state.instructorData._id}`, formData);
+                if (response.success) {
+                    toast.success('Instructor Data successfully updated');
+                } else {
+                    throw new Error(response.data || "Failed to update Instructor Data");
+                }
+            } else {
+                // Create new course (POST request)
+                response = await api.post('/instructor', formData);
+                if (response.success) {
+                    toast.success('Instructor Data successfully added');
+                } else {
+                    throw new Error(response.data || "Failed to add Instructor Data");
+                }
+            }
 
-        if (operation === 'edit') {
-            const EditedData = editItem('course', id, formData);
-            if (EditedData) {
-                toast.success('Instructor successfully updated');
-            } else {
-                toast.error('Something went wrong');
-            }
-        } else {
-            const res = storeData('instructor', formData);
-            if (res) {
-                toast.success('Instructor successfully added');
-                navigate('/admin/instructor');
-            } else {
-                toast.error('Something went wrong');
-            }
+            navigate('/admin/instructor');
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            toast.error(error.message || "Something went wrong. Please try again.");
         }
     }
 

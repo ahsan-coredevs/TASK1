@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { api } from '../../../utils/apiCaller';  // Adjust the import path as needed
 
 const AddCourses = () => {
-    const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm();
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const fileInputRef = useRef(null); 
     const API_KEY = import.meta.env.VITE_IMG_API_KEY;
     const navigate = useNavigate();
     const location = useLocation();
 
-
+ 
     useEffect(() => {
         if (location?.state?.courseData) {
             console.log(location?.state?.courseData)
@@ -60,6 +60,7 @@ const AddCourses = () => {
             ...data,
             imageUrl: imageSrc,
         };
+     
 
         try {
             let response;

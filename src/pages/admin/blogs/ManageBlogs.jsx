@@ -95,7 +95,7 @@ const ManageBlogs = () => {
       </div>
 
       <div
-        className={`h-16 flex items-center mb-2 
+        className={`h-16 flex mb-2  w-full left-0
           ${
             selectedBlogIds.length > 0
               ? "scale-100 transform transition-transform duration-[1.5s]"
@@ -103,10 +103,10 @@ const ManageBlogs = () => {
           }
         `}
       >
-        <p className="px-4 bg-grayDark py-2 rounded-md">
+        <p className=" h-[40px] px-4 bg-grayDark py-2 rounded-md">
           {selectedBlogIds.length > 0
             ? `${selectedBlogIds.length} ${
-                selectedBlogIds.length > 1 ? "Items" : "Item"
+                selectedBlogIds.length> 1 ? "Items" : "Item"
               } Selected`
             : "No Item Selected"}
         </p>
@@ -198,8 +198,8 @@ const ManageBlogs = () => {
         <div className="w-[calc(100vw-177px)] h-[calc(100vh-99px)] bg-dark bg-opacity-70 text-white top-0 left-0 absolute">
           <div className="mt-[150px] ml-[250px] w-[50%] h-[40%] flex flex-col justify-center items-start bg-white/90 rounded-md">
             <p className="ml-8 p-4 text-black text-lg font-bold">
-              Are you sure you want to delete this blog? Once deleted, it
-              cannot be recovered.
+              Are you sure you want to delete this blog? Once deleted, it cannot
+              be recovered.
             </p>
             <div className="w-[50%] flex justify-around ml-8">
               <button

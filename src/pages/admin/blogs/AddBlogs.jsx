@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
-import { storeData, editItem } from '../../../utils/FileManagement';
 import { toast } from 'react-toastify';
+import { api } from '../../../utils/apiCaller';
 
 function AddBlogs() {
     const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
@@ -64,32 +64,33 @@ function AddBlogs() {
         id: uniqueId
       };
 
-
-      if(location?.state?.blogData && operation==='edit') {
-        const EditedData = editItem('blogs',location?.state?.blogData?.id, formData)
-        if(EditedData) {
-            toast.success('Blog successfully added');
-
+      try {
+        let response;
+     
+        if (location?.state?.blogData?._id) {
+            // Update course (PUT request)
+            response = await api.patch(`/blog/${location.state.blogData._id}`, formData);
+            if (response.success) {
+                toast.success('Blog successfully updated');
+            } else {
+                throw new Error(response.data || "Failed to update course");
+            }
+        } else {
+            // Create new course (POST request)
+            response = await api.post('/blog', formData);
+            if (response.success) {
+                toast.success('Blog successfully added');
+            } else {
+                throw new Error(response.data || "Failed to add Blog");
+            }
         }
-        else toast.error('Something went wrong')
 
-      }
-      else {
-        
-        const res= storeData('blogs',formData);
-        if(res) {
-            toast.success('Course successfully added');
-
-            navigate('/admin/blogs')
-
-        }
-        else toast.error('Something went wrong')
-      }
-      
-      
-       
-       
+        navigate('/admin/blog');
+    } catch (error) {
+        console.error("Error submitting form:", error);
+        toast.error(error.message || "Something went wrong. Please try again.");
     
+      } 
     };
   return (
     <div className='w-full h-full flex items-center justify-center bg-grayDark text-white'>

@@ -1,8 +1,12 @@
 import axios from "axios";
 
+// const header =  {
+//     Authorization: `Bearer ${user?.token}`,
+// }
+
 const config= {
     headers: {
-
+        
     },
     withCredentials: true
 }

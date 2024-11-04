@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Button from '../../../components/Button/Button';
-import { Link, useNavigate } from 'react-router-dom';
-import { fetchData, deleteItem } from '../../../utils/FileManagement';
-import { Book, Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
+import { useState, useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import { Checkbox, Checkboxok, Delete, Edit, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 import { useDispatch, useSelector } from 'react-redux';
 import { setInstructor } from '../../../services/redux/reducers/instructorSlice';
+import { api } from '../../../utils/apiCaller';
+import { toast } from 'react-toastify';
 
 const ManageInstructor = () => {
 
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
-  const [filteredData, setFilteredData]=useState([]);
   const [selectInstructorIds, setSelectInstructorIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const dispatch = useDispatch();
@@ -30,37 +30,39 @@ const ManageInstructor = () => {
     if (isSelectAll) {
       setSelectInstructorIds([]);
     } else {
-      setSelectInstructorIds(instructorData.map((instructor) => instructor.id));
+      setSelectInstructorIds(instructorData.map((instructor) => instructor._id));
     }
     setIsSelectAll(!isSelectAll);
   };
 
-  const handleDeleteMultiple = () => {
-    selectInstructorIds.forEach((id) => {
-      // deleteItem('instructor', id);
-      console.log(id)
-  
-      console.log("Selected ID : ", id);
+
+  const retrieveData = () => {
+    api.get("/instructor").then((res) => {
+      if (res.success) dispatch(setInstructor(res.data));
+      else toast.error(res.data.message || "Something went wrong");
     });
+  };
+
+  const handleDelete = async (id) => {
+    console.log(id);
+    try {
+      const response = await api.delete(`/instructor/${JSON.stringify(id)}`);
+      if (response.success) {
+        toast.success("Insturctor Data successfully deleted");
+        retrieveData();
+      } else {
+        throw new Error(response.data || "Failed to delete Instrctor Data");
+      }
+    } catch (error) {
+      console.error("Error deleting Instructor Data:", error);
+      toast.error(error.message || "Something went wrong. Please try again.");
+    } finally {
+      setShowConfirm(null);
+    }
     retrieveData();
     setSelectInstructorIds([]); // Clear selection after deletion
     setIsSelectAll(false); // Reset "Select All" state
   };
- 
-  const retrieveData = () => {
-    const res= fetchData('instructor');
-
-    dispatch(setInstructor(res))
-    }
- 
-    const handleDelete = (id) => {
-
-      deleteItem('instructor', id);
-      retrieveData();
-
-      setShowConfirm(null);
-
-    };
 
 
  
@@ -68,19 +70,18 @@ const ManageInstructor = () => {
     retrieveData();
   }, []);
 
-  useEffect(() => {
+    // Calculate the courses to display based on the current page and items per page
+    const startIdx = (page - 1) * item_per_page;
+    const endIdx = startIdx + item_per_page;
+    const paginatedInstructor = instructorData.slice(startIdx, endIdx);
+    const totalPages = Math.ceil(instructorData.length / item_per_page);
   
-  }, [page]);
-  
-  const handlePage = (value=1) => {
- 
-      const totat_page = Math.ceil(instructorData.length/item_per_page);
-      if (value < 1  || value>totat_page) return ;
-     const filtered_data= instructorData.slice((value-1)*item_per_page,((value-1)*item_per_page)+5 );
-     setFilteredData(filtered_data);
-     setPage(value)
-
-  }
+    const handlePage = (newPage) => {
+      if (newPage < 1 || newPage > totalPages) return;
+      setPage(newPage);
+      setIsSelectAll(false);
+      setSelectInstructorIds([]);
+    };
    
   return (
     <>
@@ -94,8 +95,8 @@ const ManageInstructor = () => {
               ? `${selectInstructorIds.length} ${selectInstructorIds.length>1 ? 'items' : 'item'} selected`
               : 'No Item Selected'}
               {selectInstructorIds.length > 0 && (
-              <button
-                onClick={handleDeleteMultiple} // Button to delete selected items
+              <button type='submit'
+                onClick={() => handleDelete(selectInstructorIds)} // Button to delete selected items
                 className="text-white bg-red-600 py-2 px-4 rounded-md ml-8 focus:scale-90 duration-100 font-[500] absolute top-0 "
               >
                 {`${selectInstructorIds.length > 1 ? 'Delete All' : 'Delete'}`}
@@ -119,12 +120,12 @@ const ManageInstructor = () => {
               </tr>
             </thead>
             <tbody className='bg-grayDark'>
-              {instructorData.length > 0 ? (
-                instructorData.map((instructor, id) => (
-                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={id}>
+              {paginatedInstructor.length > 0 ? (
+                paginatedInstructor.map((instructor) => (
+                  <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={instructor._id}>
                      <td className="text-left py-3 px-6">
-                        <button onClick={() => handleCheckBox(instructor.id)}>
-                          {selectInstructorIds.includes(instructor.id) ? (
+                        <button onClick={() => handleCheckBox(instructor._id)}>
+                          {selectInstructorIds.includes(instructor._id) ? (
                             <Checkboxok />
                           ) : (
                             <Checkbox />

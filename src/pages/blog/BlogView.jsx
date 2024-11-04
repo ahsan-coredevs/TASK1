@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { fetchData } from '../../utils/FileManagement';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation} from 'react-router-dom';
 import { BiCalendar } from 'react-icons/bi';
 import { Clock } from '../../components/shared/svgComponents';
 
