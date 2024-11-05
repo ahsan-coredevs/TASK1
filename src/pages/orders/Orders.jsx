@@ -20,8 +20,7 @@ function Orders() {
   const [totalPages, setTotalPages] = useState(0);
   const dispatch = useDispatch();
   const orderData = useSelector((state) => state.order.order);
-  const page = 1;
-  const limit = 5;
+
  
 
   const handleCheckBox = (id) => {
@@ -44,11 +43,9 @@ function Orders() {
   const retrieveData = async () => {
 
     try {
-      const res = await api.get(`order`, {
-        params: {page, limit}
-      });
+      const res = await api.get(`/order?limit=10&page=1`,);
       if (res.success) {
-        dispatch(setOrder(res.data.docs));
+        dispatch(setOrder(res.data));
         setTotalPages(res.data.totalPages);
       } else {
         toast.error(res.data.message || "Something Went Wrong"); 
@@ -138,7 +135,7 @@ function Orders() {
             </tr>
           </thead>
           <tbody className="bg-grayDark">
-            {orderData.map((order) => (
+            {orderData?.docs.map((order) => (
               <tr
                 className="text-center even:bg-slate-800/50 odd:bg-slate-900/50"
                 key={order._id}
