@@ -37,6 +37,7 @@ function SignUp() {
     }
       
        const response = await api.post('/user', formData);
+       console.log(response)
        if (response.success) {
          toast.success("Account created successfully");
          navigate('/signin');

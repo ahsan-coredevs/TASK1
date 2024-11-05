@@ -1,4 +1,3 @@
-import React from 'react'
 import profileImage from '../../assets/about/profile.png'
 
 function OrderOwnerInfo() {

@@ -35,7 +35,7 @@ function AdminLayout() {
                 <NavLink to='/admin/instructor' className={({isActive}) => isActive ? "text-primary" : " "}> Instructor </NavLink>
             </li>
             <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
-                <NavLink to='/admin/orders' className={({isActive}) => isActive ? "text-primary" : " "}> Orders </NavLink>
+                <NavLink to='/admin/order' className={({isActive}) => isActive ? "text-primary" : " "}> Orders </NavLink>
             </li>
             <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
                 <NavLink to='/admin/users' className={({isActive}) => isActive ? "text-primary" : " "}> Users </NavLink>

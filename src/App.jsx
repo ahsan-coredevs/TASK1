@@ -67,7 +67,7 @@ function App() {
               path="/admin/instructor/:operation"
               element={<AddInstructor />}
             />
-            <Route path="/admin/orders" element={<Orders />} />
+            <Route path="/admin/order" element={<Orders />} />
             <Route
               path="/admin/orders/order_details"
               element={<OrderDetails />}

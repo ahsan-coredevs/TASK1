@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Arrow } from '../shared/svgComponents'
 
 function Button({buttonName, buttonClass, disabled=false, ...rest}) {
