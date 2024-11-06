@@ -27,7 +27,7 @@ function SignIn() {
       const {token} = response.data.data;
       localStorage.setItem('token', token);
 
-      navigate("/");
+      navigate("/courses");
       toast.success("Sign in successfull");
     } else {
       toast.error(response.data.message);

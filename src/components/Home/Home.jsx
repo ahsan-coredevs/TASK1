@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Arrow, Certificate, Laptop, Man, Members } from '../shared/svgComponents'
 
 import hero from '../../assets/about/girl-1.webp';
@@ -14,12 +14,9 @@ import Courses from '../popularCourses/PopularCourses';
 import Instructors from '../Instructors/Instructors';
 import Partners from '../Partners/Partners';
 import News from '../News/News';
-import Footer from '../footer/Footer';
 import AboutCourse from '../popularCourses/AboutCourse';
-import Blog from '../../pages/blog/Blog';
 import HomeBlog from '../blog/HomeBlog';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 
 function Home() {

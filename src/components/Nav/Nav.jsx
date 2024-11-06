@@ -24,6 +24,7 @@ function Nav() {
   const logoutHanddle = () => {
     localStorage.removeItem("token");
     setUserData(null);
+
   }
 
  
