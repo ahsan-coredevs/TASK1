@@ -5,9 +5,26 @@ import { IoCallSharp } from "react-icons/io5";
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/icons/logo-white.png';
 import { Arrow, Dot, DownArrow, LinkedinIcon, Person, Search } from '../shared/svgComponents';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+
+
 
 function Nav() {
   const navigate = useNavigate();
+  const userDataFromRedux = useSelector((state) => state.user.user);
+  const [userData, setUserData] = useState(userDataFromRedux);
+
+
+  useEffect(() => {
+    setUserData(userDataFromRedux);
+  }, [userDataFromRedux]);
+
+  const logoutHanddle = () => {
+    localStorage.removeItem("token");
+    setUserData(null);
+  }
 
  
   
@@ -15,12 +32,25 @@ function Nav() {
     <div className='sticky top-0 z-50 bg-dark flex items-center justify-center '>
         <div className='w-full  overflow-hidden sticky z-50 '  >
         <div className='flex flex-row max-h-14 w-full bg-gray-900 justify-between items-center p-2 '> 
-          <div className='flex justify-between w-[40%] min-h-full border-r border-gray-500'>
+          <div className='flex justify-between min-h-full border-r border-gray-500 pr-6'>
           <p className='text-slate-100'>First 20 students get 50% discount. <span className='text-red-600 cursor-pointer'>Hurry up!</span> </p> 
-          <Link to='/SignIn' className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3'>Sign In</Link>
+
           </div>
-          <Link to='/SignUp' className='text-slate-100 hover:text-red-500 transition-colors duration-300 border-r border-gray-500 pr-3 text-center'>Register</Link>
-          <div className='flex border-r border-gray-500'>
+
+
+          {userData == null ? (
+            <div className='flex items-center justify-center pr-2 border-r border-gray-500 '>
+              <Link to='/SignIn' className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3'>Sign In</Link>
+              <Link to='/SignUp' className='text-slate-100 hover:text-red-500 transition-colors duration-300 pr-3 text-center'>Register</Link>
+            </div>
+          ): (
+            <Link onClick={() => logoutHanddle()} className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3 outline-none'>Logout</Link>
+          )
+        
+        }
+
+
+          <div className='flex border-r items-center justify-center border-gray-500'>
           <IoCallSharp className='text-red-500 size-5 mr-2 ' />
           <p className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer pr-3'>Call: 123 5452 3462</p>
           </div>

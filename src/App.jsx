@@ -30,8 +30,23 @@ import Orders from "./pages/orders/Orders";
 import AdminLayout from "./Layout/AdminLayout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import { api } from "./utils/apiCaller";
+import { useDispatch } from "react-redux";
+import { setUser } from "./services/redux/reducers/userSlice";
 
 function App() {
+  const dispatch= useDispatch();
+
+  useEffect(()=>{
+    api.get('/me').then(res=>{
+     if(res.success){
+      dispatch(setUser(res.data));
+     }
+     else dispatch(setUser(null));
+    })
+
+  },[]);
   return (
     <>
       <ToastContainer />

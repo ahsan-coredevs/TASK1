@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import { api } from "../../utils/apiCaller";
 
 function Orders() {
+  const [page, setPages] = useState(1);
   const [selectedOrderIds, setSelectedOrderIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
@@ -43,7 +44,7 @@ function Orders() {
   const retrieveData = async () => {
 
     try {
-      const res = await api.get(`/order?limit=10&page=1`,);
+      const res = await api.get(`/order?limit=5&page=${page}`,);
       if (res.success) {
         dispatch(setOrder(res.data));
         setTotalPages(res.data.totalPages);
@@ -78,7 +79,7 @@ function Orders() {
 
   useEffect(() => {
     retrieveData();
-  }, []);
+  }, [page]);
 
  
 
@@ -135,7 +136,7 @@ function Orders() {
             </tr>
           </thead>
           <tbody className="bg-grayDark">
-            {orderData?.docs.map((order) => (
+            {orderData?.docs?.map((order) => (
               <tr
                 className="text-center even:bg-slate-800/50 odd:bg-slate-900/50"
                 key={order._id}
@@ -175,10 +176,10 @@ function Orders() {
         </table>
       </div>
       <div></div>
-{/* 
+
       <div className="text-white text-xl flex justify-end pt-5 pb-10">
         <button
-          onClick={() => handlePage(page - 1)}
+          onClick={() => setPages(page - 1)}
           disabled={page === 1}
           className="border p-2"
         >
@@ -186,13 +187,13 @@ function Orders() {
         </button>
         <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
         <button
-          onClick={() => handlePage(page + 1)}
+          onClick={() => setPages(page + 1)}
           disabled={page === totalPages}
           className="border p-2"
         >
           <RightArrow />
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }

@@ -24,13 +24,12 @@ import { useSelector } from 'react-redux';
 
 function Home() {
   const navigate = useNavigate();
-  const userState= useSelector(state=>state.userStore);
-  console.log({userState})
+  
   const handleMouseMove = (event) => {
    
     const movable_images= document.querySelectorAll('.mousemove');
     movable_images.forEach(item=>{
-     console.log(item.speed)
+  
 
      item.style.transform=`translate(${(event.clientX *item.getAttribute('speed'))/50}px, ${(event.clientY*item.getAttribute('speed'))/80}px)`;
     })

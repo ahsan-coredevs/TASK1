@@ -10,18 +10,22 @@ import { setUser } from "../../services/redux/reducers/userSlice";
 
 function SignIn() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const [isChecked, setIsChecked] = useState(false);
-  const dispatch = useDispatch();
+
 
   async function onSubmit(data) {
-    const response = await api.post("/user/login", data);
+    const response = await api.post("/user/login", data )
     if (response.success) {
-      dispatch(setUser(response.data.data));
+      dispatch(setUser(response.data.data.user));
+      console.log(response.data.data.token);
+      const {token} = response.data.data;
+      localStorage.setItem('token', token);
 
       navigate("/");
       toast.success("Sign in successfull");
@@ -35,7 +39,7 @@ function SignIn() {
         <div className="w-[450px] p-8 flex flex-col justify-center items-left bg-grayDark rounded-lg">
           <h1 className="text-xl font-bold">Sign In</h1>
           <p>
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <Link to="/SignUp">
               <span className="text-primary text-lg hover:text-secondary duration-300 cursor-pointer">
                 Sign Up
