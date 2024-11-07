@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const blogsSlice = createSlice({
   name: 'blogs',
   initialState: {
-    blogs:[]
+    blogs:null
   },
   reducers: {
     setBlogs: (state, action) => {

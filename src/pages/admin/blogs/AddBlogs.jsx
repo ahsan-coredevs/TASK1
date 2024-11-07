@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { api } from '../../../utils/apiCaller';
 
 function AddBlogs() {
-    const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm();
+    const { register, handleSubmit, setValue, formState: { isSubmitting } } = useForm();
     const [imageSrc, setImageSrc] = useState('https://via.placeholder.com/100');
     const fileInputRef = useRef(null); 
     const API_KEY = import.meta.env.VITE_IMG_API_KEY;
@@ -63,6 +63,8 @@ function AddBlogs() {
         imageUrl: imageSrc, 
         id: uniqueId
       };
+      
+      console.log("BLOG INFO : ",formData)
 
       try {
         let response;

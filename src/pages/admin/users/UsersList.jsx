@@ -1,121 +1,93 @@
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Checkbox, Checkboxok } from '../../../components/shared/svgComponents';
+import { Checkbox, Checkboxok, LeftArrow, RightArrow } from '../../../components/shared/svgComponents';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../../../services/redux/reducers/userSlice';
+import { setUserList } from '../../../services/redux/reducers/userListSlice';
+import { toast } from 'react-toastify';
+import { api } from '../../../utils/apiCaller';
 
-
-const orders_list = [
-  {
-      name : 'Ahsan Kabir',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Verified'
-  },
-  {
-      name : 'Kabir',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Pending'
-  },
-  {
-      name : 'Ahsan Kabir',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Verified'
-  },
-  {
-      name : 'Robin',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Pending'
-  },
-  {
-      name : 'Ahsan',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Verified'
-  },
-  {
-      name : 'Habib',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Pending'
-  },
-  {
-      name : 'Sheikh Ahsan',
-      courseName : 'Web Development',
-      paymentMethod : 'Bkash',
-      phoneNO : "01308686991",
-      tnxId : "asj378456sjdfh",
-      paymentDate : '12-01-2024',
-      status: 'Verified'
-  },
-];
 
 function UsersList() {
   const navigate = useNavigate();
-  const [selectedOrderIds, setSelectedOrderIds] = useState([]);
+  const [page, setPage] = useState(1);
+  const [selectedUserIds, setSelectedUserIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user.user);
+  const userListData = useSelector((state) => state.userList.userList);
 
 
-  dispatch(setUser(orders_list)); // store userlist in redux store
 
   // Toggle individual checkbox selection
-  const handleCheckBox = (index) => {
-    setSelectedOrderIds((prevSelectedIds) =>
-      prevSelectedIds.includes(index)
-        ? prevSelectedIds.filter((id) => id !== index) // Deselect if already selected
-        : [...prevSelectedIds, index] // Select if not selected
+  const handleCheckBox = (id) => {
+    setSelectedUserIds((prevSelectedIds) =>
+      prevSelectedIds.includes(id)
+    ? prevSelectedIds.filter((userID) => userID !== id)
+    : [...prevSelectedIds, id]
     );
   };
 
   // Toggle "Select All" checkbox
   const handleSelectAll = () => {
     if (isSelectAll) {
-      setSelectedOrderIds([]); // Deselect all
+      setSelectedUserIds([]); // Deselect all
     } else {
-      setSelectedOrderIds(orders_list.map((_, index) => index)); // Select all
+      setSelectedUserIds(userListData.map((user) => user._id)); // Select all
     }
     setIsSelectAll(!isSelectAll);
   };
+
+  const retrieveData = async () => {
+
+    try {
+      const res = await api.get(`/user?limit=5&page=${page}`);
+      if (res.success) {
+        dispatch(setUserList(res.data));
+        setTotalPages(res.data.totalPages);
+      } else {
+        toast.error(res.data.message || "Something Went Wrong"); 
+      }
+    } catch (error) {
+      toast.error("Failed to fetch Users List...")
+    }
+    
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await api.delete(`/user/${JSON.stringify(id)}`);
+      if (response.success) {
+        toast.success("user successfully deleted");
+        retrieveData();
+      } else {
+        throw new Error(response.data || "Failed to delete user");
+      }
+    } catch (error) {
+      console.error("Error deleting User:", error);
+      toast.error(error.message || "Something went wrong. Please try again.");
+    }
+    retrieveData();
+    setSelectedUserIds([]);
+    setIsSelectAll(false);
+  };
+
+  useEffect(() => {
+    retrieveData();
+  }, [page]);
 
   return (
     <div className="w-full h-full">
       {/* Display selected count and delete button */}
       <div className="h-6 text-white font-semibold relative m-4">
-        {selectedOrderIds.length > 0 
-          ? `${selectedOrderIds.length} ${selectedOrderIds.length > 1 ? 'items' : 'item'} selected`
+        {selectedUserIds.length > 0 
+          ? `${selectedUserIds.length} ${selectedUserIds.length > 1 ? 'items' : 'item'} selected`
           : 'No Item Selected'}
-        {selectedOrderIds.length > 0 && (
+        {selectedUserIds.length > 0 && (
           <button
-            onClick={() => {
-              console.log('Selected order indices:', selectedOrderIds); 
-              // Add delete functionality here if needed
-            }}
+            onClick={() => handleDelete(selectedUserIds)}
             className="text-white bg-red-600 py-2 px-4 rounded-md ml-8 focus:scale-90 duration-100 font-[500] absolute top-0"
           >
-            {`${selectedOrderIds.length > 1 ? 'Delete All' : 'Delete'}`}
+            {`${selectedUserIds.length > 1 ? 'Delete All' : 'Delete'}`}
           </button>
         )}
       </div>
@@ -130,44 +102,55 @@ function UsersList() {
                 </button>
               </th>
               <th className="bg-primary/50 py-3 px-6 text-left text-lg font-bold uppercase">Name</th>
-              <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase">Course Name</th>
-              <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase">Payment Method</th>
-              <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase">Phone No</th>
-              <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase">TnxID</th>
-              <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase">Date</th>
+              <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase">Email</th>
+              
               <th className="bg-primary/50 py-3 px-6 text-left text-sm font-medium uppercase rounded-tr-md">Status</th>
             </tr>
           </thead>
           <tbody className="bg-grayDark">
-            {userData.map((order, index) => (
+            {userListData?.docs?.map((user) => (
               <tr
-                key={index}
+                key={(user._id)}
                 className="text-center even:bg-slate-800/50 odd:bg-slate-900/50 cursor-pointer hover:bg-slate-700/50 transition-colors"
               >
                 <td className="text-left py-3 px-6">
-                  <button onClick={() => handleCheckBox(index)}>
-                    {selectedOrderIds.includes(index) ? <Checkboxok /> : <Checkbox />}
+                  <button onClick={() => handleCheckBox(user._id)}>
+                    {selectedUserIds.includes(user._id) ? <Checkboxok /> : <Checkbox />}
                   </button>
                 </td>
-                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.name}</td>
-                <td  onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.courseName}</td>
-                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.paymentMethod}</td>
-                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.phoneNO}</td>
-                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.tnxId}</td>
-                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{order.paymentDate}</td>
+                <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{user.name}</td>
+                <td  onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">{user.email}</td>
                 <td onClick={()=>navigate('order_owner_info')} className="text-left py-3 px-6">
                   <span
                     className={`px-3 py-1 rounded-md font-bold ${
-                      order.status === 'Verified' ? 'bg-green-500 text-green-900' : 'bg-yellow-500 text-yellow-900'
+                      user.status === 'Verified' ? 'bg-green-500 text-green-900' : 'bg-yellow-500 text-yellow-900'
                     }`}
                   >
-                    {order.status}
+                    {/* {order.status} */} Pending
                   </span>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="text-white text-xl flex justify-end pt-5 pb-10">
+        <button
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+          className="border p-2"
+        >
+          <LeftArrow />
+        </button>
+        <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+          className="border p-2"
+        >
+          <RightArrow />
+        </button>
       </div>
     </div>
   );

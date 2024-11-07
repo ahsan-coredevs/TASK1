@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const orderSlice = createSlice({
   name: 'order',
   initialState: {
-    order:[]
+    order:null
   },
   reducers: {
     setOrder: (state, action) => {

@@ -8,11 +8,10 @@ import {
   RightArrow,
 } from "../../components/shared/svgComponents";
 import { useNavigate } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-import { setOrder } from "../../services/redux/reducers/orderSlice";
 import { toast } from "react-toastify";
 import { api } from "../../utils/apiCaller";
+import { setOrder } from "../../services/redux/reducers/orderSlice";
 
 function Orders() {
   const [page, setPages] = useState(1);
@@ -44,7 +43,7 @@ function Orders() {
   const retrieveData = async () => {
 
     try {
-      const res = await api.get(`/order?limit=5&page=${page}`,);
+      const res = await api.get(`/order?limit=5&page=${page}`);
       if (res.success) {
         dispatch(setOrder(res.data));
         setTotalPages(res.data.totalPages);
@@ -64,10 +63,10 @@ function Orders() {
         toast.success(" successfully deleted");
         retrieveData();
       } else {
-        throw new Error(response.data || "Failed to delete course");
+        throw new Error(response.data || "Failed to delete order");
       }
     } catch (error) {
-      console.error("Error deleting course:", error);
+      console.error("Error deleting order:", error);
       toast.error(error.message || "Something went wrong. Please try again.");
     } finally {
       navigate("/admin/order");

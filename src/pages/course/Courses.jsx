@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LeftArrow, RightArrow } from "../../components/shared/svgComponents";
-import { fetchData } from "../../utils/FileManagement";
 import { Book, Person, Arrow } from "../../components/shared/svgComponents";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,9 +32,9 @@ const Courses = () => {
 
   useEffect(() => {
     retrieveData();
-  }, []);
+  }, [page]);
 
-  // Calculate the courses to display based on the current page and items per page
+  //Calculate the courses to display based on the current page and items per page
   const startIdx = (page - 1) * item_per_page;
   const endIdx = startIdx + item_per_page;
   const paginatedCourses = courseData.slice(startIdx, endIdx);
@@ -44,8 +43,6 @@ const Courses = () => {
   const handlePage = (newPage) => {
     if (newPage < 1 || newPage > totalPages) return;
     setPage(newPage);
-    setIsSelectAll(false);
-    setSelectedCourseIds([]);
   };
 
   const roundedRating = roundRating(4);
@@ -77,8 +74,8 @@ const Courses = () => {
           Pick A Course To Get Started
         </h1>
         <div className="w-full max-w-[1400px] rounded-md flex gap-6 items-start p-8 flex-wrap bg-grayDark overflow-hidden text-white relative">
-          {paginatedCourses.length > 0 ? (
-            paginatedCourses.map((course) => (
+          {paginatedCourses?.length > 0 ? (
+            paginatedCourses?.map((course) => (
               <div key={course._id} className="bg-dark w-[23%] min-w-[280px] text-white h-content relative group rounded-xl overflow-hidden">
                 <div>
                   <img

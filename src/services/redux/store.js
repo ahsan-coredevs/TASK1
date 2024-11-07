@@ -4,6 +4,7 @@ import courseSlice from './reducers/courseSlice';
 import instructorSlice from './reducers/instructorSlice';
 import orderSlice from './reducers/orderSlice';
 import userSlice from './reducers/userSlice';
+import userListSlice from './reducers/userListSlice';
 
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
     course: courseSlice,
     instructor: instructorSlice,
     order: orderSlice,
-    user: userSlice
+    user: userSlice,
+    userList: userListSlice
 
   },
 })

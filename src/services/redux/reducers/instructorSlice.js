@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const instructorSlice = createSlice({
   name: 'instructor',
   initialState: {
-    instructor:[]
+    instructor:null
   },
   reducers: {
     setInstructor: (state, action) => {

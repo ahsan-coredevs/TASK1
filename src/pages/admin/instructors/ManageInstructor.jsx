@@ -19,7 +19,7 @@ const ManageInstructor = () => {
   const item_per_page=5;
 
   const handleCheckBox = (id) => {
-    setSelectInstructorIds((prevSelectedIds) =>
+    setSelectInstructorIds((prevSelectedIds) => 
       prevSelectedIds.includes(id)
         ? prevSelectedIds.filter((instructorID) => instructorID !== id) // Deselect if already selected
         : [...prevSelectedIds, id] // Select if not selected

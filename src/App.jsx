@@ -91,9 +91,9 @@ function App() {
               path="/admin/orders/order_owner_info"
               element={<OrderOwnerInfo />}
             />
-            <Route path="/admin/users" element={<UsersList />} />
+            <Route path="/admin/user" element={<UsersList />} />
             <Route
-              path="/admin/users/order_owner_info"
+              path="/admin/user/order_owner_info"
               element={<OrderOwnerInfo />}
             />
           </Route>
