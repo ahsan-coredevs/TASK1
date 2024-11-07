@@ -11,12 +11,14 @@ const ManageInstructor = () => {
 
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [selectInstructorIds, setSelectInstructorIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const dispatch = useDispatch();
   const instructorData = useSelector((state) => state.instructor.instructor);
   const navigate = useNavigate();
-  const item_per_page=5;
+
+  console.log(instructorData)
 
   const handleCheckBox = (id) => {
     setSelectInstructorIds((prevSelectedIds) => 
@@ -36,11 +38,19 @@ const ManageInstructor = () => {
   };
 
 
-  const retrieveData = () => {
-    api.get("/instructor").then((res) => {
-      if (res.success) dispatch(setInstructor(res.data));
-      else toast.error(res.data.message || "Something went wrong");
-    });
+  const retrieveData = async () => {
+    try {
+        const res = await api.get(`/instructor?limit=5&page=${page}`);
+        if(res.success) {
+          dispatch(setInstructor(res.data));
+          setTotalPages(res.data.totalPages);
+        } else {
+          toast.error(res.data.message || "Something Went Wrong"); 
+        }
+      }
+      catch (error) {
+        toast.error("Failed to fetch blog List...")
+      }
   };
 
   const handleDelete = async (id) => {
@@ -68,20 +78,9 @@ const ManageInstructor = () => {
  
   useEffect(() => {
     retrieveData();
-  }, []);
+  }, [page]);
 
-    // Calculate the courses to display based on the current page and items per page
-    const startIdx = (page - 1) * item_per_page;
-    const endIdx = startIdx + item_per_page;
-    const paginatedInstructor = instructorData.slice(startIdx, endIdx);
-    const totalPages = Math.ceil(instructorData.length / item_per_page);
-  
-    const handlePage = (newPage) => {
-      if (newPage < 1 || newPage > totalPages) return;
-      setPage(newPage);
-      setIsSelectAll(false);
-      setSelectInstructorIds([]);
-    };
+
    
   return (
     <>
@@ -120,8 +119,8 @@ const ManageInstructor = () => {
               </tr>
             </thead>
             <tbody className='bg-grayDark'>
-              {paginatedInstructor.length > 0 ? (
-                paginatedInstructor.map((instructor) => (
+              {instructorData?.docs?.length > 0 ? (
+                instructorData?.docs?.map((instructor) => (
                   <tr className=' text-center even:bg-slate-800/50 odd:bg-slate-900/50  ' key={instructor._id}>
                      <td className="text-left py-3 px-6">
                         <button onClick={() => handleCheckBox(instructor._id)}>
@@ -162,10 +161,23 @@ const ManageInstructor = () => {
       </div>
        }
               
-        <div className=' text-white text-xl flex justify-end pt-5 pb-10'>
-          <button onClick={() => handlePage(page-1)} className='border p-2'><LeftArrow /></button>
-          <button onClick={() => handlePage(page+1)} className='border border-l-0 p-2'><RightArrow /></button>
-        </div>
+      <div className="text-white text-xl flex justify-end pt-5 pb-10">
+        <button
+          onClick={() => setPage(page - 1)}
+          disabled={page === 1}
+          className="border p-2 cursor-pointer"
+        >
+          <LeftArrow />
+        </button>
+        <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
+        <button
+          onClick={() => setPage(page + 1)}
+          disabled={page === totalPages}
+          className="border p-2 cursor-pointer"
+        >
+          <RightArrow />
+        </button>
+      </div>
 
        </div>
     </>

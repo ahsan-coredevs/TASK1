@@ -22,7 +22,6 @@ const ManageBlogs = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const blogData = useSelector((state) => state.blogs.blogs);
-  console.log(blogData)
 
   const handleCheckBox = (id) => {
     setSelectedBlogIds((prevSelectedIds) =>

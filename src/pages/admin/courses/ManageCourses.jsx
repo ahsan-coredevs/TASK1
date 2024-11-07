@@ -16,12 +16,13 @@ import { toast } from "react-toastify";
 const ManageCourses = () => {
   const [showConfirm, setShowConfirm] = useState(null);
   const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const [selectedCourseIds, setSelectedCourseIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const courseData = useSelector((state) => state.course.course);
-  const item_per_page = 5;
+
 
   const handleCheckBox = (id) => {
     setSelectedCourseIds((prevSelectedIds) =>
@@ -41,8 +42,11 @@ const ManageCourses = () => {
   };
 
   const retrieveData = () => {
-    api.get("/course").then((res) => {
-      if (res.success) dispatch(setCourse(res.data));
+    api.get(`/course?limit=5&page=${page}`).then((res) => {
+      if (res.success) {
+        dispatch(setCourse(res.data));
+        setTotalPages(res.data.totalPages);
+      } 
       else toast.error(res.data.message || "Something went wrong");
     });
   };
@@ -69,20 +73,9 @@ const ManageCourses = () => {
 
   useEffect(() => {
     retrieveData();
-  }, []);
+  }, [page]);
 
-  // Calculate the courses to display based on the current page and items per page
-  const startIdx = (page - 1) * item_per_page;
-  const endIdx = startIdx + item_per_page;
-  const paginatedCourses = courseData.slice(startIdx, endIdx);
-  const totalPages = Math.ceil(courseData.length / item_per_page);
 
-  const handlePage = (newPage) => {
-    if (newPage < 1 || newPage > totalPages) return;
-    setPage(newPage);
-    setIsSelectAll(false);
-    setSelectedCourseIds([]);
-  };
 
   return (
     <div className="h-full w-[calc(100vw-177px)] relative p-10 text-white">
@@ -148,8 +141,8 @@ const ManageCourses = () => {
             </tr>
           </thead>
           <tbody className="bg-grayDark">
-            {paginatedCourses.length > 0 ? (
-              paginatedCourses.map((course) => (
+            {courseData?.docs?.length > 0 ? (
+              courseData?.docs?.map((course) => (
                 <tr
                   className="text-center even:bg-slate-800/50 odd:bg-slate-900/50"
                   key={course._id}
@@ -223,17 +216,17 @@ const ManageCourses = () => {
 
       <div className="text-white text-xl flex justify-end pt-5 pb-10">
         <button
-          onClick={() => handlePage(page - 1)}
+          onClick={() => setPage(page - 1)}
           disabled={page === 1}
-          className="border p-2"
+          className="border p-2 cursor-pointer"
         >
           <LeftArrow />
         </button>
         <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
         <button
-          onClick={() => handlePage(page + 1)}
+          onClick={() => setPage(page + 1)}
           disabled={page === totalPages}
-          className="border p-2"
+          className="border p-2 cursor-pointer"
         >
           <RightArrow />
         </button>

@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { LeftArrow, RightArrow } from "../../components/shared/svgComponents";
 import { Book, Person, Arrow } from "../../components/shared/svgComponents";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { setCourse } from "../../services/redux/reducers/courseSlice";
 import { api } from "../../utils/apiCaller";
 import { toast } from "react-toastify";
 
@@ -17,35 +15,35 @@ const roundRating = (rating) => {
 };
 
 const Courses = () => {
-  const courseData = useSelector((state) => state.course.course);
-  const dispatch = useDispatch();
+  const [courses, setCourses] = useState([]);
   const [page, setPage] = useState(1);
-  const item_per_page = 4;
+  const [totalPages, setTotalPage] = useState(0);
   const navigate = useNavigate();
 
-  const retrieveData = () => {
-    api.get("/course").then((res) => {
-      if (res.success) dispatch(setCourse(res.data));
-      else toast.error(res.data.message || "Something went wrong");
-    });
+  console.log(courses);
+
+  const retrieveData = async () => {
+    try {
+      const res = await api.get(`/course?limit=4&page=${page}&paginate=true`);
+     if (res.success) {
+      setCourses(res.data);
+      setTotalPage(res.data.totalPages);
+     }
+     else {
+      toast.error(res.data.message || 'Something went Wrong...')  //
+    }
+  }
+    catch (error) {
+      toast.error("Failed to fetch blog List...")
+    }
+    
   };
 
   useEffect(() => {
     retrieveData();
-  }, []);
+  }, [page]);
 
-  // //Calculate the courses to display based on the current page and items per page
-  // const startIdx = (page - 1) * item_per_page;
-  // const endIdx = startIdx + item_per_page;
-  // const paginatedCourses = courseData.slice(startIdx, endIdx);
-  // const totalPages = Math.ceil(courseData.length / item_per_page);
 
-  // const handlePage = (newPage) => {
-  //   if (newPage < 1 || newPage > totalPages) return;
-  //   setPage(newPage);
-  //   setIsSelectAll(false);
-  //   setSelectedCourseIds([]);
-  // };
 
   const roundedRating = roundRating(4);
 
@@ -76,8 +74,8 @@ const Courses = () => {
           Pick A Course To Get Started
         </h1>
         <div className="w-full max-w-[1400px] rounded-md flex gap-6 items-start p-8 flex-wrap bg-grayDark overflow-hidden text-white relative">
-          {courseData?.length > 0 ? (
-            courseData?.map((course) => (
+          {courses?.docs?.length > 0 ? (
+            courses?.docs?.map((course) => (
               <div key={course._id} className="bg-dark w-[23%] min-w-[280px] text-white h-content relative group rounded-xl overflow-hidden">
                 <div>
                   <img
@@ -155,13 +153,19 @@ const Courses = () => {
           )}
         </div>
 
-        <div className=" text-white text-xl flex justify-end pt-5 pb-10">
-          <button onClick={() => handlePage(page - 1)} className="border p-2">
+        <div className={`text-white text-xl flex justify-end pt-5 pb-10`}>
+          <button
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+            className="border p-2 cursor-pointer"
+          >
             <LeftArrow />
           </button>
+          <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
           <button
-            onClick={() => handlePage(page + 1)}
-            className="border border-l-0 p-2"
+            onClick={() => setPage(page + 1)}
+            disabled={page === totalPages}
+            className="border p-2 cursor-pointer"
           >
             <RightArrow />
           </button>
