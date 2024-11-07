@@ -18,10 +18,11 @@ const ManageBlogs = () => {
   const [page, setPage] = useState(1);
   const [selectedBlogIds, setSelectedBlogIds] = useState([]);
   const [isSelectAll, setIsSelectAll] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const blogData = useSelector((state) => state.blogs.blogs);
-  const item_per_page = 5;
+  console.log(blogData)
 
   const handleCheckBox = (id) => {
     setSelectedBlogIds((prevSelectedIds) =>
@@ -40,11 +41,20 @@ const ManageBlogs = () => {
     setIsSelectAll(!isSelectAll);
   };
 
-  const retrieveData = () => {
-    api.get("/blog").then((res) => {
-      if (res.success) dispatch(setBlogs(res.data));
-      else toast.error(res.data.message || "Something went wrong");
-    });
+  const retrieveData = async () => {
+
+    try {
+      const res = await api.get(`/blog?limit=5&page=${page}`);
+      if (res.success) {
+        dispatch(setBlogs(res.data));
+        setTotalPages(res.data.totalPages);
+      } else {
+        toast.error(res.data.message || "Something Went Wrong"); 
+      }
+    } catch (error) {
+      toast.error("Failed to fetch blog List...")
+    }
+    
   };
 
   const handleDelete = async (id) => {
@@ -59,9 +69,7 @@ const ManageBlogs = () => {
     } catch (error) {
       console.error("Error deleting blog:", error);
       toast.error(error.message || "Something went wrong. Please try again.");
-    } finally {
-      setShowConfirm(null);
-    }
+    } 
     retrieveData();
     setSelectedBlogIds([]);
     setIsSelectAll(false);
@@ -69,19 +77,8 @@ const ManageBlogs = () => {
 
   useEffect(() => {
     retrieveData();
-  }, []);
+  }, [page]);
 
-  const startIdx = (page - 1) * item_per_page;
-  const endIdx = startIdx + item_per_page;
-  const paginatedBlogs = blogData.slice(startIdx, endIdx);
-  const totalPages = Math.ceil(blogData.length / item_per_page);
-
-  const handlePage = (newPage) => {
-    if (newPage < 1 || newPage > totalPages) return;
-    setPage(newPage);
-    setIsSelectAll(false);
-    setSelectedBlogIds([]);
-  };
 
   return (
     <div className="h-full w-[calc(100vw-177px)] relative p-10 text-white">
@@ -146,8 +143,8 @@ const ManageBlogs = () => {
             </tr>
           </thead>
           <tbody className="bg-grayDark">
-            {paginatedBlogs.length > 0 ? (
-              paginatedBlogs.map((blog) => (
+            {blogData?.docs?.length > 0 ? (
+              blogData?.docs?.map((blog) => (
                 <tr
                   className="text-center even:bg-slate-800/50 odd:bg-slate-900/50"
                   key={blog._id}
@@ -221,17 +218,17 @@ const ManageBlogs = () => {
 
       <div className="text-white text-xl flex justify-end pt-5 pb-10">
         <button
-          onClick={() => handlePage(page - 1)}
+          onClick={() => setPage(page - 1)}
           disabled={page === 1}
-          className="border p-2"
+          className="border p-2 cursor-pointer"
         >
           <LeftArrow />
         </button>
         <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
         <button
-          onClick={() => handlePage(page + 1)}
+          onClick={() => setPage(page + 1)}
           disabled={page === totalPages}
-          className="border border-l-0 p-2"
+          className="border p-2 cursor-pointer"
         >
           <RightArrow />
         </button>

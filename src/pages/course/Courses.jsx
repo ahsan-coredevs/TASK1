@@ -32,18 +32,20 @@ const Courses = () => {
 
   useEffect(() => {
     retrieveData();
-  }, [page]);
+  }, []);
 
-  //Calculate the courses to display based on the current page and items per page
-  const startIdx = (page - 1) * item_per_page;
-  const endIdx = startIdx + item_per_page;
-  const paginatedCourses = courseData.slice(startIdx, endIdx);
-  const totalPages = Math.ceil(courseData.length / item_per_page);
+  // //Calculate the courses to display based on the current page and items per page
+  // const startIdx = (page - 1) * item_per_page;
+  // const endIdx = startIdx + item_per_page;
+  // const paginatedCourses = courseData.slice(startIdx, endIdx);
+  // const totalPages = Math.ceil(courseData.length / item_per_page);
 
-  const handlePage = (newPage) => {
-    if (newPage < 1 || newPage > totalPages) return;
-    setPage(newPage);
-  };
+  // const handlePage = (newPage) => {
+  //   if (newPage < 1 || newPage > totalPages) return;
+  //   setPage(newPage);
+  //   setIsSelectAll(false);
+  //   setSelectedCourseIds([]);
+  // };
 
   const roundedRating = roundRating(4);
 
@@ -74,8 +76,8 @@ const Courses = () => {
           Pick A Course To Get Started
         </h1>
         <div className="w-full max-w-[1400px] rounded-md flex gap-6 items-start p-8 flex-wrap bg-grayDark overflow-hidden text-white relative">
-          {paginatedCourses?.length > 0 ? (
-            paginatedCourses?.map((course) => (
+          {courseData?.length > 0 ? (
+            courseData?.map((course) => (
               <div key={course._id} className="bg-dark w-[23%] min-w-[280px] text-white h-content relative group rounded-xl overflow-hidden">
                 <div>
                   <img
