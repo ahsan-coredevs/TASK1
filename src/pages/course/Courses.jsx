@@ -5,6 +5,7 @@ import { Book, Person, Arrow } from "../../components/shared/svgComponents";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { api } from "../../utils/apiCaller";
 import { toast } from "react-toastify";
+import Pagination from "../../components/pagination/Pagination";
 
 const roundRating = (rating) => {
   if (rating >= 2.75 && rating <= 3.25) return 3;
@@ -17,17 +18,18 @@ const roundRating = (rating) => {
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPage] = useState(0);
+
   const navigate = useNavigate();
 
-  console.log(courses);
 
+
+  
   const retrieveData = async () => {
     try {
       const res = await api.get(`/course?limit=4&page=${page}&paginate=true`);
      if (res.success) {
       setCourses(res.data);
-      setTotalPage(res.data.totalPages);
+     
      }
      else {
       toast.error(res.data.message || 'Something went Wrong...')  //
@@ -41,6 +43,7 @@ const Courses = () => {
 
   useEffect(() => {
     retrieveData();
+
   }, [page]);
 
 
@@ -70,6 +73,7 @@ const Courses = () => {
     <>
       <div className="w-full flex flex-col items-center bg-dark text-slate-200 pt-[50px]  realtive ">
         <p className="text-xl ">Popular Courses</p>
+        
         <h1 className="text-4xl my-4 font-bold">
           Pick A Course To Get Started
         </h1>
@@ -154,21 +158,9 @@ const Courses = () => {
         </div>
 
         <div className={`text-white text-xl flex justify-end pt-5 pb-10`}>
-          <button
-            onClick={() => setPage(page - 1)}
-            disabled={page === 1}
-            className="border p-2 cursor-pointer"
-          >
-            <LeftArrow />
-          </button>
-          <span className="px-4">{`Page ${page} of ${totalPages}`}</span>
-          <button
-            onClick={() => setPage(page + 1)}
-            disabled={page === totalPages}
-            className="border p-2 cursor-pointer"
-          >
-            <RightArrow />
-          </button>
+
+          <Pagination data={courses} onChange={(p)=>{setPage(p)}}/>
+
         </div>
       </div>
     </>

@@ -42,7 +42,7 @@ const ManageCourses = () => {
   };
 
   const retrieveData = () => {
-    api.get(`/course?limit=5&page=${page}`).then((res) => {
+    api.get(`/course?limit=5&page=${page}&paginate=true`).then((res) => {
       if (res.success) {
         dispatch(setCourse(res.data));
         setTotalPages(res.data.totalPages);
