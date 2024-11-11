@@ -1,147 +1,46 @@
+import { useEffect, useState } from "react";
+
 function Pagination({ data = {}, onChange = () => {} }) {
-  const handlePage = (value) => onChange(value);
+  const [pages, setPages] = useState([]);
+  const { page, totalPages } = data;
+
+  useEffect(() => {
+    if (totalPages <= 2) setPages([]);
+    else if (totalPages === 3) setPages([2]);
+    else if (totalPages === 4) setPages([2, 3]);
+    else {
+      if (page <= 2) setPages([2, 3, '...']);
+      else if (page >= totalPages - 1) setPages(['...', totalPages - 2, totalPages - 1]);
+      else setPages(['...', page - 1, page, page + 1, '...']);
+    }
+  }, [page, totalPages]);
+
+  if (!data || data.docs === 0) {
+    return <div></div>;
+  }
 
   return (
-    <div>
-      <ul className="flex">
-        {data?.totalPages === 1 && (
-          <li
-            onClick={() => handlePage(1)}
-            className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer "
-          >
-            1
-       
-          </li>
-        )}
-        {data?.totalPages === 2 && (
-          <div className="flex gap-2">
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-      
-              1
-            </li>
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-            
-              2
-            </li>
-          </div>
-        )}
-        {data?.totalPages === 3 && (
-          <div className="flex gap-2">
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-         
-              1
-            </li>
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-            
-              2
-            </li>
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-             
-              3
-            </li>
-          </div>
-        )}
-        {data?.totalPages === 4 && (
-          <div className="flex gap-2">
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-              1
-            </li>
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-              2
-            </li>
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-              3
-            </li>
-            <li
-              onClick={() => handlePage(1)}
-              className="border px-2 rounded-full h-8 w-8 text-center cursor-pointer"
-            >
-              4
-            </li>
-          </div>
-        )}
-        {data?.totalPages > 4 && (
-          <div className="flex gap-2">
-            <li
-              onClick={() => handlePage(1)}
-              className={`border px-2 rounded-full h-8 w-8 text-center cursor-pointer focus:bg-green-500 hover:bg-green-40duration-150 ${
-                data?.hasPrevPage === false ? "disabled" : ""
-              } ${
-                data?.page === 1 ? "bg-green-500  text-black font-bold " : ""
-              }`}
-            >  1
-            </li>
-
-            ...
-
-            <li
-              onClick={() => handlePage(data?.prevPage || 2)}
-              className={`border px-2 rounded-full h-8 w-8 text-center cursor-pointer ${
-                data?.page === 2 ? "bg-green-500 text-black font-bold" : ""
-              }`}
-            >
-              {data?.prevPage > 2 ? data?.prevPage : 2 }
-            </li>
-              {/* here is the problem solve this at home */}
-            <li
-              onClick={() => handlePage(data?.page)}
-              className={`border px-2 rounded-full h-8 w-8 text-center cursor-pointer ${
-                data?.page === data?.page && data?.page !== 1 && data?.page !== 2 && data?.page !== 7 ? "bg-green-500 text-black font-bold" : ""
-              }`}
-            >
-              {data?.prevPage > 2 ? data?.page :  3 }
-            </li>
-
-            <li
-              onClick={() => handlePage(data?.nextPage || 4 )}
-              className={`border px-2 rounded-full h-8 w-8 text-center cursor-pointer ${
-                data?.page === data?.totalPages-1
-                  ? ""
-                  : "disabled"
-              }`}
-            >
-             {data?.nextPage < 7 && data?.nextPage > 3 ? data?.nextPage :  4 }
-            </li>
-
-            ...
-
-            <li
-              onClick={() => handlePage(data?.totalPages)}
-              className={`border px-2 rounded-full h-8 w-8 text-center cursor-pointer ${
-                data?.hasNextPage === false ? "disabled" : ""
-              } ${
-                data?.page === data?.totalPages ? "bg-green-500  text-black font-bold " : ""
-              }`}
-            >
-              {data?.totalPages}
-            </li>
-          </div>
-        )}
-      </ul>
+    <div className="flex gap-2">
+      <button onClick={() => onChange(1)} className={`px-4 py-2 rounded-full font-bold ${page === 1 ? "bg-green-400 text-black" : ""}`}>
+        1
+      </button>
+      {pages.map((currentPage, i) => (
+        <button
+          key={i}
+          onClick={() => typeof currentPage === 'number' && onChange(currentPage)}
+          className={`px-4 py-2 rounded-full  font-bold ${currentPage == page ? "bg-green-400 text-black" : ""}`}
+        >
+          {currentPage}
+        </button>
+      ))}
+      {totalPages > 1 && (
+        <button
+          onClick={() => onChange(totalPages)}
+          className={`px-4 py-2 rounded-full font-bold  ${ page == totalPages ? "bg-green-400 text-black" : ""}`}
+        >
+          {totalPages}
+        </button>
+      )}
     </div>
   );
 }

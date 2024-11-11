@@ -82,7 +82,7 @@ function SignIn() {
 
               <span>Remember Me </span>
             </p>{" "}
-            <span className="hover:cursor-pointer hover:text-primary duration-300">
+            <span onClick={() => navigate('/generate_password')}  className="hover:cursor-pointer hover:text-primary duration-300">
               Lost your password?
             </span>
           </p>

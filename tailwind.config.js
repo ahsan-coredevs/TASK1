@@ -46,5 +46,23 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        '.no-arrows': {
+          // Remove arrows in WebKit browsers (Chrome, Safari, etc.)
+          '&::-webkit-inner-spin-button': {
+            appearance: 'none',
+            margin: 0,
+          },
+          '&::-webkit-outer-spin-button': {
+            appearance: 'none',
+            margin: 0,
+          },
+          // Remove arrows in Firefox
+          '-moz-appearance': 'textfield',
+        },
+      });
+    },
+  ],
 }
