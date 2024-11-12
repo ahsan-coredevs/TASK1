@@ -15,16 +15,22 @@ function Gpassword() {
   async function onSubmit(data) {
     try {
     
-      const response = await api.get(`/user/send-otp?email=${data.email}`);
+      const response = await api.get(`/user/otpsend?email=${data.email}`);
 
-      if (response.data && response.data.message) {
-        toast.success(response.data.message || "Email is Matched");
+      if (response.data) {
+        toast.success(response.data.message);
+        console.log(response.data)
+        const {token} = response.data.data;
+        localStorage.setItem("Fun", token);
+
+        navigate('/verify_by_code')
       } else {
         toast.error(response.data.message || "Something went wrong...");
+        console.log("error",response.data)
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Failed to verify the email");
+      toast.error("Failed to verify");
     }
 
    

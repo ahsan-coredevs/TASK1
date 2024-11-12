@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
+import { api } from "../../utils/apiCaller";
+import { toast } from "react-toastify";
 
 
   
@@ -9,8 +11,21 @@ import Button from "../Button/Button";
         handleSubmit,
         formState: { errors },
       } = useForm();
-      const onSubmit = (data) => {
-        console.log(data);
+      async function onSubmit (data) {
+        const combinedCode = `${data.firstNumber}${data.secondNumber}${data.thirdNumber}${data.fourthNumber}`;
+        const codeAsNumber = Number(combinedCode);
+        const verifyToken = localStorage.getItem('Fun');
+        try {
+          const res = await api.get(`user/verifyotp?otp=${codeAsNumber}&token=${verifyToken}`)
+          if (res.data) {
+            toast.success(res.data.message);
+          } else {
+            toast.error(res.data.meesage || "Something went wrong")
+          }
+        } catch (error) {
+          toast.error('Failed to verify')
+        }
+
       };
     return (
       <div className="h-[400px] bg-dark flex justify-center items-center">
