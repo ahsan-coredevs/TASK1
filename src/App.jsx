@@ -36,6 +36,8 @@ import { useDispatch } from "react-redux";
 import { setUser } from "./services/redux/reducers/userSlice";
 import Gpassword from "./components/SignIn/Gpassword";
 import CodeVerify from "./components/SignIn/CodeVerify";
+import GenerateNewPassword from "./components/SignIn/GenerateNewPassword";
+
 
 function App() {
   const dispatch= useDispatch();
@@ -71,6 +73,7 @@ function App() {
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/generate_password" element={<Gpassword />} />
             <Route path="/verify_by_code" element={<CodeVerify />} />
+            <Route path="/generate_new_Password" element={<GenerateNewPassword />} />
             <Route path="/SignUp" element={<SignUp />} />
           </Route>
         </Routes>
