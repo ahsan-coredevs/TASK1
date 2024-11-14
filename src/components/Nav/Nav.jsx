@@ -23,7 +23,7 @@ function Nav() {
 
   const logoutHanddle = () => {
     localStorage.removeItem("token");
-    setUserData(null);
+    userDataFromRedux(null);
 
   }
 
@@ -34,18 +34,18 @@ function Nav() {
         <div className='w-full  overflow-hidden sticky z-50 '  >
         <div className='flex flex-row max-h-14 w-full bg-gray-900 justify-between items-center p-2 '> 
           <div className='flex justify-between min-h-full border-r border-gray-500 pr-6'>
-          <p className='text-slate-100'>First 20 students get 50% discount. <span className='text-red-600 cursor-pointer'>Hurry up!</span> </p> 
+          <p className='text-slate-300'>First 20 students get 50% discount. <span className='text-red-600 cursor-pointer'>Hurry up!</span> </p> 
 
           </div>
 
 
           {userData == null ? (
             <div className='flex items-center justify-center pr-2 border-r border-gray-500 '>
-              <Link to='/SignIn' className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3'>Sign In</Link>
-              <Link to='/SignUp' className='text-slate-100 hover:text-red-500 transition-colors duration-300 pr-3 text-center'>Register</Link>
+              <Link to='/SignIn' className='text-slate-300 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3'>Sign In</Link>
+              <Link to='/SignUp' className='text-slate-300 hover:text-red-500 transition-colors duration-300 pr-3 text-center'>Register</Link>
             </div>
           ): (
-            <Link onClick={() => logoutHanddle()} className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3 outline-none'>Logout</Link>
+            <Link onClick={() => logoutHanddle()} className='text-slate-300 hover:text-red-500 transition-colors duration-300 cursor-pointer mr-3 outline-none'>Logout</Link>
           )
         
         }
@@ -53,17 +53,17 @@ function Nav() {
 
           <div className='flex border-r items-center justify-center border-gray-500'>
           <IoCallSharp className='text-red-500 size-5 mr-2 ' />
-          <p className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer pr-3'>Call: 123 5452 3462</p>
+          <p className='text-slate-300 hover:text-red-500 transition-colors duration-300 cursor-pointer pr-3'>Call: 123 5452 3462</p>
           </div>
           <div className='flex border-r border-gray-500'>
           <IoMdMail className='text-red-500 size-5 mr-2 '/>
-            <p className='text-slate-100 hover:text-red-500 transition-colors duration-300 cursor-pointer pr-3'> Email: info@edublink.com</p>
+            <p className='text-slate-300 hover:text-red-500 transition-colors duration-300 cursor-pointer pr-3'> Email: info@edublink.com</p>
           </div>
           <div className='flex'>
-          <FaFacebook className='m-2 text-slate-100 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer'  />
-          <FaInstagram className='m-2 text-slate-100 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer' size={20}  />
-          <FaTwitter className='m-2 text-slate-100 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer' size={20}  />
-          <LinkedinIcon className='m-2 text-slate-100 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer' size={20}  />
+          <FaFacebook className='m-2 text-slate-300 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer'  />
+          <FaInstagram className='m-2 text-slate-300 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer' size={20}  />
+          <FaTwitter className='m-2 text-slate-300 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer' size={20}  />
+          <LinkedinIcon className='m-2 text-slate-300 size-4 hover:text-red-500 transition-colors duration-300 cursor-pointer' size={20}  />
           </div>
         </div>
 
@@ -76,7 +76,7 @@ function Nav() {
           </div>
 
             <div className='border-r border-gray-500/30 h-full flex items-center justify-center px-5'>
-              <a href="#" className="flex items-center text-slate-100 hover:text-primary duration-300">
+              <a href="#" className="flex items-center text-slate-300 hover:text-primary duration-300">
                 <Dot className="mr-1" /> 
                 Category
               </a>
@@ -84,7 +84,7 @@ function Nav() {
           </div>
 
             
-            <div className='flex justify-between w-[70%] h-[100%] text-slate-100'>
+            <div className='flex justify-between w-[70%] h-[100%] text-slate-300'>
               
               <div className='w-[50%] h-[100%] items-center'>
                 <ul className='flex justify-between items-center h-[100%]'>

@@ -11,7 +11,7 @@ import Img8 from '../../assets/brand/brand-08.png'
 
 function Partners() {
   return (
-    <div className='flex items-center justify-between w-full h-[500px] bg-grayDark text-white'>
+    <div className='flex items-center justify-between w-full h-[500px] bg-grayDark text-slate-300'>
         <div className='w-[40%] flex flex-col justify-center pl-20'>
             <p className='text-lg py-2'>OUR PARTNERS</p>
             <h1 className='text-4xl font-bold py-4'>Learn With Our Partners</h1>

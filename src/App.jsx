@@ -58,7 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="/Home" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/Categories" element={<Categories />} />
             <Route path="/courses" element={<Courses />} />
             <Route path="/courses/:operation" element={<ViewCourse />} />
@@ -73,6 +73,7 @@ function App() {
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/generate_password" element={<Gpassword />} />
             <Route path="/verify_by_code" element={<CodeVerify />} />
+            <Route path="/verify_by_code/:otp/:token" element={<CodeVerify />} />
             <Route path="/generate_new_Password" element={<GenerateNewPassword />} />
             <Route path="/SignUp" element={<SignUp />} />
           </Route>

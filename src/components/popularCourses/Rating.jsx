@@ -36,7 +36,7 @@ const Rating = ({ rating }) => {
     <div className="border p-4 rounded-md shadow-md">
       <h2 className="text-lg font-bold mb-2">User Rating</h2>
       <div className="flex space-x-1">{getStars()}</div>
-      <p className="mt-2 text-sm text-gray-500">Rating: {roundedRating} / 5</p>
+      <p className="mt-2 text-sm text-gray-300">Rating: {roundedRating} / 5</p>
     </div>
   );
 };

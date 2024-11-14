@@ -16,7 +16,7 @@ function News() {
         })
     };
   return (
-    <div className='flex flex-col items-center justify-center w-full bg-grayDark text-white py-36 pb-[200px] relative' onMouseOver={handleMouseMove}>
+    <div className='flex flex-col items-center justify-center w-full bg-grayDark text-slate-300 py-36 pb-[200px] relative' onMouseOver={handleMouseMove}>
         <p className='text-lg py-4'>LATEST ARTICLES</p>
         <h2 className='text-4xl font-bold pb-8 z-40'>Get News With Edublink</h2>
 

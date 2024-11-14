@@ -17,6 +17,7 @@ import News from '../News/News';
 import AboutCourse from '../popularCourses/AboutCourse';
 import HomeBlog from '../blog/HomeBlog';
 import { useNavigate } from 'react-router-dom';
+import HomeCources from '../popularCourses/HomeCources';
 
 
 function Home() {
@@ -37,7 +38,7 @@ function Home() {
     <div className='w-full flex items-center justify-center'>
     <div className='w-full overflow-hidden' onMouseMove={handleMouseMove}>
         <div className='flex justify-between h-full w-full bg-dark relative '>
-          <div className='flex flex-col items-left z-10 justify-center ml-[85px] text-white w-[50%]'>
+          <div className='flex flex-col items-left z-10 justify-center ml-[85px] text-slate-300 w-[50%]'>
             <h1 className='text-[50px] font-bold mb-4'>Get <span className='text-secondary'>2500+</span> <br /> Best Online Courses <br /> from Edublink</h1>
             <p className='text-xl '>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit.</p>
             <button onClick={() => navigate("/courses")} className='flex w-[170px] text-base mt-3 bg-primary px-4 py-4 rounded-lg justify-center'>Find courses <Arrow className='ml-2 mt-2 text-sm' /></button>
@@ -97,8 +98,8 @@ function Home() {
     </div>
     <Categories />
     <Learning />
-    <Courses />
-    <AboutCourse />
+    {/* <Courses /> */}
+    <HomeCources />
     <HomeBlog/>
     <Instructors />
     <Partners />

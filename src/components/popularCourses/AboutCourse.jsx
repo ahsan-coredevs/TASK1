@@ -16,8 +16,8 @@ function AboutCourse() {
         })
     };
   return (
-    <div className='w-full flex flex-col items-center bg-dark text-slate-200 pt-[100px]'>
-         <div className='w-full flex flex-col items-center bg-dark text-slate-200 pb-[100px] relative '>
+    <div className='w-full flex flex-col items-center bg-dark text-slate-300 pt-[100px]'>
+         <div className='w-full flex flex-col items-center bg-dark text-slate-300 pb-[100px] relative '>
             <div className='bg-[#1c242f] h-[400px] p-14 w-[50%] grid grid-cols-2 grid-rows-2 rounded-xl z-10  ' onMouseMove={handleMouseMove}  >
                 <div className='flex flex-col items-center justify-center border-r-[1px] border-b-[1px] border-slate-600'>
                     <h1 className='text-primary text-5xl font-bold py-2'>45.2k</h1>

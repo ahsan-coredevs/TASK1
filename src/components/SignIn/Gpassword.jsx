@@ -16,7 +16,7 @@ function Gpassword() {
     try {
       const response = await api.post(`/user/otpsend?email=${data.email}`);
 
-      if (response.data) {
+      if (response.success) {
         toast.success(response.data.message);
         const { token } = response.data.data;
 
@@ -37,10 +37,10 @@ function Gpassword() {
     <div className="h-[300px] w-full flex justify-center items-center bg-dark">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="w-[40%] flex flex-col justify-center items-center bg-grayDark text-white p-4 rounded-md"
+        className="w-[40%] flex flex-col justify-center items-center bg-grayDark text-slate-300 p-4 rounded-md"
       >
-        <label className="w-full" htmlFor="#">
-          Type Your Account Email:
+        <label className="w-full text-slate-300" htmlFor="#">
+          Type Your Email To Verify Your Account :
         </label>
         <input
           {...register("email", { required: true })}

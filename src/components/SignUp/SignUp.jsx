@@ -49,7 +49,7 @@ function SignUp() {
   }
 
   return (
-    <div className="w-screen h-auto bg-dark text-white flex justify-center">
+    <div className="w-screen h-auto bg-dark text-slate-300 flex justify-center">
       <form className="m-12" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-[450px] flex flex-col justify-center items-left bg-grayDark p-8 rounded-lg">
           <h1 className="text-xl font-bold pt-8">Registration</h1>

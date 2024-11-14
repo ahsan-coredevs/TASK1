@@ -14,7 +14,7 @@ function Contact() {
     };
   return (
     <>
-        <div className='h-screen w-screen flex items-center justify-center absolute bg-grayDark text-white'>
+        <div className='h-screen w-screen flex items-center justify-center absolute bg-grayDark text-slate-300'>
             <form onSubmit={handleSubmit(onSubmit)} className='w-[600px] h-[500px] bg-dark p-8 flex flex-col items-center rounded-lg'>
                 <h1 className='text-2xl font-bold'>Contact Us</h1>
                 <Input 

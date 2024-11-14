@@ -20,7 +20,7 @@ function Learning() {
     };
   return (
     <>
-        <div className=' w-full flex  pb-52 pt-16 bg-[#1c242f] text-white overflow-hidden' onMouseMove={handleMouseMove}>
+        <div className=' w-full flex  pb-52 pt-16 bg-[#1c242f] text-slate-300 overflow-hidden' onMouseMove={handleMouseMove}>
             <div className='w-[50%] flex flex-col items-center relative z-20'>
 
                 <img className='h-[400px] w-full/2 rounded-xl top-14 left-20 absolute' src={person} alt="" />

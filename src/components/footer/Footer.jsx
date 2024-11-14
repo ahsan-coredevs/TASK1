@@ -5,7 +5,7 @@ import logo from '../../assets/icons/logo-white.png';
 function Footer() {
   return (
     <div className='w-full h-full flex items-center justify-center'>
-        <div className='bg-gray-700 w-full flex pt-14 text-white px-8 pb-12 '>
+        <div className='bg-gray-700 w-full flex pt-14 text-slate-300 px-8 pb-12 '>
         <div className='flex flex-col w-[30%]'>
             <div className='border-r border-gray-500/30 p-2'>
                  <img src={logo} alt="Logo" className='cursor-pointer'/>

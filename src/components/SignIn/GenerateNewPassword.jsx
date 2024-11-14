@@ -27,9 +27,9 @@ function GenerateNewPassword() {
 
     try {
       const res = await api.patch(`/user/updatepassword`, formData);
-      if (res.data) {
+      if (res.success) {
         toast.success(res.data.message);
-        navigate('/login')
+        navigate('/SignIn')
       } else {
         toast.error(res.data.message || "Something went wrong");
       }
@@ -40,9 +40,9 @@ function GenerateNewPassword() {
 
 
   return (
-        <div className='h-[450px] bg-grayDark flex items-center justify-center '>
-        <div className='w-[50%] text-white flex flex-col p-6 bg-dark '>
-          <h1 className='text-xl font-bold'>Type Your New Password Below </h1>
+        <div className='h-[450px] bg-grayDark flex items-center justify-center'>
+        <div className='w-[50%] text-white flex flex-col p-6 bg-dark rounded-md'>
+          <h1 className='text-xl font-bold'>Type Your New Password Below</h1>
           <form  onSubmit={handleSubmit(onSubmit)} action="#">
           <Input
               labelClass="py-2"

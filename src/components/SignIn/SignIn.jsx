@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { api } from "../../utils/apiCaller";
 import Button from "../Button/Button";
 import Input from "./Input";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "../../services/redux/reducers/userSlice";
 
 function SignIn() {
@@ -17,24 +17,36 @@ function SignIn() {
     formState: { errors },
   } = useForm();
   const [isChecked, setIsChecked] = useState(false);
+  const location = useLocation();
+  const from = location.state?.from || "/";
 
+  // Access user and courseData from Redux
+  const user = useSelector((state) => state.user.user);
+  const courseData = useSelector((state) => state.course.courseData); // Example for accessing course data
 
   async function onSubmit(data) {
-    const response = await api.post("/user/login", data )
-    if (response.success) {
-      dispatch(setUser(response.data.data.user));
-      console.log(response.data.data.token);
-      const {token} = response.data.data;
-      localStorage.setItem('token', token);
+    try {
+      const response = await api.post("/user/login", data);
 
-      navigate("/courses");
-      toast.success("Sign in successfull");
-    } else {
-      toast.error(response.data.message);
+      if (response.success) {
+        const { token } = response.data.data;
+        dispatch(setUser(token));
+        localStorage.setItem("token", token);
+        toast.success("Sign in successful");
+
+        console.log("Navigating to:", from); // Debugging
+        navigate(from); // Navigate back to the previous page or to the home page
+      } else {
+        toast.error(response.data.message || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("An error occurred during login. Please try again.");
     }
   }
+
   return (
-    <div className="w-screen bg-dark text-white flex justify-center items-center">
+    <div className="w-screen bg-dark text-slate-300 flex justify-center items-center">
       <form className="m-8" onSubmit={handleSubmit(onSubmit)}>
         <div className="w-[450px] p-8 flex flex-col justify-center items-left bg-grayDark rounded-lg">
           <h1 className="text-xl font-bold">Sign In</h1>
@@ -79,10 +91,12 @@ function SignIn() {
                 type="checkbox"
                 onChange={({ target: { checked } }) => setIsChecked(checked)}
               />
-
               <span>Remember Me </span>
             </p>{" "}
-            <span onClick={() => navigate('/generate_password')}  className="hover:cursor-pointer hover:text-primary duration-300">
+            <span
+              onClick={() => navigate("/generate_password")}
+              className="hover:cursor-pointer hover:text-primary duration-300"
+            >
               Lost your password?
             </span>
           </p>

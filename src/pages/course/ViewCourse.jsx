@@ -30,7 +30,7 @@ function ViewCourse() {
   const [expended, setExpended] = useState();
   const [payment, setPayment] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("Bkash");
-  const {user}= useSelector(state=>state.user)
+  const user = useSelector(state=>state.user.user)
 
   const navigate = useNavigate();
   const {
@@ -40,6 +40,10 @@ function ViewCourse() {
   } = useForm();
 
   async function onSubmit(data) {
+
+    if (!user) {
+      return navigate("/SignIn", { state: { from: window.location.pathname } });
+    }
     const formData = {
       ...data,
       paymentMethod: selectedPaymentMethod,
@@ -73,7 +77,7 @@ function ViewCourse() {
 
   console.log("ViewCourse Information : ", courseData);
   return (
-    <div className="bg-dark text-white">
+    <div className="bg-dark text-slate-300">
       <div className="p-20">
         <h1 className="text-5xl font-bold pb-4">{courseData.title}</h1>
         <div className="flex gap-4 items-center">
@@ -89,11 +93,11 @@ function ViewCourse() {
           </div>
         </div>
       </div>
-      <div className="bg-grayDark text-white p-20">
+      <div className="bg-grayDark text-slate-300 p-20">
         <div className="flex w-full relative">
           <div className="w-[60%]">
             <h4 className="text-2xl font-bold pb-8">About This Course</h4>
-            <p className="pr-4 text-white/50">
+            <p className="pr-4 text-slate-300">
               {" "}
               Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               Inventore blanditiis laboriosam officia possimus, nesciunt
@@ -137,7 +141,7 @@ function ViewCourse() {
               <h5 className="text-xl font-bold w-full ">
                 What You will Learn?
               </h5>
-              <div className=" grid grid-cols-2 w-full text-white/50">
+              <div className=" grid grid-cols-2 w-full text-slate-300">
                 <div className="flex gap-2 items-start py-2 w-[90%]  ">
                   <Checkright className="mt-1 text-xl  text-primary" />
                   <p>
@@ -171,7 +175,7 @@ function ViewCourse() {
 
             <div className="w-full">
               <h2 className="text-2xl font-bold mt-10 pb-4">Requirements</h2>
-              <div className="w-full text-white/50 pb-8">
+              <div className="w-full text-slate-300 pb-8">
                 <div className="flex gap-4 py-2">
                   <Checkright className="mt-1 text-xl  text-primary" />
                   <p>
@@ -201,7 +205,7 @@ function ViewCourse() {
 
             <div className="w-full">
               <h2 className="font-bold text-2xl pb-4">Course Outline</h2>
-              <p className="text-lg text-white/50 py-4">
+              <p className="text-lg text-slate-300 py-4">
                 Explore the key topics and essential Knowledge areas that form
                 the foundation of this course. Gain insights into the core
                 concepts and skills you will master throughtout the program.
@@ -304,14 +308,14 @@ function ViewCourse() {
           </div>
 
           {payment && (
-            <div className="top-[100px] left-0 right-0 bottom-0 flex justify-center items-center bg-dark fixed opacity-[98%]">
+            <div className="top-[100px] left-0 right-0 bottom-0 flex justify-center items-center bg-dark fixed opacity-[99%]">
               <form onSubmit={handleSubmit(onSubmit)}
                 className=" w-[50%] absolute bg-gray-800 p-8 rounded-md "
                 action=""
               >
                 <label
                   htmlFor="payment-method"
-                  className="block text-lg font-medium text-white"
+                  className="block text-lg font-medium text-slate-100"
                 >
                   Select Payment Method
                 </label>
@@ -351,8 +355,8 @@ function ViewCourse() {
                     type="text"
                   />
                 </div>
-                <Button
-                  type="submit"
+                <Button 
+                  type='submit'
                   buttonClass={"py-2 w-full gap-2"}
                   buttonName={"SUBMIT"}
                 />

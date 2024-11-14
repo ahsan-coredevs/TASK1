@@ -2,26 +2,59 @@ import { useForm } from "react-hook-form";
 import Button from "../Button/Button";
 import { api } from "../../utils/apiCaller";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function CodeVerify() {
   const navigate = useNavigate();
+  const { otp, token } = useParams(); 
   const {
     register,
     handleSubmit,
     setFocus,
+    setValue,
     formState: { errors },
   } = useForm();
 
-  // Function to handle input change and auto focus to the next input
+  useEffect(() => {
+  
+    setFocus("firstNumber");
+
+
+    if (otp && otp.length === 4 && !isNaN(otp)) {
+      setValue("firstNumber", otp.charAt(0));
+      setValue("secondNumber", otp.charAt(1));
+      setValue("thirdNumber", otp.charAt(2));
+      setValue("fourthNumber", otp.charAt(3));
+      setFocus("fourthNumber"); 
+    }
+  }, [otp, setFocus, setValue]);
+
+  useEffect(() => {
+    if (token) {
+      sessionStorage.setItem("Fun", token);
+    }
+  }, [token]);
+
   const handleInputChange = (event, nextInput) => {
     const { value } = event.target;
     if (value.length >= 1) {
-      event.target.value = value.charAt(0); // Ensure only one digit is kept
+      event.target.value = value.charAt(0);
       if (nextInput) {
-        setFocus(nextInput); // Move focus to the next input
+        setFocus(nextInput); 
       }
+    }
+  };
+
+ 
+  const handlePaste = (event) => {
+    const pasteData = event.clipboardData.getData("text").trim();
+    if (pasteData.length === 4 && !isNaN(pasteData)) {
+      setValue("firstNumber", pasteData.charAt(0));
+      setValue("secondNumber", pasteData.charAt(1));
+      setValue("thirdNumber", pasteData.charAt(2));
+      setValue("fourthNumber", pasteData.charAt(3));
+      setFocus("fourthNumber"); 
     }
   };
 
@@ -32,9 +65,10 @@ function CodeVerify() {
 
     try {
       const res = await api.post(`/user/verifyotp?otp=${codeAsNumber}&token=${verifyToken}`);
-      if (res.data) {
+      console.log("data :",res);
+      if (res.success) {
         toast.success(res.data.message);
-        navigate('/generate_new_Password')
+        navigate('/generate_new_Password');
       } else {
         toast.error(res.data.message || "Something went wrong");
       }
@@ -56,6 +90,7 @@ function CodeVerify() {
             type="number"
             {...register("firstNumber", { required: true })}
             onInput={(e) => handleInputChange(e, "secondNumber")}
+            onPaste={handlePaste}
           />
 
           <input

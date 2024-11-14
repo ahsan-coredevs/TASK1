@@ -138,9 +138,7 @@ const Courses = () => {
                     <button
                       onClick={() =>
                         navigate(
-                          `/Courses/${course.title
-                            .replace(/\s+/g, " ")
-                            .replace(/\s/g, "-")}`,
+                          `/Courses/${course._id}`,
                           { state: { courseData: { ...course, id: course._id } } }
                         )
                       }

@@ -28,7 +28,7 @@ function Profile() {
   };
 
   return (
-    <div className='w-full bg-dark text-white/80'>
+    <div className='w-full bg-dark text-slate-300'>
       <div className='w-full border-b border-stone-400/50'>
         <h3 className='text-2xl font-bold p-6'>Profile</h3>
       </div>
