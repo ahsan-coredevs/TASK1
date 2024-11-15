@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { LeftArrow, RightArrow } from "../../components/shared/svgComponents";
 import { Book, Person, Arrow } from "../../components/shared/svgComponents";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { api } from "../../utils/apiCaller";
@@ -69,6 +68,9 @@ const Courses = () => {
 
     return stars;
   };
+
+
+
   return (
     <>
       <div className="w-full flex flex-col items-center bg-dark text-slate-200 pt-[50px]  realtive ">
@@ -138,7 +140,7 @@ const Courses = () => {
                     <button
                       onClick={() =>
                         navigate(
-                          `/Courses/${course._id}`,
+                          `/course/${course._id}`,
                           { state: { courseData: { ...course, id: course._id } } }
                         )
                       }

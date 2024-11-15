@@ -1,4 +1,3 @@
-import React from 'react'
 import InStructor1 from '../../assets/resources/blog-01.jpg'
 import InStructor2 from '../../assets/resources/process-1.webp'
 import InStructor3 from '../../assets/resources/about-18.webp'
@@ -8,12 +7,12 @@ import Certificates from './Certificates'
 
 function Instructors() {
   return (
-    <>
-        <div className='flex flex-col items-center justify-center bg-grayDark w-full '>
-        <p className='py-4 text-lg text-white'>INSTRUCTORS</p>
+    <div className=''>
+        <div className='flex flex-col items-start md:items-center justify-center bg-grayDark w-full p-4'>
+        <p className='py-4 text-lg text-slate-300'>INSTRUCTORS</p>
         <h1 className='text-5xl font-bold pb-8 text-white'>Course Instructors</h1>
         <div className='flex items-center justify-center gap-8 w-full pb-20 flex-col md:flex-row'>
-            <div className='text-white flex flex-col items-center'>
+            <div className='text-slate-300 flex flex-col items-center'>
                 <div className='w-[280px] h-[400px] relative group rounded-lg'>
                     <div className='w-full h-full absolute group-hover:bg-primary group-hover:bg-opacity-70 z-10 duration-300 rounded-lg'></div>
                     <img className='absolute object-cover w-full h-full rounded-lg' src={InStructor1} alt="" />
@@ -21,7 +20,7 @@ function Instructors() {
                     <Facebook className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[75px] group-hover:opacity-100 duration-1000 absolute' />
                     <Twitter className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[125px] group-hover:opacity-100 duration-1000 absolute' /> 
                     <div className='w-10 h-10 right-6 font-bold opacity-0 top-6 text-white border-2 border-white rounded-full p-2 group-hover:z-50 group-hover:top-[175px] group-hover:opacity-100 duration-1000 absolute flex items-center justify-center'>
-                    <LinkedinIcon className='text-lg'  />
+                    <LinkedinIcon className='text-lg'/>
                     </div>
                 </div>
                 <h1 className='py-2 text-2xl font-bold'>Jane Seymour</h1>
@@ -80,7 +79,7 @@ function Instructors() {
         </div>
     </div>
     <Certificates />
-    </>
+    </div>
   )
 }
 

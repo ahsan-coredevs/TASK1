@@ -16,14 +16,14 @@ function  Certificates() {
         })
     };
   return (
-    <div className='w-full h-[400px] bg-dark flex items-center justify-center flex-col relative overflow-hidden
+    <div className='w-full h-[400px] bg-dark flex items-start md:items-center justify-center flex-col relative overflow-hidden p-4
      ' onMouseMove={handleMouseMove}>
-        <h1 className='text-5xl font-bold text-white py-4 text-center leading-[60px] pb-8'>Get Your Quality Skills Certificate <br /> Through EduBlink</h1>
+        <h1 className=' text-2xl md:text-5xl font-bold text-slate-300 py-4 md:text-center leading-[60px] pb-8 '>Get Your Quality Skills Certificate <br /> Through EduBlink</h1>
         <Button buttonClass={'py-2'} buttonName='Get Started Now' /> 
-        <img speed={-3} className='absolute top-[20px] right-0 transition-all duration-200 mousemove ease-linear' src={Halfball} alt="" />
-        <img speed={3} className='absolute top-[0px] right-0 transition-all duration-200 mousemove ease-linear' src={Blueball} alt="" />
-        <img speed={-3} className='absolute top-[250px] left-20 w-32 transition-all duration-200 mousemove ease-linear' src={Redball} alt="" />
-        <img speed={3} className='absolute top-[250px] left-24 transition-all duration-200 mousemove ease-linear' src={Wave} alt="" />
+        <img speed={-3} className=' hidden md:block  absolute top-[20px] right-0 transition-all duration-200 mousemove ease-linear' src={Halfball} alt="" />
+        <img speed={3} className=' hidden md:block absolute top-[0px] right-0 transition-all duration-200 mousemove ease-linear' src={Blueball} alt="" />
+        <img speed={-3} className=' hidden md:block absolute top-[250px] left-20 w-32 transition-all duration-200 mousemove ease-linear' src={Redball} alt="" />
+        <img speed={3} className=' hidden md:block absolute top-[250px] left-24 transition-all duration-200 mousemove ease-linear' src={Wave} alt="" />
     </div>
   )
 }

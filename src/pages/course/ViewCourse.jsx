@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Book,
   Certificate,
@@ -16,7 +16,7 @@ import {
 } from "../../components/shared/svgComponents";
 import Button from "../../components/Button/Button";
 import Youtube from "../../components/Learning/Youtube";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { api } from "../../utils/apiCaller";
 import { toast } from "react-toastify";
@@ -24,13 +24,13 @@ import { useSelector } from "react-redux";
 
 
 function ViewCourse() {
-  const {
-    state: { courseData },
-  } = useLocation();
+ 
   const [expended, setExpended] = useState();
   const [payment, setPayment] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("Bkash");
-  const user = useSelector(state=>state.user.user)
+  const [course, setCourse] = useState([]);
+  const user = useSelector(state=>state.user.user);
+  const {id} = useParams();
 
   const navigate = useNavigate();
   const {
@@ -47,7 +47,7 @@ function ViewCourse() {
     const formData = {
       ...data,
       paymentMethod: selectedPaymentMethod,
-      course: courseData._id,
+      course: course._id,
       user: user._id
     
     };
@@ -56,7 +56,7 @@ function ViewCourse() {
     console.log(response);
     if (response.success) {
       toast.success("Order has been successfully completed.");
-      navigate("/Courses");
+      navigate("/courses");
     } else {
       console.log(response?.data?.message);
       toast.error(response?.data?.message);
@@ -75,11 +75,31 @@ function ViewCourse() {
     setExpended(!expended);
   };
 
-  console.log("ViewCourse Information : ", courseData);
+  async function ViewCourseById(id) {
+    try {
+      const res = await api.get(`/course/${id}`);
+      if (res.success) {
+        setCourse(res.data);
+      } else {
+        console.log("Couse Data not found");
+      }
+
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  }
+  console.log("COurse Data: ",course)
+
+
+  useEffect(() => {
+    ViewCourseById(id)
+  }, [])
+
+
   return (
     <div className="bg-dark text-slate-300">
       <div className="p-20">
-        <h1 className="text-5xl font-bold pb-4">{courseData.title}</h1>
+        <h1 className="text-5xl font-bold pb-4">{course.title}</h1>
         <div className="flex gap-4 items-center">
           <div className="flex gap-2 items-center">
             <Teacher className="text-primary" />{" "}
@@ -261,7 +281,7 @@ function ViewCourse() {
                 <p className="flex items-center gap-4">
                   <Money /> Price :
                 </p>
-                <span>{courseData.price}</span>
+                <span>{course.price}</span>
               </div>
               <div className="flex justify-between text-lg font-bold py-4 border-b border-stone-500/50">
                 <p className="flex items-center gap-4">

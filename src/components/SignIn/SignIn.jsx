@@ -20,10 +20,6 @@ function SignIn() {
   const location = useLocation();
   const from = location.state?.from || "/";
 
-  // Access user and courseData from Redux
-  const user = useSelector((state) => state.user.user);
-  const courseData = useSelector((state) => state.course.courseData); // Example for accessing course data
-
   async function onSubmit(data) {
     try {
       const response = await api.post("/user/login", data);

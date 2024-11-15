@@ -28,9 +28,9 @@ function HomeBlog() {
 
   return (
     <>
-        <div className='w-full flex flex-col items-center bg-dark text-slate-300 pt-[50px]'>
+        <div className='w-full flex flex-col items-start md:items-center bg-dark text-slate-300 pt-[50px] p-4'>
             <p className='text-xl '>Popular Blogs</p>
-            <h1 className='text-4xl my-4 font-bold text-center'>Read Blogs to <br /> Gather More Knowledge About The World</h1>
+            <h1 className='text-4xl my-4 font-bold md:text-center'>Read Blogs to <br /> Gather More Knowledge About The World</h1>
             <div className='w-full max-w-[1400px] rounded-md flex justify-center items-start p-8 flex-wrap  gap-6  bg-grayDark overflow-hidden text-white realtive'>
                 {blogData.length > 0 ? (
                     filteredData.map((blogs, index) => (

@@ -1,14 +1,14 @@
-import React from 'react';
+
 import { Management, Design, Code, Pil, Mic, Hand, Data, Photos, Laptop } from '../shared/svgComponents';
 
 const Categories = () => {
     
     return (
         <>
-            <div id='Categories' className='flex flex-col w-full   items-center pt-16 bg-[#1c242f] text-slate-300 overflow-hidden'>
+            <div id='Categories' className='flex flex-col w-full p-4 items-left md:items-center pt-16 bg-[#1c242f] text-slate-300 overflow-hidden pb-4'>
                 <h1 className='text-5xl font-bold'>Top Categories</h1>
                 <p className='text-xl my-5'>Consectetur adipscing elit sed do eiusmod tempor incididunt ut labore et dolore</p>
-                <div className='grid grid-cols-3 gap-12'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-12'>
                     <div className='bg-grayDark flex items-center py-4 px-6 justify-start w-[350px] rounded group hover:bg-primary duration-300'>
                         <Management className='h-14 w-10 mr-6 text-primary group-hover:text-white '/>
                         <h3 className='font-bold text-lg'>Business Management</h3>
