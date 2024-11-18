@@ -20,6 +20,30 @@ function Nav() {
   const userDataFromRedux = useSelector((state) => state.user.user);
   const [userData, setUserData] = useState(userDataFromRedux);
 
+
+  const navContent=[
+    {
+      title:'Home',
+      path:'/'
+    },
+    {
+      title:'Courses',
+      path:'/courses'
+    },
+    {
+      title:'Blog',
+      path:'/blog'
+    },
+    {
+      title:'Contact',
+      path:'/contact'
+    },
+    {
+      title:'Feedback',
+      path:'/feedback'
+    }
+  ]
+
   useEffect(() => {
     setUserData(userDataFromRedux);
   }, [userDataFromRedux]);
@@ -36,6 +60,7 @@ function Nav() {
   };
 
   return (
+   <>
     <div className="sticky top-0 z-50 bg-dark flex items-center justify-center ">
       <div className="w-full  overflow-hidden sticky z-50 ">
         <div className="flex flex-row max-h-14 w-full bg-gray-900 justify-between items-center p-2 ">
@@ -124,7 +149,7 @@ function Nav() {
             </div>
           </div>
           
-          <div className={`${menuOpen ? 'items-start':''} flex justify-between w-full md:w-[70%] h-full text-slate-300`}>
+    <div className={`${menuOpen ? 'items-start':''} flex justify-between w-full md:w-[70%] h-full text-slate-300`}>
       {/* Menu Icon for Mobile */}
       <button onClick={toggleMenu} className="md:hidden text-2xl p-2">
         {menuOpen ? <FaTimes /> : <FaBars />}
@@ -132,37 +157,18 @@ function Nav() {
 
       {/* Navigation Links */}
       <div
-        className={`${
-          menuOpen ? 'flex' : 'hidden'
-        } flex-col md:flex md:flex-row items-start md:items-center md:justify-between w-full h-full md:w-[50%]`}
-      >
-        <ul className="flex flex-col md:flex-row justify-between md:justify-around items-start md:items-center md:w-full h-full space-y-4 md:space-y-0">
-          <li className="flex items-center hover:text-primary duration-300">
-            <Link to="/home" className="flex items-center">
-              Home <DownArrow className="ml-1" />
+        className='w-full hidden md:block'>
+        <div className="flex  items-center gap-5 w-full h-full ">
+          {
+            navContent?.map((nav, index)=> <div  key={`navIndex+${index}`}className="flex items-center hover:text-primary duration-300">
+            <Link to={nav?.path} className="flex items-center">
+              {nav?.title} 
             </Link>
-          </li>
-          <li className="flex items-center hover:text-primary duration-300">
-            <Link to="/courses" className="flex items-center">
-              Courses <DownArrow className="ml-1" />
-            </Link>
-          </li>
-          <li className="flex items-center hover:text-primary duration-300">
-            <Link to="/blog" className="flex items-center">
-              Blog <DownArrow className="ml-1" />
-            </Link>
-          </li>
-          <li className="flex items-center hover:text-primary duration-300">
-            <Link to="/Contact" className="flex items-center">
-              Contact <DownArrow className="ml-1" />
-            </Link>
-          </li>
-          <li className="flex items-center hover:text-primary duration-300">
-            <Link to="/feedback" className="flex items-center">
-              Feedback <DownArrow className="ml-1" />
-            </Link>
-          </li>
-        </ul>
+          </div>)
+          }
+         
+         
+        </div>
       </div>
 
             <div className={`${menuOpen ? 'mt-4 flex':'flex justify-between items-center space-x-4 mr-6'}`}>
@@ -179,6 +185,21 @@ function Nav() {
         </div>
       </div>
     </div>
+    <div className={`w-[250px] bg-slate-300 h-screen fixed top-0 duration-500 ${menuOpen?' left-0':'-left-[500px]'} z-[60] block md:hidden `}>
+     <div className="h-[50px] bg-primary flex justify-end items-center text-white px-2">
+     <button onClick={()=>setMenuOpen(false)}>X CLOSE</button>
+     </div>
+     {/* Nav content */}
+
+      <div  className=" h-[calc(100vh-50px)] overflow-y-auto flex flex-col gap-1">
+       {
+        navContent?.map((nav, index)=>  <Link key={'responsivenav'+index} to={nav?.path} className="p-1 border-b border-black/10" onClick={()=>setMenuOpen(false)}>
+        {nav?.title} 
+      </Link>)
+      }</div>
+    </div>
+    <div className={`absolute top-0 right-0 left-0 bottom-0 backdrop-blur-md z-[50] ${menuOpen?'block':'hidden'} `}></div>
+    </>
   );
 }
 

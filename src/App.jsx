@@ -37,6 +37,7 @@ import { setUser } from "./services/redux/reducers/userSlice";
 import Gpassword from "./components/SignIn/Gpassword";
 import CodeVerify from "./components/SignIn/CodeVerify";
 import GenerateNewPassword from "./components/SignIn/GenerateNewPassword";
+import Overview from "./pages/admin/overview/Overview";
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
             <Route path="/admin/blog" element={<ManageBlogs />} />
             <Route path="/admin/blog/:operation" element={<AddBlogs />} />
             <Route path="/admin/instructor" element={<ManageInstructor />} />
+            <Route path="/admin/overview" element={<Overview />} />
             <Route
               path="/admin/instructor/:operation"
               element={<AddInstructor />}

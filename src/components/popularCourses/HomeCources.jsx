@@ -26,7 +26,7 @@ function HomeCources() {
       if (res.success) {
         setCourses(res.data);
       } else {
-        toast.error(res.data.message || "Something went Wrong..."); //
+        toast.error(res.data.message || "Something went Wrong..."); 
       }
     } catch (error) {
       toast.error("Failed to fetch blog List...");

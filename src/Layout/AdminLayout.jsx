@@ -24,6 +24,10 @@ function AdminLayout() {
         <ul className='flex flex-col space-y-2 '>
             
             <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
+                <NavLink  to='/admin/overview' className={({isActive}) => isActive ? "text-primary" : " "}>Overview </NavLink>
+            </li>
+            
+            <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
                 <NavLink  to='/admin/course' className={({isActive}) => isActive ? "text-primary" : " "}>Courses </NavLink>
             </li>
             
