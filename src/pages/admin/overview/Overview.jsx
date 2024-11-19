@@ -42,7 +42,7 @@ function Overview() {
 
   const retrieveData = async () => {
     try {
-      const res = await api.get(`/order?limit=4&page=1`);
+      const res = await api.get(`/stats/count`);
       if (res.success) {
         setOrder(res.data);
         console.log(res.data);
