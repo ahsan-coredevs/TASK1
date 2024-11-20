@@ -1,41 +1,50 @@
 import { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import { api } from "../../../utils/apiCaller";
-import { setOrder } from "../../../services/redux/reducers/orderSlice";
 import { toast } from "react-toastify";
 
 function Overview() {
-  const [selectedOption, setSelectedOption] = useState("This Week");
+  const [selectedOption, setSelectedOption] = useState("week");
+  const [listOfData, setListOfData] = useState({
+    courses: 0,
+    blogs: 0,
+    instructors: 0,
+    users: 0,
+    orders: 0,
+  });
+  const [chartData, setChartData] = useState({
+    categories: [],
+    values: [],
+  });
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.value);
   };
 
-
   const overViewData = [
     {
       name: "Courses",
-      value: "299",
+      value: listOfData.courses,
       bg: "#2B55AF",
     },
     {
       name: "Blogs",
-      value: "299",
+      value: listOfData.blogs,
       bg: "#4EDFC2",
     },
     {
       name: "Instructors",
-      value: "299",
+      value: listOfData.instructors,
       bg: "#CE513D",
     },
     {
       name: "Users",
-      value: "299",
+      value: listOfData.users,
       bg: "#C00070",
     },
     {
       name: "Orders",
-      value: "299",
+      value: listOfData.orders,
       bg: "#32AB54",
     },
   ];
@@ -44,13 +53,27 @@ function Overview() {
     try {
       const res = await api.get(`/stats/count`);
       if (res.success) {
-        setOrder(res.data);
-        console.log(res.data);
+        console.log("List of data: ", res.data);
+        setListOfData(res.data);
       } else {
-        toast.error(res.data.message || "Something went Wrong..."); //
+        toast.error(res.data.message || "Something went wrong...");
       }
-    } catch {
-      toast.error("Failed to fetch blog List...");
+    } catch (error) {
+      toast.error("Failed to fetch data...");
+    }
+  };
+
+  const retrieveChartData = async () => {
+    try {
+      const res = await api.get(`/stats/order?filter=${selectedOption}`);
+      if (res.success) {
+        console.log("chartData : ", res.data);
+        setChartData(res.data);
+      } else {
+        toast.error(res.data.message || "Something went wrong...");
+      }
+    } catch (error) {
+      toast.error("Failed to fetch data...");
     }
   };
 
@@ -58,26 +81,66 @@ function Overview() {
     retrieveData();
   }, []);
 
-  const [series] = useState([
-    {
-      data: [21, 22, 59, 28, 16, 52, 21],
-    },
-  ]);
+  useEffect(() => {
+    retrieveChartData();
+  }, [selectedOption]);
 
-  const colors = ["#008FFB", "#00E396", "#FEB019", "#FF4560", "#775DD0"];
+  const colors = [ 
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#FF4560",
+    "#775DD0",
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#FF4560",
+    "#775DD0",
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#FF4560",
+    "#775DD0",
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#FF4560",
+    "#775DD0",
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#FF4560",
+    "#775DD0",
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#FF4560",
+    "#775DD0",
+  ];
 
-  const [options] = useState({
+  const options = {
     chart: {
       height: 350,
-      toolbar: false,
+      toolbar: { show: false },
       type: "bar",
-      events: {},
     },
     colors: colors,
     plotOptions: {
       bar: {
         distributed: true,
-        borderRadius: false,
+        borderRadius: 4,
       },
     },
     dataLabels: {
@@ -87,7 +150,7 @@ function Overview() {
       show: false,
     },
     xaxis: {
-      categories: ["Sat", "Sun", "Mon", "Tues", "Wed", "Thu", "Fri"],
+      categories: chartData.categories,
       labels: {
         show: true,
         style: {
@@ -108,11 +171,46 @@ function Overview() {
         },
       },
     },
-  });
+  };
+
+  const series = [
+    {
+      data: chartData.values,
+    },
+  ];
+
+  const pieOptions = {
+    chart: {
+      height: 350,
+      toolbar: { show: false },
+      type: "pie",
+    },
+    colors: colors,
+    labels: ["Blogs", "Courses", "Instructors", "Orders", "Users"],
+    dataLabels: {
+      enabled: true,
+      style: {
+        fontSize: "14px",
+        fontFamily: "Arial, sans-serif",
+      },
+    },
+    legend: {
+      show: false,
+      position: "bottom",
+    },
+  };
+
+  const pieSeries = [
+    listOfData.blogs,
+    listOfData.courses,
+    listOfData.instructors,
+    listOfData.orders,
+    listOfData.users,
+  ];
 
   return (
-    <>
-      <div className="w-[80%] grid grid-cols-5 gap-4 text-white absolute top-8">
+    <div className="w-full h-auto">
+      <div className="w-[80%] h-auto grid grid-cols-5 gap-4 text-slate-300 absolute right-8 top-8">
         {overViewData.map((ovd, index) => (
           <div
             key={`OverviewData${index}`}
@@ -129,29 +227,40 @@ function Overview() {
         ))}
       </div>
 
-      <div className="absolute top-[200px] left-[200px] w-[50%]">
-        <div className="relative">
-          <div className="text-slate-600 flex justify-end">
-            <select
-              id="paymentMethod"
-              value={selectedOption}
-              onChange={handleOptionChange}
-              className="p-2 bg-dark border border-slate-600 rounded-md focus:outline-none active:outline-none outline-none "
-            >
-              <option value="Bkash">This Week</option>
-              <option value="Nogod">This Month</option>
-              <option value="Rocket">This Year</option>
-            </select>
+      <div className="w-full grid grid-cols-2  z-100 mb-[200px]">
+        <div className="absolute bg-stone-900  bg-opacity-45 rounded-md w-[50%] ml-10">
+          <div className="relative">
+            <div className="text-slate-600 flex justify-end  right-0">
+              <select
+                id="paymentMethod"
+                value={selectedOption}
+                onChange={handleOptionChange}
+                className="p-2 bg-dark border border-slate-600 rounded-md focus:outline-none"
+              >
+                <option value="week">Last Week</option>
+                <option value="month">Last One Month</option>
+                <option value="year">Last One Year</option>
+              </select>
+            </div>
+            <ReactApexChart
+              options={options}
+              series={series}
+              type="bar"
+              height={350}
+            />
           </div>
-          <ReactApexChart
-            options={options}
-            series={series}
-            type="bar"
-            height={350}
+        </div>
+        <div className=" flex justify-center items-center absolute bg-stone-900 bg-opacity-45 rounded-md w-[30%] h-[70%] right-10">
+        <ReactApexChart
+        className=''
+            options={pieOptions}
+            series={pieSeries}
+            type="pie"
+            height={250}
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

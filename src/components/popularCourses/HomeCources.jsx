@@ -62,7 +62,6 @@ function HomeCources() {
     <div className="">
       <div className="w-full flex flex-col items-start md:items-center bg-dark text-slate-200 md:pt-[50px]  realtive ">
         <p className="text-xl ">Popular Courses</p>
-
         <h1 className="text-4xl my-4 font-bold">
           Pick A Course To Get Started
         </h1>

@@ -87,7 +87,7 @@ function Nav() {
               </Link>
             </div>
           ) : (
-            <div className="text-slate-300 text-center min-h-full bg-red-500 w-[25%] md:w-[15%] hover:text-red-500 transition-colors duration-300 cursor-pointer md:-ml-20 outline-none pr-4 md:border-r">
+            <div className="text-slate-300 font-bold text-center min-h-full w-[25%] md:w-[15%] hover:text-red-500 transition-colors duration-300 cursor-pointer md:-ml-20 outline-none pr-4 md:border-r">
               <Link
               onClick={() => logoutHanddle()}
               
