@@ -197,6 +197,9 @@ function Overview() {
     legend: {
       show: false,
       position: "bottom",
+    }, stroke: {
+      show: false, // Disable stroke
+      width: 0,    // Set stroke width to 0
     },
   };
 
