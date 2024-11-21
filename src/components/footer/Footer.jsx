@@ -1,7 +1,42 @@
 import Button from "../Button/Button";
 import logo from "../../assets/icons/logo-white.png";
+import { toast } from "react-toastify";
+import { api } from "../../utils/apiCaller";
+import { useForm } from "react-hook-form";
+import Input from "../SignIn/Input";
 
 function Footer() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    console.log("form data for newsletter",data);
+    const formData = {
+      ...data,
+
+    };
+    try {
+      const res = await api.post(`/subscriber`, formData);
+      if (res.success) {
+        console.log("newletter : ", res.data);
+        toast.success("NewsLetter created successfully");
+      } else {
+        toast.error(res.data.message || "Something went wrong...");
+      }
+    } catch (error) {
+      toast.error("cann't fetch the data...")
+    }
+  };
+
+
+
+
+
+
+
   return (
     <div className="w-full h-full flex items-center justify-center pb-[100px] bg-gray-700">
       <div className="bg-gray-700 w-full flex flex-col md:flex-row pt-14 text-slate-300 px-8 pb-12 ">
@@ -104,12 +139,18 @@ function Footer() {
             Enter your email address to register to our newsletter subscription
           </p>
           <div className="flex gap-4 flex-col">
-            <input
-              className="py-2 px-4 rounded-md bg-gray-600 border"
-              placeholder="Your Email:"
-              type=""
-            />
-            <Button buttonClass={"py-2"} buttonName={"Subcribe"} />
+            <form onSubmit={handleSubmit(onSubmit)} action="">
+                <Input
+                  labelClass="py-2"
+                  InputClass="w-[100%] px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-primary"
+                  placeholder="Type Your email..."
+                  register={() => register("email", { required: "email is required..." })}
+                />
+                {errors.email && (
+                  <span className="text-red-500">{errors.email.message}</span>
+                )}
+                <Button  type="submit" buttonClass={"py-2 w-full mt-2"} buttonName={"Subcribe"} />
+            </form>
           </div>
         </div>
       </div>

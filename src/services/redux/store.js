@@ -5,6 +5,10 @@ import instructorSlice from './reducers/instructorSlice';
 import orderSlice from './reducers/orderSlice';
 import userSlice from './reducers/userSlice';
 import userListSlice from './reducers/userListSlice';
+import NewsLetters from './reducers/newsletter';
+import subscribersSlice from './reducers/subscribers';
+
+
 
 
 export const store = configureStore({
@@ -14,7 +18,9 @@ export const store = configureStore({
     instructor: instructorSlice,
     order: orderSlice,
     user: userSlice,
-    userList: userListSlice
+    userList: userListSlice,
+    newsLetter: NewsLetters,
+    subscribers : subscribersSlice
 
   },
 })

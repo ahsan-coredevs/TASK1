@@ -44,6 +44,12 @@ function AdminLayout() {
             <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
                 <NavLink to='/admin/user' className={({isActive}) => isActive ? "text-primary" : " "}> Users </NavLink>
             </li>
+            <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
+                <NavLink to='/admin/newsletters' className={({isActive}) => isActive ? "text-primary" : " "}> News Letters </NavLink>
+            </li>
+            <li className='hover:text-primary cursor-pointer duration-300 text-lg font-bold'>
+                <NavLink to='/admin/subscribers' className={({isActive}) => isActive ? "text-primary" : " "}> Subscribers </NavLink>
+            </li>
             
         </ul>
         </div>

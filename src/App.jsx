@@ -38,6 +38,8 @@ import Gpassword from "./components/SignIn/Gpassword";
 import CodeVerify from "./components/SignIn/CodeVerify";
 import GenerateNewPassword from "./components/SignIn/GenerateNewPassword";
 import Overview from "./pages/admin/overview/Overview";
+import NewsLetters from "./pages/admin/newsletters/NewsLetters";
+import Subscriber from "./pages/admin/subscribers/Subscriber";
 
 
 function App() {
@@ -105,6 +107,14 @@ function App() {
             <Route
               path="/admin/user/order_owner_info"
               element={<OrderOwnerInfo />}
+            />
+            <Route
+              path="/admin/newsletters"
+              element={<NewsLetters />}
+            />
+            <Route
+              path="/admin/subscribers"
+              element={<Subscriber />}
             />
           </Route>
         </Routes>

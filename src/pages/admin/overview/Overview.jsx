@@ -130,6 +130,8 @@ function Overview() {
     "#775DD0",
   ];
 
+
+
   const options = {
     chart: {
       height: 350,
@@ -183,9 +185,9 @@ function Overview() {
     chart: {
       height: 350,
       toolbar: { show: false },
-      type: "pie",
+      type: "donut",
     },
-    colors: colors,
+    
     labels: ["Blogs", "Courses", "Instructors", "Orders", "Users"],
     dataLabels: {
       enabled: true,
@@ -200,6 +202,24 @@ function Overview() {
     }, stroke: {
       show: false, // Disable stroke
       width: 0,    // Set stroke width to 0
+    },
+    colors:[ 
+      "#2B55AF",
+      "#4EDFC2",
+      "#CE513D",
+      "#C00070",
+      "#32AB54"], // Gradient end colors
+    fill: {
+      type: "gradient",
+      gradient: {
+        shade: "light", // Options: 'light', 'dark'
+        type: "horizontal", // Options: 'horizontal', 'vertical', 'diagonal1', 'diagonal2', 'radial'
+        shadeIntensity: 0.5,
+        inverseColors: true,
+        opacityFrom: 0.5,
+        opacityTo: 0.95,
+        stops: [0, 100], // Color transition stops
+      },
     },
   };
 
@@ -258,7 +278,7 @@ function Overview() {
         className=''
             options={pieOptions}
             series={pieSeries}
-            type="pie"
+            type="donut"
             height={250}
           />
         </div>
