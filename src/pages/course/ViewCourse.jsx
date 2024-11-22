@@ -16,21 +16,20 @@ import {
 } from "../../components/shared/svgComponents";
 import Button from "../../components/Button/Button";
 import Youtube from "../../components/Learning/Youtube";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { api } from "../../utils/apiCaller";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-
+import { addToCart }  from "../../utils/FileManagement";
 
 function ViewCourse() {
- 
   const [expended, setExpended] = useState();
   const [payment, setPayment] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("Bkash");
   const [course, setCourse] = useState([]);
-  const user = useSelector(state=>state.user.user);
-  const {id} = useParams();
+  const user = useSelector((state) => state.user.user);
+  const { id } = useParams();
 
   const navigate = useNavigate();
   const {
@@ -40,7 +39,6 @@ function ViewCourse() {
   } = useForm();
 
   async function onSubmit(data) {
-
     if (!user) {
       return navigate("/SignIn", { state: { from: window.location.pathname } });
     }
@@ -48,8 +46,7 @@ function ViewCourse() {
       ...data,
       paymentMethod: selectedPaymentMethod,
       course: course._id,
-      user: user._id
-    
+      user: user._id,
     };
 
     const response = await api.post("/order", formData);
@@ -83,18 +80,14 @@ function ViewCourse() {
       } else {
         console.log("Couse Data not found");
       }
-
     } catch (error) {
       console.error("Error during login:", error);
     }
   }
-  console.log("COurse Data: ",course)
-
 
   useEffect(() => {
-    ViewCourseById(id)
-  }, [])
-
+    ViewCourseById(id);
+  }, []);
 
   return (
     <div className="bg-dark text-slate-300">
@@ -114,8 +107,8 @@ function ViewCourse() {
         </div>
       </div>
       <div className="bg-grayDark text-slate-300 p-20">
-        <div className="flex w-full relative">
-          <div className="w-[60%]">
+        <div className="flex flex-col md:flex-row w-full relative">
+          <div className="w-full md:w-[60%]">
             <h4 className="text-2xl font-bold pb-8">About This Course</h4>
             <p className="pr-4 text-slate-300">
               {" "}
@@ -272,7 +265,7 @@ function ViewCourse() {
               </div>
             </div>
           </div>
-          <div className="w-[35%] p-4 ml-10">
+          <div className="w-full  md:w-[35%] p-4 md:ml-10">
             <div className="w-full bg-slate-500/30 p-10 rounded-md">
               <Youtube videoId="E8lXC2mR6-k" />
               <h2 className="text-2xl font-bold pt-6">Course Includes: </h2>
@@ -309,19 +302,24 @@ function ViewCourse() {
               </div>
               <div>
                 <Button
+                  onClick={()=>addToCart(course)}
+                  buttonClass={"my-2 py-2 w-full font-bold text-slate-200"}
+                  buttonName={"Add To Cart"}
+                />
+                <Button
                   onClick={() => paymentBtn()}
-                  buttonClass={"my-4 py-2 w-full"}
+                  buttonClass={"my-2 py-2 w-full font-bold text-slate-200"}
                   buttonName={"Start Now"}
                 />
 
                 <h3 className="text-2xl font-bold mb-8">Share On</h3>
                 <div className="text-white flex justify-around items-center">
-                  <Facebook className="border border-stone-300/50 h-10 w-10 p-2 rounded-full" />
-                  <Twitter className="border border-stone-300/50 h-10 w-10 p-2 rounded-full" />
-                  <div className="h-10 w-10 p-2 rounded-full border border-stone-300/50 flex items-center justify-center">
+                  <Facebook className="border border-stone-300/50 h-10 w-10 p-2 rounded-full hover:cursor-pointer hover:text-primary hover:scale-110 hover:border-primary duration-200" />
+                  <Twitter className="border border-stone-300/50 h-10 w-10 p-2 rounded-full hover:cursor-pointer hover:text-primary hover:scale-110 hover:border-primary duration-200" />
+                  <div className="h-10 w-10 p-2 rounded-full border border-stone-300/50 flex items-center justify-center hover:cursor-pointer hover:text-primary hover:scale-110 hover:border-primary duration-200">
                     <LinkedinIcon />{" "}
                   </div>
-                  <Youtubebtn className="border border-stone-300/50 h-10 w-10 p-2 rounded-full" />
+                  <Youtubebtn className="border border-stone-300/50 h-10 w-10 p-2 rounded-full hover:cursor-pointer hover:text-primary hover:scale-110 hover:border-primary duration-200" />
                 </div>
               </div>
             </div>
@@ -329,7 +327,8 @@ function ViewCourse() {
 
           {payment && (
             <div className="top-[100px] left-0 right-0 bottom-0 flex justify-center items-center bg-dark fixed opacity-[99%]">
-              <form onSubmit={handleSubmit(onSubmit)}
+              <form
+                onSubmit={handleSubmit(onSubmit)}
                 className=" w-[50%] absolute bg-gray-800 p-8 rounded-md "
                 action=""
               >
@@ -339,7 +338,7 @@ function ViewCourse() {
                 >
                   Select Payment Method
                 </label>
-                <select 
+                <select
                   id="paymentMethod"
                   value={selectedPaymentMethod}
                   onChange={handlePaymentMethodChange}
@@ -355,13 +354,15 @@ function ViewCourse() {
                 </p>
 
                 <div className="w-full flex flex-col gap-4 py-4">
-                   <label htmlFor="">Phone NO:</label>
-                  <input 
+                  <label htmlFor="">Phone NO:</label>
+                  <input
                     {...register("phoneNo", { required: true, maxLength: 15 })}
-                    className={`py-4 px-2 rounded-md bg-dark ${errors.phoneNo ? "border border-red-500" : "border-none"}`}
+                    className={`py-4 px-2 rounded-md bg-dark ${
+                      errors.phoneNo ? "border border-red-500" : "border-none"
+                    }`}
                     placeholder="Type Your Phone Number"
                     type="text"
-                  /> 
+                  />
                 </div>
 
                 <div className="w-full flex-col flex gap-4 py-4">
@@ -370,13 +371,15 @@ function ViewCourse() {
                     {...register("taxID", { required: true, maxLength: 20 })}
                     placeholder="Type your Transection ID"
                     className={`py-4 px-2 rounded-md bg-dark
-                        ${errors.taxID ? "border border-red-500" : "border-none"}
+                        ${
+                          errors.taxID ? "border border-red-500" : "border-none"
+                        }
                         `}
                     type="text"
                   />
                 </div>
-                <Button 
-                  type='submit'
+                <Button
+                  type="submit"
                   buttonClass={"py-2 w-full gap-2"}
                   buttonName={"SUBMIT"}
                 />

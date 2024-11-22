@@ -11,7 +11,7 @@ function Youtube({videoId, tClassName}) {
   return (
     
         <div>
-            <div className={`relative w-[300px] h-[200px] bg-gray-200 rounded-lg overflow-hidden ${tClassName} `}>
+            <div className={`relative w-full h-[200px] bg-gray-200 rounded-lg overflow-hidden ${tClassName} `}>
             <div
           className="w-full h-full bg-cover bg-center cursor-pointer rounded"
           style={{

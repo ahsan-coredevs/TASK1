@@ -40,6 +40,8 @@ import World from '../../assets/icons/world.svg?react';
 import Language from '../../assets/icons/language.svg?react'; 
 import Youtubebtn from '../../assets/icons/youtube.svg?react'; 
 import Checkright from '../../assets/icons/checkright.svg?react'; 
+import Cart from '../../assets/icons/cart.svg?react'; 
+import Car from '../../assets/icons/car.svg?react'; 
 
 
 
@@ -86,7 +88,9 @@ export  {
     World,
     Language,
     Youtubebtn,
-    Checkright
+    Checkright, 
+    Cart,
+    Car
 
 
 

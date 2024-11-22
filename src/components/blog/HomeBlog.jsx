@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { fetchData } from '../../utils/FileManagement';
 
 import Button from '../Button/Button';
-import { LeftArrow, RightArrow } from '../../components/shared/svgComponents';
 
 function HomeBlog() {
     const [blogData, setBlogData] = useState([]);
     const [filteredData, setFilteredData]=useState([]);
-
 
     const retrieveData = ()  => {
         const res = fetchData('blogs');

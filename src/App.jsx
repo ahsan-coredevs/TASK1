@@ -40,6 +40,7 @@ import GenerateNewPassword from "./components/SignIn/GenerateNewPassword";
 import Overview from "./pages/admin/overview/Overview";
 import NewsLetters from "./pages/admin/newsletters/NewsLetters";
 import Subscriber from "./pages/admin/subscribers/Subscriber";
+import CartComponent from "./components/cart/CartComponent";
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
             <Route path="/Contact" element={<Contact />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/add_to_cart" element={<CartComponent />} />
 
             <Route path="/SignIn" element={<SignIn />} />
             <Route path="/generate_password" element={<Gpassword />} />
