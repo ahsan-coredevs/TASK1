@@ -14,7 +14,17 @@ export default {
         dark: '#020b17',
         yallow: '#fd7e14',
         ctaColorBg: '#F0F4F5',
-        gold: '#FFD700'
+        gold: '#FFD700',
+        primary2:'rgb(136, 73, 249)',
+        secondary2: '#391775',
+        Gray: '#F0F9FF',
+        subText: '#A2A8B4',
+        inputField: '#717A8C',
+        bg: '#05051E',
+        error: '#FF5471',
+        success: '#32D74B',
+        alert: '#F3BB1B',
+        highhLight: '#4FEEE4'
       },
       keyframes: {
         move: {

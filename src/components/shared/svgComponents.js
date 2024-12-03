@@ -42,6 +42,7 @@ import Youtubebtn from '../../assets/icons/youtube.svg?react';
 import Checkright from '../../assets/icons/checkright.svg?react'; 
 import Cart from '../../assets/icons/cart.svg?react'; 
 import Car from '../../assets/icons/car.svg?react'; 
+import ThreeDot from '../../assets/icons/threeDot.svg?react'; 
 
 
 
@@ -90,7 +91,8 @@ export  {
     Youtubebtn,
     Checkright, 
     Cart,
-    Car
+    Car,
+    ThreeDot
 
 
 

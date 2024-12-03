@@ -41,6 +41,7 @@ import Overview from "./pages/admin/overview/Overview";
 import NewsLetters from "./pages/admin/newsletters/NewsLetters";
 import Subscriber from "./pages/admin/subscribers/Subscriber";
 import CartComponent from "./components/cart/CartComponent";
+import KvantsHome from "./components/kvants/KvantsHome";
 
 
 function App() {
@@ -118,6 +119,11 @@ function App() {
               path="/admin/subscribers"
               element={<Subscriber />}
             />
+          </Route>
+        </Routes>
+        <Routes>
+          <Route>
+            <Route path="/newapp" element={<KvantsHome />} />
           </Route>
         </Routes>
       </Router>

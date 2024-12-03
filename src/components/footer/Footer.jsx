@@ -38,10 +38,10 @@ function Footer() {
 
 
   return (
-    <div className="w-full h-full flex items-center justify-center pb-[100px] bg-gray-700">
+    <div className="w-full h-full flex items-center justify-center pb-[100px] bg-slate-800">
       <div className="bg-gray-700 w-full flex flex-col md:flex-row pt-14 text-slate-300 px-8 pb-12 ">
         <div className="flex flex-col md:w-[30%]">
-          <div className="border-r border-gray-500/30 p-2">
+          <div className="p-2">
             <img src={logo} alt="Logo" className="cursor-pointer" />
           </div>
           <p className="text-2lg font-bold mb-1 w-[80%]">
